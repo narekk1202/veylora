@@ -4,7 +4,6 @@ import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
 
 const VerifyEmailView = ({ email }: { email?: string }) => {
-
   return (
     <main className="page_container px-2">
       <div>
@@ -30,9 +29,6 @@ const VerifyEmailView = ({ email }: { email?: string }) => {
       </div>
 
       <div className="flex flex-col items-center">
-        <Button variant={"link"} className={"text-muted-foreground mt-5"}>
-          Resend email
-        </Button>
         <Button variant={"link"} className={"text-muted-foreground/50"}>
           <Link href={"/login"}>Back to sign in</Link>
         </Button>

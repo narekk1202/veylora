@@ -7,6 +7,6 @@ export const metadata: Metadata = {
     "Enter the email on the account. If it exists, a reset link arrives shortly.",
 };
 
-export default function ForgotPasswordPage() {
+export default async function ForgotPasswordPage() {
   return <ForgotView />;
 }

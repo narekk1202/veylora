@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 import "./shared/config/env";
 
-const nextConfig: NextConfig = {/* config options here */};
+const nextConfig: NextConfig = {
+  typedRoutes: true,
+};
 
 export default nextConfig;

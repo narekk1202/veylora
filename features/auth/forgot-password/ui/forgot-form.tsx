@@ -12,7 +12,7 @@ import { Input } from "@/shared/components/ui/input";
 import { useForgotPassword } from "../use-forgot-password";
 
 const ForgotForm = () => {
-  const { form, errors, onSubmit } = useForgotPassword();
+  const { form, errors, onSubmit, isPending } = useForgotPassword();
 
   return (
     <form
@@ -35,7 +35,7 @@ const ForgotForm = () => {
             {errors.email && <FieldError>{errors.email.message}</FieldError>}
           </Field>
 
-          <Button className={"h-12 w-full"} type="submit">
+          <Button className={"h-12 w-full"} type="submit" disabled={isPending}>
             Send reset link
           </Button>
         </FieldGroup>
