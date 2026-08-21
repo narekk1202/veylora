@@ -15,17 +15,23 @@ const RegisterForm = () => {
       <FieldSet>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="name">Name</FieldLabel>
+            <FieldLabel htmlFor="name" className="text-muted-foreground">
+              Name
+            </FieldLabel>
             <Input id="name" type="text" placeholder="How we greet you" />
             {/* <FieldError>Choose another username.</FieldError> */}
           </Field>
           <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <FieldLabel htmlFor="email" className="text-muted-foreground">
+              Email
+            </FieldLabel>
             <Input id="email" type="email" placeholder="example@example.com" />
             {/* <FieldError>Choose another username.</FieldError> */}
           </Field>
           <Field>
-            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <FieldLabel htmlFor="password" className="text-muted-foreground">
+              Password
+            </FieldLabel>
             <Input
               id="password"
               type="password"

@@ -12,16 +12,20 @@ import Link from "next/link";
 
 const LoginForm = () => {
   return (
-    <form className="sm:bg-primary-foreground mt-10 h-80 w-full max-w-md rounded-lg sm:border px-6 py-4">
+    <form className="sm:bg-primary-foreground mt-10 h-80 w-full max-w-md rounded-lg px-6 py-4 sm:border">
       <FieldSet>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <FieldLabel htmlFor="email" className="text-muted-foreground">
+              Email
+            </FieldLabel>
             <Input id="email" type="email" placeholder="example@example.com" />
             {/* <FieldError>Choose another username.</FieldError> */}
           </Field>
           <Field>
-            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <FieldLabel htmlFor="password" className="text-muted-foreground">
+              Password
+            </FieldLabel>
             <Input id="password" type="password" placeholder="********" />
             {/* <FieldError>Choose another username.</FieldError> */}
           </Field>
