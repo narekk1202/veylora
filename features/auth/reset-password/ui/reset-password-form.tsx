@@ -12,7 +12,7 @@ import { Input } from "@/shared/components/ui/input";
 import { useResetPassword } from "../use-reset-password";
 
 const ResetPasswordForm = () => {
-  const { form, errors, onSubmit } = useResetPassword();
+  const { form, isPending, errors, onSubmit } = useResetPassword();
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
@@ -55,7 +55,7 @@ const ResetPasswordForm = () => {
             )}
           </Field>
 
-          <Button className={"h-12 w-full"} type="submit">
+          <Button className={"h-12 w-full"} type="submit" disabled={isPending}>
             Save new password
           </Button>
         </FieldGroup>
