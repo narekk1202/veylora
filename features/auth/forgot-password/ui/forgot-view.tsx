@@ -15,7 +15,7 @@ const ForgotView = () => {
 
       <ForgotForm />
 
-      <Button variant={"link"} className={"text-muted-foreground px-1"}>
+      <Button variant={"link"} className={"text-muted-foreground/50 px-1 mt-5"}>
         <Link href={"/login"}>Back to sign in</Link>
       </Button>
     </main>
