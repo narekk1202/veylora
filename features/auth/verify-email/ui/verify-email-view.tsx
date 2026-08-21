@@ -1,4 +1,4 @@
-import AuthHeader from "@/features/auth/components/auth-header";
+import AuthHeader from "@/features/auth/ui/auth-header";
 import { Button } from "@/shared/components/ui/button";
 import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";

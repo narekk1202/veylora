@@ -1,6 +1,6 @@
-import { env } from "@/app/env";
-import { createTemplatedAuthEmail } from "@/shared/lib/auth/emails";
+import { env } from "@/shared/config/env";
 import { PrismaClient } from "@/shared/generated/prisma/client";
+import { createTemplatedAuthEmail } from "@/shared/lib/auth/emails";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
