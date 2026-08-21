@@ -1,4 +1,4 @@
-import AuthHeader from "@/features/auth/ui/auth-header";
+import BrandingHeader from "@/shared/components/branding-header";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 import RegisterForm from "./register-form";
@@ -7,7 +7,7 @@ const RegisterView = () => {
   return (
     <main className="page_container px-2">
       <div>
-        <AuthHeader
+        <BrandingHeader
           title="Start an honest record."
           description="A private journal for decisions you make before the outcome arrives."
         />

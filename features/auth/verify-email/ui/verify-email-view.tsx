@@ -1,4 +1,4 @@
-import AuthHeader from "@/features/auth/ui/auth-header";
+import BrandingHeader from "@/shared/components/branding-header";
 import { Button } from "@/shared/components/ui/button";
 import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
@@ -7,7 +7,7 @@ const VerifyEmailView = ({ email }: { email?: string }) => {
   return (
     <main className="page_container px-2">
       <div>
-        <AuthHeader
+        <BrandingHeader
           title="Check your inbox."
           description="A link was sent if that address exists."
         />

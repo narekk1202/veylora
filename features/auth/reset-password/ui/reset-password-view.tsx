@@ -1,4 +1,4 @@
-import AuthHeader from "@/features/auth/ui/auth-header";
+import BrandingHeader from "@/shared/components/branding-header";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 import ResetPasswordForm from "./reset-password-form";
@@ -7,7 +7,7 @@ const ResetPasswordView = () => {
   return (
     <main className="page_container px-2">
       <div>
-        <AuthHeader
+        <BrandingHeader
           title="Choose a new password."
           description="This replaces the previous one. Your locked decisions stay untouched."
         />

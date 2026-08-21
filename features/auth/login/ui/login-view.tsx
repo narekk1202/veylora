@@ -1,4 +1,4 @@
-import AuthHeader from "@/features/auth/ui/auth-header";
+import BrandingHeader from "@/shared/components/branding-header";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 import LoginForm from "./login-form";
@@ -7,7 +7,7 @@ const LoginView = () => {
   return (
     <main className="page_container px-2">
       <div>
-        <AuthHeader
+        <BrandingHeader
           title="Return to your record."
           description="Sign in to capture, lock, and review decisions with an honest past self."
         />
