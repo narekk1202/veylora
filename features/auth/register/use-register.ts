@@ -21,11 +21,7 @@ export const useRegister = () => {
 
   const onSubmit = (data: RegisterSchema) => {
     startTransition(async () => {
-      const { error } = await authClient.signUp.email({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      });
+      const { error } = await authClient.signUp.email(data);
 
       if (error) {
         toast.add({

@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useLogin } from "../use-login";
 
 const LoginForm = () => {
-  const { form, errors, onSubmit } = useLogin();
+  const { form, isPending, errors, onSubmit } = useLogin();
 
   return (
     <form
@@ -57,7 +57,7 @@ const LoginForm = () => {
             </Button>
           </div>
 
-          <Button className={"h-12 w-full"} type="submit">
+          <Button className={"h-12 w-full"} type="submit" disabled={isPending}>
             Sign In
           </Button>
         </FieldGroup>
