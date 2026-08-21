@@ -12,7 +12,7 @@ import { Input } from "@/shared/components/ui/input";
 import { useRegister } from "../use-register";
 
 const RegisterForm = () => {
-  const { form, errors, onSubmit } = useRegister();
+  const { form, isPending, errors, onSubmit } = useRegister();
 
   return (
     <form
@@ -63,7 +63,7 @@ const RegisterForm = () => {
             )}
           </Field>
 
-          <Button className={"h-12 w-full"} type="submit">
+          <Button className={"h-12 w-full"} type="submit" disabled={isPending}>
             Create Account
           </Button>
         </FieldGroup>

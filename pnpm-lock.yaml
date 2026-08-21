@@ -59,6 +59,12 @@ importers:
       shadcn:
         specifier: ^4.18.0
         version: 4.18.0(supports-color@7.2.0)(typescript@5.9.3)
+      supersendtx:
+        specifier: ^0.15.3
+        version: 0.15.3(nodemailer@9.0.5)(react@19.2.8)
+      supersendtx-better-auth:
+        specifier: ^0.15.3
+        version: 0.15.3(supersendtx@0.15.3(nodemailer@9.0.5)(react@19.2.8))
       tailwind-merge:
         specifier: ^3.6.0
         version: 3.6.0
@@ -2977,6 +2983,10 @@ packages:
     resolution: {integrity: sha512-D9UOmYG3UH1V+ENW56t5QXBwJw1YEY18ruVeus89Rw+SyIgjPkCO84bRzO3uNIYosJbNwiabWVn48o3uJLjxFQ==}
     engines: {node: '>=18'}
 
+  nodemailer@9.0.5:
+    resolution: {integrity: sha512-wvjiKvjczmsN7U/8006JOdXubgBk2XFAbioDMbT+sM7cPs0QrhJTa6KBRX7P5REGGkDcLUz/EarWidb8G8C1jQ==}
+    engines: {node: '>=6.0.0'}
+
   npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
@@ -3655,6 +3665,34 @@ packages:
       '@babel/core':
         optional: true
       babel-plugin-macros:
+        optional: true
+
+  supersendtx-better-auth@0.15.3:
+    resolution: {integrity: sha512-E1Bu9hsxFWfTuh9s9z2EWv1qBXHIktCkjAPmJcuU47OnQV6LiTC7LOX5e2qR9MPFI5XnYPFqzN6i1En+oyP8wQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      supersendtx: 0.15.3
+
+  supersendtx-nodemailer@0.15.3:
+    resolution: {integrity: sha512-npHuzqVXJWBMldJxjKxHdU3HfwJboTKPZ3qz42cPR2J2MgB6UmqJSnGngjSfs8qlzyPYia7CH0ASme/jXEzwlw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      nodemailer: '>=6.0.0'
+      supersendtx: 0.15.3
+
+  supersendtx@0.15.3:
+    resolution: {integrity: sha512-Bk6YevmyCyq8mJes5pZuPYxxBfu6gLcET6AFyc3sRNLMC+jG2/Mt1DTht1h+aCEQ+oafPD1rdOFktBu/6By8Cg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@react-email/render': '>=0.0.16'
+      nodemailer: '>=6.0.0'
+      react: '>=18.0.0'
+    peerDependenciesMeta:
+      '@react-email/render':
+        optional: true
+      nodemailer:
+        optional: true
+      react:
         optional: true
 
   supports-color@7.2.0:
@@ -6728,6 +6766,8 @@ snapshots:
 
   node-releases@2.0.53: {}
 
+  nodemailer@9.0.5: {}
+
   npm-run-path@4.0.1:
     dependencies:
       path-key: 3.1.1
@@ -7464,6 +7504,22 @@ snapshots:
       react: 19.2.8
     optionalDependencies:
       '@babel/core': 7.29.7(supports-color@7.2.0)
+
+  supersendtx-better-auth@0.15.3(supersendtx@0.15.3(nodemailer@9.0.5)(react@19.2.8)):
+    dependencies:
+      supersendtx: 0.15.3(nodemailer@9.0.5)(react@19.2.8)
+
+  supersendtx-nodemailer@0.15.3(nodemailer@9.0.5)(supersendtx@0.15.3(nodemailer@9.0.5)(react@19.2.8)):
+    dependencies:
+      nodemailer: 9.0.5
+      supersendtx: 0.15.3(nodemailer@9.0.5)(react@19.2.8)
+
+  supersendtx@0.15.3(nodemailer@9.0.5)(react@19.2.8):
+    dependencies:
+      supersendtx-nodemailer: 0.15.3(nodemailer@9.0.5)(supersendtx@0.15.3(nodemailer@9.0.5)(react@19.2.8))
+    optionalDependencies:
+      nodemailer: 9.0.5
+      react: 19.2.8
 
   supports-color@7.2.0:
     dependencies:
