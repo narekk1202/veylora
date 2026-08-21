@@ -1,2 +1,3 @@
 export { default as LoginView } from "./login/ui/login-view";
 export { default as RegisterView } from "./register/ui/register-view";
+export { default as ForgotView } from "./forgot-password/ui/forgot-view";
