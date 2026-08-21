@@ -8,7 +8,7 @@ type AuthHeaderProps = {
 
 const AuthHeader = ({ title, description }: AuthHeaderProps) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center text-center">
       <BrandText />
       <AuthWelcomeMessage title={title} description={description} />
     </div>
