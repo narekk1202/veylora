@@ -11,7 +11,7 @@ import { Input } from "@/shared/components/ui/input";
 
 const RegisterForm = () => {
   return (
-    <form className="bg-primary-foreground mt-10 h-90 w-full max-w-md rounded-lg border px-6 py-4">
+    <form className="sm:bg-primary-foreground mt-10 h-90 w-full max-w-md rounded-lg px-6 py-4 sm:border">
       <FieldSet>
         <FieldGroup>
           <Field>

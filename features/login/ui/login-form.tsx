@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const LoginForm = () => {
   return (
-    <form className="bg-primary-foreground mt-10 h-80 w-full max-w-md rounded-lg border px-6 py-4">
+    <form className="sm:bg-primary-foreground mt-10 h-80 w-full max-w-md rounded-lg sm:border px-6 py-4">
       <FieldSet>
         <FieldGroup>
           <Field>

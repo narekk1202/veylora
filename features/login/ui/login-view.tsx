@@ -5,7 +5,7 @@ import LoginForm from "./login-form";
 
 const LoginView = () => {
   return (
-    <main className="page_container">
+    <main className="page_container px-2">
       <div>
         <AuthHeader
           title="Return to your record."

@@ -5,7 +5,7 @@ import RegisterForm from "./register-form";
 
 const RegisterView = () => {
   return (
-    <main className="page_container">
+    <main className="page_container px-2">
       <div>
         <AuthHeader
           title="Start an honest record."
