@@ -3,31 +3,52 @@
 import { Button } from "@/shared/components/ui/button";
 import {
   Field,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSet,
 } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
 import Link from "next/link";
+import { useLogin } from "../use-login";
 
 const LoginForm = () => {
+  const { form, errors, onSubmit } = useLogin();
+
   return (
-    <form className="sm:bg-primary-foreground mt-10 h-80 w-full max-w-md rounded-lg px-6 py-4 sm:border">
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="sm:bg-primary-foreground mt-10 min-h-80 w-full max-w-md rounded-lg px-6 py-4 sm:border"
+    >
       <FieldSet>
         <FieldGroup>
-          <Field>
+          <Field data-invalid={!!errors.email}>
             <FieldLabel htmlFor="email" className="text-muted-foreground">
               Email
             </FieldLabel>
-            <Input id="email" type="email" placeholder="example@example.com" />
-            {/* <FieldError>Choose another username.</FieldError> */}
+            <Input
+              {...form.register("email")}
+              id="email"
+              type="email"
+              placeholder="example@example.com"
+              aria-invalid={!!errors.email}
+            />
+            {errors.email && <FieldError>{errors.email.message}</FieldError>}
           </Field>
-          <Field>
+          <Field data-invalid={!!errors.password}>
             <FieldLabel htmlFor="password" className="text-muted-foreground">
               Password
             </FieldLabel>
-            <Input id="password" type="password" placeholder="********" />
-            {/* <FieldError>Choose another username.</FieldError> */}
+            <Input
+              {...form.register("password")}
+              id="password"
+              type="password"
+              placeholder="********"
+              aria-invalid={!!errors.password}
+            />
+            {errors.password && (
+              <FieldError>{errors.password.message}</FieldError>
+            )}
           </Field>
 
           <div className="flex w-full justify-end">
