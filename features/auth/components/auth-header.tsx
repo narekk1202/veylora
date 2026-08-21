@@ -1,4 +1,4 @@
-import BrandText from "../brand-text";
+import BrandText from "@/shared/components/brand-text";
 import AuthWelcomeMessage from "./auth-welcome-message";
 
 type AuthHeaderProps = {

@@ -1,4 +1,4 @@
-import AuthHeader from "@/shared/components/auth/auth-header";
+import AuthHeader from "@/features/auth/components/auth-header";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 import LoginForm from "./login-form";

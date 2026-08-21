@@ -26,7 +26,11 @@ const RegisterForm = () => {
           </Field>
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
-            <Input id="password" type="password" placeholder="********" />
+            <Input
+              id="password"
+              type="password"
+              placeholder="At least 8 characters"
+            />
             {/* <FieldError>Choose another username.</FieldError> */}
           </Field>
 
