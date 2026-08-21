@@ -1,33 +1,24 @@
-import { getCookieCache } from "better-auth/cookies";
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "./shared/lib/auth";
 
 const publicRoutes = new Set(["/", "/login", "/register"]);
 const utilityRoutes = ["/verify-email", "/reset-password", "/forgot-password"];
 
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const session = await getCookieCache(request);
-  const onboarded = session?.user?.onboardingCompleted === true;
+  const hasSession = await auth.api.getSession({
+    headers: request.headers,
+  });
 
   if (utilityRoutes.some((r) => path === r || path.startsWith(r + "/"))) {
     return NextResponse.next();
   }
 
-  if (!session && !publicRoutes.has(path)) {
+  if (!hasSession && !publicRoutes.has(path)) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (session && publicRoutes.has(path)) {
-    return NextResponse.redirect(
-      new URL(onboarded ? "/overview" : "/onboarding", request.url),
-    );
-  }
-
-  if (session && !onboarded && path !== "/onboarding") {
-    return NextResponse.redirect(new URL("/onboarding", request.url));
-  }
-
-  if (session && onboarded && path === "/onboarding") {
+  if (hasSession && publicRoutes.has(path)) {
     return NextResponse.redirect(new URL("/overview", request.url));
   }
 

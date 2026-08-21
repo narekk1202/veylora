@@ -32,13 +32,6 @@ export const auth = betterAuth({
     sendVerificationEmail: email.sendVerificationEmail,
   },
 
-  session: {
-    cookieCache: {
-      enabled: true,
-      maxAge: 5 * 60
-    },
-  },
-
   user: {
     additionalFields: {
       onboardingCompleted: {
