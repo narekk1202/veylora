@@ -2,11 +2,12 @@
 
 import { auth } from "@/shared/lib/auth";
 import { prisma } from "@/shared/lib/prisma";
+import { Route } from "next";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-async function completeOnboarding(redirectTo: string) {
+async function completeOnboarding(redirectTo: Route<string>) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
