@@ -1,7 +1,7 @@
 import BrandingHeader from "@/shared/components/branding-header";
-import { Button } from "@/shared/components/ui/button";
-import Link from "next/link";
+import { endOnboarding, skipOnboarding } from "../actions";
 import InfoCard from "./info-card";
+import SubmitButton from "./submit-button";
 
 const infoCards = [
   {
@@ -39,12 +39,21 @@ const OnboardingView = () => {
       </div>
 
       <div className="mt-10 flex items-center gap-2 max-sm:flex-col max-sm:items-center">
-        <Button variant="default" className="h-13 w-68">
-          <Link href="/decisions/new">Record your first decision</Link>
-        </Button>
-        <Button variant="link">
-          <Link href="/decisions/new">Skip to overview</Link>
-        </Button>
+        <form action={endOnboarding}>
+          <SubmitButton
+            variant="default"
+            className="h-12 w-64"
+            loadingText="Redirecting..."
+          >
+            Record your first decision
+          </SubmitButton>
+        </form>
+
+        <form action={skipOnboarding}>
+          <SubmitButton variant="link" loadingText="Skipping...">
+            Skip to overview
+          </SubmitButton>
+        </form>
       </div>
     </main>
   );
