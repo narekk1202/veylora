@@ -1,11 +1,16 @@
+import { Route } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./shared/lib/auth";
 
-const publicRoutes = new Set(["/", "/login", "/register"]);
-const utilityRoutes = ["/verify-email", "/reset-password", "/forgot-password"];
+const publicRoutes: Set<Route<string>> = new Set(["/", "/login", "/register"]);
+const utilityRoutes: Route<string>[] = [
+  "/verify-email",
+  "/reset-password",
+  "/forgot-password",
+];
 
 export async function proxy(request: NextRequest) {
-  const path = request.nextUrl.pathname;
+  const path = request.nextUrl.pathname as Route<string>;
   const hasSession = await auth.api.getSession({
     headers: request.headers,
   });
@@ -15,11 +20,15 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!hasSession && !publicRoutes.has(path)) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(
+      new URL("/login" as Route<string>, request.url),
+    );
   }
 
   if (hasSession && publicRoutes.has(path)) {
-    return NextResponse.redirect(new URL("/overview", request.url));
+    return NextResponse.redirect(
+      new URL("/overview" as Route<string>, request.url),
+    );
   }
 
   return NextResponse.next();
