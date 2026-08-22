@@ -3,15 +3,14 @@ import * as React from "react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
+import { Separator } from "../ui/separator";
 import { NavItem, NavMain } from "./nav-main";
-import { Separator } from "./ui/separator";
 
 const navLinks: { navMain: NavItem[] } = {
   navMain: [
@@ -86,10 +85,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <Separator />
-        <NavMain items={[{ title: "Settings", url: "/settings" }]} />
-      </SidebarFooter>
     </Sidebar>
   );
 }

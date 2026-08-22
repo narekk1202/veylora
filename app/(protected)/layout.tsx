@@ -1,19 +1,11 @@
-import { AppSidebar } from "@/shared/components/app-sidebar";
-import { Separator } from "@/shared/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/shared/components/ui/sidebar";
+import AppHeader from "@/shared/components/app-header";
+import { AppSidebar } from "@/shared/components/sidebar/app-sidebar";
+import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
 import { auth } from "@/shared/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default async function ProtectedLayout({
-  children,
-}: {
-  children: LayoutProps<"/">;
-}) {
+export default async function ProtectedLayout({ children }: LayoutProps<"/">) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -32,15 +24,9 @@ export default async function ProtectedLayout({
     >
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-        </header>
+        <AppHeader />
+        <main className="min-h-svh flex-1 p-4">{children}</main>
       </SidebarInset>
-      <>{children}</>
     </SidebarProvider>
   );
 }

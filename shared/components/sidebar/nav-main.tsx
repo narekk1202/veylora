@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
   sidebarMenuButtonVariants,
 } from "@/shared/components/ui/sidebar";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 export type NavItem = {
   title: string;
