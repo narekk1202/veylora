@@ -1,13 +1,9 @@
 import { env } from "@/shared/config/env";
-import { PrismaClient } from "@/shared/generated/prisma/client";
 import { createTemplatedAuthEmail } from "@/shared/lib/auth/emails";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { prisma } from "@/shared/lib/prisma";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { createBetterAuthEmail } from "supersendtx-better-auth";
-
-const adapter = new PrismaPg({ connectionString: env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
 
 const tx = createBetterAuthEmail({
   from: "noreply@veylora.space",
