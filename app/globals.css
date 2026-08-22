@@ -187,4 +187,7 @@
   .page_container {
     @apply container mx-auto flex h-svh flex-col items-center justify-center;
   }
+  .active_sidebar_link {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground;
+  }
 }

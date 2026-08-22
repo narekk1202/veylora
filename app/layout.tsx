@@ -1,4 +1,5 @@
 import { Toaster } from "@/shared/components/ui/toast";
+import { TooltipProvider } from "@/shared/components/ui/tooltip";
 import { ThemeProvider } from "@/shared/providers/theme-provider";
 import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
@@ -34,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
         </ThemeProvider>
       </body>
