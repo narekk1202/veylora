@@ -1,4 +1,4 @@
-import { Button } from "@/shared/components/ui/button";
+import { buttonVariants } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import {
   Empty,
@@ -7,6 +7,8 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from "@/shared/components/ui/empty";
+import { cn } from "@/shared/lib/utils";
+import Link from "next/link";
 
 const EmptyDecisionsCard = () => {
   return (
@@ -21,17 +23,13 @@ const EmptyDecisionsCard = () => {
             so you can learn from your past self later.
           </EmptyDescription>
         </EmptyHeader>
-        <EmptyContent className="mt-2 max-w-none sm:flex-row justify-center gap-4">
-          <Button type="button" className="h-12 px-5">
-            Record your first decision
-          </Button>
-          <Button
-            type="button"
-            variant="link"
-            className="text-muted-foreground"
+        <EmptyContent className="mt-2 max-w-none justify-center gap-4 sm:flex-row">
+          <Link
+            href="/decisions/new"
+            className={cn(buttonVariants({ variant: "default" }), "h-12 px-5")}
           >
-            How Veylora works
-          </Button>
+            Record your first decision
+          </Link>
         </EmptyContent>
       </Empty>
     </Card>
