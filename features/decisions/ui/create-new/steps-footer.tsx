@@ -4,7 +4,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Lock } from "lucide-react";
 import { newDecision } from "../../libs/stepperize";
 
-const StepsFooter = ({ isLockStep }: { isLockStep: boolean }) => {
+const StepsFooter = ({ isLockStep = false }: { isLockStep?: boolean }) => {
   const stepper = newDecision.useStepper();
 
   return (
@@ -24,10 +24,10 @@ const StepsFooter = ({ isLockStep }: { isLockStep: boolean }) => {
           Continue
         </Button>
       )}
-
-      {!stepper.canNext && isLockStep && (
+      {isLockStep && (
         <Button className="h-11 px-8" onClick={() => stepper.next()}>
-          <Lock /> Lock decision
+          <Lock />
+          Lock decision
         </Button>
       )}
     </div>

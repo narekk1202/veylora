@@ -6,4 +6,5 @@ export const newDecision = defineStepper([
   { id: "reasoning", title: "Reasoning" },
   { id: "prediction", title: "Prediction" },
   { id: "summary", title: "Summary" },
+  { id: "locked", title: "Locked" },
 ]);
