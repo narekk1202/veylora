@@ -3,14 +3,14 @@ export const CATEGORY_NAME = {
   PERSONAL: "Personal",
   FINANCE: "Finance",
   RELATIONSHIPS: "Relationships",
-} as const;
+} as const
 
 export const CATEGORY_COLOR = {
   CAREER: "#60A5FA",
   PERSONAL: "#34D399",
   FINANCE: "#FBBF24",
   RELATIONSHIPS: "#FB7185",
-} as const;
+} as const
 
 export const CATEGORIES = [
   {
