@@ -1,6 +1,6 @@
 "use client";
 
-import { CATEGORY_NAME } from "@/shared/constants/catergories.consts";
+import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { cn } from "@/shared/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startOfTomorrow } from "date-fns";
@@ -22,7 +22,7 @@ const NewDecisionView = () => {
   const form = useForm<NewDecisionSchema>({
     resolver: zodResolver(newDecisionSchema),
     defaultValues: {
-      category: CATEGORY_NAME.CAREER,
+      category: CATEGORY_CONFIG.CAREER.id,
       question: "",
       context: "",
       urgency: "",
@@ -35,6 +35,7 @@ const NewDecisionView = () => {
       confidence: 0,
       reviewDate,
     },
+    mode: "onChange",
   });
 
   return (
