@@ -15,7 +15,7 @@ const DecisionsCategoryTabs = () => {
     >
       <TabsList variant="line" className="max-lg:w-full">
         {CATEGORIES.map((category) => (
-          <TabsTrigger key={category.name} value={category.name}>
+          <TabsTrigger key={category.id} value={category.id}>
             <span
               className="size-2 rounded-full"
               style={{ backgroundColor: category.color }}

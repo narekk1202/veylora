@@ -9,10 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
-import {
-  CATEGORY_COLOR,
-  CATEGORY_NAME,
-} from "@/shared/constants/catergories.consts";
+import { CATEGORIES } from "@/shared/constants/catergories.consts";
 import { Separator } from "../ui/separator";
 import { NavItem, NavMain } from "./nav-main";
 
@@ -38,28 +35,11 @@ const navLinks: { navMain: NavItem[] } = {
 };
 
 const navCategories: { navCategories: NavItem[] } = {
-  navCategories: [
-    {
-      title: CATEGORY_NAME.CAREER,
-      url: "/decisions?category=career",
-      dotColor: CATEGORY_COLOR.CAREER,
-    },
-    {
-      title: CATEGORY_NAME.PERSONAL,
-      url: "/decisions?category=personal",
-      dotColor: CATEGORY_COLOR.PERSONAL,
-    },
-    {
-      title: CATEGORY_NAME.FINANCE,
-      url: "/decisions?category=finance",
-      dotColor: CATEGORY_COLOR.FINANCE,
-    },
-    {
-      title: CATEGORY_NAME.RELATIONSHIPS,
-      url: "/decisions?category=relationships",
-      dotColor: CATEGORY_COLOR.RELATIONSHIPS,
-    },
-  ],
+  navCategories: CATEGORIES.map((category) => ({
+    title: category.name,
+    url: `/decisions?category=${category.id.toLowerCase()}`,
+    dotColor: category.color,
+  })),
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

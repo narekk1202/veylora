@@ -1,26 +1,29 @@
 import { Badge } from "@/shared/components/ui/badge";
-import { CATEGORY_COLOR } from "@/shared/constants/catergories.consts";
-import { DecisionCategory } from "../../types";
+import {
+  CATEGORY_CONFIG,
+  CategoryKey,
+} from "@/shared/constants/catergories.consts";
 
 type StepsHeadingProps = {
   title: string;
   description: string;
-  category?: DecisionCategory;
+  category?: CategoryKey;
 };
 
 const StepsHeading = ({ title, description, category }: StepsHeadingProps) => {
-  const categoryColor = CATEGORY_COLOR[category as DecisionCategory];
+  const categoryMeta = category ? CATEGORY_CONFIG[category] : undefined;
+
   return (
     <header className="flex flex-col gap-2">
-      {category && (
+      {categoryMeta && (
         <Badge
           className="h-5.75 uppercase"
           style={{
-            color: categoryColor,
-            backgroundColor: `${categoryColor}40`,
+            color: categoryMeta.color,
+            backgroundColor: `${categoryMeta.color}40`,
           }}
         >
-          {category} decision
+          {categoryMeta.name} decision
         </Badge>
       )}
       <h2 className="font-serif text-4xl font-medium italic max-sm:text-3xl">

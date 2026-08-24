@@ -10,15 +10,15 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/shared/components/ui/empty";
-import { CATEGORY_COLOR } from "@/shared/constants/catergories.consts";
+import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { cn } from "@/shared/lib/utils";
 import { Lock } from "lucide-react";
 import Link from "next/link";
 
 const LOCKED_PREVIEW = {
   question: "Should I switch to the Lead Product role?",
-  category: "Career",
-  categoryColor: CATEGORY_COLOR.CAREER,
+  category: CATEGORY_CONFIG.CAREER.name,
+  categoryColor: CATEGORY_CONFIG.CAREER.color,
   confidence: 75,
   reviewDate: "Sept 15, 2026",
 };

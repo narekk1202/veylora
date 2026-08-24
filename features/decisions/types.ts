@@ -1,6 +1,6 @@
-import { CATEGORY_NAME } from "@/shared/constants/catergories.consts";
+import { CategoryKey } from "@/shared/constants/catergories.consts";
 
-export type DecisionCategory = keyof typeof CATEGORY_NAME;
+export type DecisionCategory = CategoryKey;
 export type DecisionStatus = "locked" | "reviewed";
 
 export type Decision = {

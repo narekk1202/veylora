@@ -1,3 +1,4 @@
+import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { Decision } from "../types";
 import DecisionsCard from "./decisions-card";
 import DecisionsFilters from "./decisions-filters";
@@ -6,7 +7,7 @@ import DecisionsHeader from "./decisions-header";
 const MOCK_DECISIONS: Decision[] = [
   {
     title: "Should I switch to the Lead Product role?",
-    category: "CAREER",
+    category: CATEGORY_CONFIG.CAREER.id,
     status: "locked",
     date: new Date(2025, 7, 20),
     confidence: 75,
@@ -14,14 +15,14 @@ const MOCK_DECISIONS: Decision[] = [
   },
   {
     title: "Should I invest time in learning Rust?",
-    category: "PERSONAL",
+    category: CATEGORY_CONFIG.PERSONAL.id,
     status: "reviewed",
     date: new Date(2025, 7, 18),
     accuracyLabel: "Mostly accurate",
   },
   {
     title: "Changing the project architecture to microservices?",
-    category: "FINANCE",
+    category: CATEGORY_CONFIG.FINANCE.id,
     status: "locked",
     date: new Date(2025, 7, 15),
     confidence: 62,

@@ -1,8 +1,5 @@
 import { Card } from "@/shared/components/ui/card";
-import {
-  CATEGORY_COLOR,
-  CATEGORY_NAME,
-} from "@/shared/constants/catergories.consts";
+import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { cn } from "@/shared/lib/utils";
 import { Decision } from "../types";
 import { formatDecisionDate } from "../utils";
@@ -21,8 +18,9 @@ const DecisionsCard = ({
   reviewInDays,
   className,
 }: DecisionsCardProps) => {
-  const categoryColor = CATEGORY_COLOR[category];
-  const categoryLabel = CATEGORY_NAME[category].toUpperCase();
+  const categoryMeta = CATEGORY_CONFIG[category];
+  const categoryColor = categoryMeta.color;
+  const categoryLabel = categoryMeta.name.toUpperCase();
 
   return (
     <Card
@@ -61,7 +59,7 @@ const DecisionsCard = ({
         {status === "locked" && confidence !== undefined ? (
           <span
             className="text-sm font-semibold tabular-nums"
-            style={{ color: CATEGORY_COLOR.FINANCE }}
+            style={{ color: CATEGORY_CONFIG.FINANCE.color }}
           >
             {confidence}%
           </span>
@@ -69,7 +67,7 @@ const DecisionsCard = ({
         {status === "reviewed" && accuracyLabel ? (
           <span
             className="text-sm font-medium"
-            style={{ color: CATEGORY_COLOR.PERSONAL }}
+            style={{ color: CATEGORY_CONFIG.PERSONAL.color }}
           >
             {accuracyLabel}
           </span>
