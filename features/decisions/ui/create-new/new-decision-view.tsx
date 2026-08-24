@@ -6,6 +6,7 @@ import OptionsStep from "./steps/options";
 import PredictionStep from "./steps/prediction";
 import ReasoningStep from "./steps/reasoning";
 import SituationStep from "./steps/situation";
+import SummaryStep from "./steps/summary";
 
 const NewDecisionView = () => (
   <newDecision.Provider>
@@ -24,7 +25,7 @@ const NewDecisionContent = () => {
         options: () => <OptionsStep />,
         reasoning: () => <ReasoningStep />,
         prediction: () => <PredictionStep />,
-        summary: () => null,
+        summary: () => <SummaryStep />,
       })}
     </main>
   );
