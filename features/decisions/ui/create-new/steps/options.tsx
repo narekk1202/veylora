@@ -30,7 +30,7 @@ const OptionsStep = () => {
   return (
     <section className="flex flex-col gap-8">
       <StepsHeading
-        category="CAREER"
+        category={form.getValues("category")}
         title="What are your options?"
         description="List the paths you're seriously considering. Be honest—include options you might dismiss out of habit."
       />

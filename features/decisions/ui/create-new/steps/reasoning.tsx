@@ -22,7 +22,7 @@ const ReasoningStep = () => {
   return (
     <section className="flex flex-col gap-8">
       <StepsHeading
-        category="CAREER"
+        category={form.getValues("category")}
         title="Why are you leaning this way?"
         description="Structure your internal dialogue. Identifying what you are assuming now will help you see through your biases later."
       />

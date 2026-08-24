@@ -1,3 +1,4 @@
+import { NewDecisionSchema } from "@/features/decisions/schemas";
 import {
   Card,
   CardContent,
@@ -6,36 +7,15 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
+import { useFormContext } from "react-hook-form";
 import StepsFooter from "../steps-footer";
 import StepsHeading from "../steps-heading";
-
 const sectionLabelClassName =
   "text-muted-foreground text-[10px] font-medium tracking-wider uppercase";
 
-const SUMMARY_PREVIEW = {
-  question: "Should I switch to the Lead Product role?",
-  context:
-    "The company is restructuring product around a new platform bet. I've been asked to move from Senior IC into a Lead role that owns the roadmap, people, and delivery for one squad.",
-  options: [
-    { id: "stay", label: "Stay as Senior IC" },
-    { id: "lead", label: "Accept Lead Product", selected: true },
-    { id: "external", label: "Look for external IC Lead roles" },
-  ],
-  confidence: 75,
-  reviewDate: "Sept 15, 2026",
-  reasoning:
-    "The title bump is real, and the team already looks to me for coordination. I want the salary increase, and I believe I can keep enough craft in the week if I protect maker time. The alternative — staying IC — feels like delaying a conversation that is already happening.",
-  assumptions: [
-    "The title bump will translate into real decision rights, not just more meetings.",
-    "Leadership will keep the squad resourced through the next two quarters.",
-  ],
-  risks: [
-    "Coordination overhead crowds out the craft that currently makes the work sustainable.",
-    "If the reorg stalls, the new scope exists on paper only.",
-  ],
-};
-
 const SummaryStep = () => {
+  const form = useFormContext<NewDecisionSchema>();
+
   return (
     <section className="flex flex-col gap-8">
       <StepsHeading
@@ -49,9 +29,9 @@ const SummaryStep = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-primary font-serif text-2xl font-medium">
-                {SUMMARY_PREVIEW.question}
+                {form.getValues("question")}
               </CardTitle>
-              <CardDescription>{SUMMARY_PREVIEW.context}</CardDescription>
+              <CardDescription>{form.getValues("context")}</CardDescription>
             </CardHeader>
           </Card>
         </section>
@@ -60,14 +40,19 @@ const SummaryStep = () => {
           <section className="flex flex-col gap-2">
             <h3 className={sectionLabelClassName}>Considered options</h3>
             <ul className="flex flex-col gap-2">
-              {SUMMARY_PREVIEW.options.map((option) => (
+              {form.getValues("options").map((option) => (
                 <li key={option.id}>
                   <Card
                     size="sm"
-                    aria-current={option.selected ? "true" : undefined}
+                    aria-current={
+                      option.id === form.getValues("selectedOptionId")
+                        ? "true"
+                        : undefined
+                    }
                     className={cn(
                       "py-3",
-                      option.selected && "ring-primary ring-2",
+                      option.id === form.getValues("selectedOptionId") &&
+                        "ring-primary ring-2",
                     )}
                   >
                     <CardContent>
@@ -86,13 +71,13 @@ const SummaryStep = () => {
                 <div className="flex flex-col gap-1">
                   <p className={sectionLabelClassName}>Confidence</p>
                   <p className="text-chart-4 font-serif text-4xl tabular-nums">
-                    {SUMMARY_PREVIEW.confidence}%
+                    {form.getValues("confidence")}%
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
                   <p className={sectionLabelClassName}>Review date</p>
                   <p className="text-sm font-medium">
-                    {SUMMARY_PREVIEW.reviewDate}
+                    {form.getValues("reviewDate").toLocaleDateString()}
                   </p>
                 </div>
               </CardContent>
@@ -105,7 +90,7 @@ const SummaryStep = () => {
           <Card>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                {SUMMARY_PREVIEW.reasoning}
+                {form.getValues("primaryReasons")}
               </p>
             </CardContent>
           </Card>
@@ -117,9 +102,12 @@ const SummaryStep = () => {
             <Card className="h-full">
               <CardContent>
                 <ul className="text-muted-foreground flex flex-col gap-3 text-sm leading-relaxed">
-                  {SUMMARY_PREVIEW.assumptions.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
+                  {form
+                    .getValues("assumptions")
+                    .split("\n")
+                    .map((item, index) => (
+                      <li key={index}>{item.trim()}</li>
+                    ))}
                 </ul>
               </CardContent>
             </Card>
@@ -130,9 +118,12 @@ const SummaryStep = () => {
             <Card className="h-full">
               <CardContent>
                 <ul className="text-muted-foreground flex flex-col gap-3 text-sm leading-relaxed">
-                  {SUMMARY_PREVIEW.risks.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
+                  {form
+                    .getValues("potentialConcerns")
+                    .split("\n")
+                    .map((item, index) => (
+                      <li key={index}>{item.trim()}</li>
+                    ))}
                 </ul>
               </CardContent>
             </Card>
@@ -145,7 +136,11 @@ const SummaryStep = () => {
         to this snapshot — not a rewritten story.
       </p>
 
-      <StepsFooter isLockStep />
+      <StepsFooter
+        isLockStep
+        callTrigger={form.trigger}
+        fields={["primaryReasons", "assumptions", "potentialConcerns"]}
+      />
     </section>
   );
 };
