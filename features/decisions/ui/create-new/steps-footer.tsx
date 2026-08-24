@@ -3,20 +3,22 @@
 import { Button } from "@/shared/components/ui/button";
 import { newDecision } from "../../libs/stepperize";
 
-const StepsFooter = ({ prev }: { prev?: boolean }) => {
+const StepsFooter = () => {
   const stepper = newDecision.useStepper();
 
   return (
     <div className="border-border/40 flex items-center justify-end gap-2 border-t pt-4">
       <div />
-      {prev && (
+      {stepper.canPrev && (
         <Button className="h-11 px-8" onClick={() => stepper.prev()}>
-          Previous
+          Go back
         </Button>
       )}
-      <Button className="h-11 px-8" onClick={() => stepper.next()}>
-        Next
-      </Button>
+      {stepper.canNext && (
+        <Button className="h-11 px-8" onClick={() => stepper.next()}>
+          Continue
+        </Button>
+      )}
     </div>
   );
 };

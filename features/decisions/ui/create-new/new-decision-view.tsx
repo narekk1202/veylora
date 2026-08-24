@@ -2,9 +2,16 @@
 
 import { newDecision } from "../../libs/stepperize";
 import NewDecisionStepper from "./new-decision-stepper";
+import OptionsStep from "./steps/options";
 import SituationStep from "./steps/situation";
 
-const NewDecisionView = () => {
+const NewDecisionView = () => (
+  <newDecision.Provider>
+    <NewDecisionContent />
+  </newDecision.Provider>
+);
+
+const NewDecisionContent = () => {
   const stepper = newDecision.useStepper();
 
   return (
@@ -12,7 +19,7 @@ const NewDecisionView = () => {
       <NewDecisionStepper />
       {stepper.match({
         situation: () => <SituationStep />,
-        options: () => null,
+        options: () => <OptionsStep />,
         reasoning: () => null,
         prediction: () => null,
         summary: () => null,
