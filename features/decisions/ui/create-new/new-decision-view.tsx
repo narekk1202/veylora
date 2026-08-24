@@ -3,6 +3,7 @@
 import { newDecision } from "../../libs/stepperize";
 import NewDecisionStepper from "./new-decision-stepper";
 import OptionsStep from "./steps/options";
+import PredictionStep from "./steps/prediction";
 import ReasoningStep from "./steps/reasoning";
 import SituationStep from "./steps/situation";
 
@@ -22,7 +23,7 @@ const NewDecisionContent = () => {
         situation: () => <SituationStep />,
         options: () => <OptionsStep />,
         reasoning: () => <ReasoningStep />,
-        prediction: () => null,
+        prediction: () => <PredictionStep />,
         summary: () => null,
       })}
     </main>
