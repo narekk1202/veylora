@@ -10,7 +10,11 @@ const StepsFooter = () => {
     <div className="border-border/40 flex items-center justify-end gap-2 border-t pt-4">
       <div />
       {stepper.canPrev && (
-        <Button className="h-11 px-8" onClick={() => stepper.prev()}>
+        <Button
+          className="h-11 px-8"
+          variant="outline"
+          onClick={() => stepper.prev()}
+        >
           Go back
         </Button>
       )}
