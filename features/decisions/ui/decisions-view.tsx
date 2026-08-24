@@ -1,9 +1,9 @@
-import DecisionsAddCard from "./decisions-add-card";
+import DecisionsHeader from "./decisions-header";
 
 const DecisionsView = () => {
   return (
     <main className="page_view">
-      <DecisionsAddCard />
+      <DecisionsHeader />
     </main>
   );
 };
