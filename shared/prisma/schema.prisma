@@ -7,17 +7,36 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Category {
+  CAREER
+  PERSONAL
+  FINANCE
+  RELATIONSHIPS
+}
+
+enum DecisionStatus {
+  LOCKED
+  REVIEWED
+}
+
+enum PredictionAccuracy {
+  ACCURATE
+  MOSTLY_ACCURATE
+  INACCURATE
+}
+
 model User {
-  id                  String    @id
+  id                  String     @id
   name                String
   email               String
-  emailVerified       Boolean   @default(false)
+  emailVerified       Boolean    @default(false)
   image               String?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
   sessions            Session[]
   accounts            Account[]
-  onboardingCompleted Boolean   @default(false)
+  onboardingCompleted Boolean    @default(false)
+  decisions           Decision[]
 
   @@unique([email])
   @@map("user")
@@ -71,4 +90,45 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Decision {
+  id                String              @id @default(cuid())
+  userId            String
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  category          Category            @default(CAREER)
+  question          String
+  context           String
+  urgency           String
+  options           DecisionOption[]
+  primaryReasons    String
+  potentialConcerns String
+  assumptions       String
+  predictions       String
+  confidence        Int
+  reviewDate        DateTime            @db.Date
+  status            DecisionStatus      @default(LOCKED)
+  actualOutcome     String?
+  accuracy          PredictionAccuracy?
+  reviewedAt        DateTime?
+
+  @@index([userId])
+  @@index([userId, status])
+  @@index([userId, createdAt])
+  @@index([status, reviewDate])
+  @@map("decision")
+}
+
+model DecisionOption {
+  id         String   @id @default(cuid())
+  decisionId String
+  decision   Decision @relation(fields: [decisionId], references: [id], onDelete: Cascade)
+  label      String
+  sortOrder  Int
+  isSelected Boolean  @default(false)
+
+  @@index([decisionId])
+  @@map("decision_option")
 }
