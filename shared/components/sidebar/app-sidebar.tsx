@@ -41,22 +41,22 @@ const navCategories: { navCategories: NavItem[] } = {
   navCategories: [
     {
       title: CATEGORY_NAME.CAREER,
-      url: "/category/career",
+      url: "/decisions?category=career",
       dotColor: CATEGORY_COLOR.CAREER,
     },
     {
       title: CATEGORY_NAME.PERSONAL,
-      url: "/category/personal",
+      url: "/decisions?category=personal",
       dotColor: CATEGORY_COLOR.PERSONAL,
     },
     {
       title: CATEGORY_NAME.FINANCE,
-      url: "/category/finance",
+      url: "/decisions?category=finance",
       dotColor: CATEGORY_COLOR.FINANCE,
     },
     {
       title: CATEGORY_NAME.RELATIONSHIPS,
-      url: "/category/relationships",
+      url: "/decisions?category=relationships",
       dotColor: CATEGORY_COLOR.RELATIONSHIPS,
     },
   ],
