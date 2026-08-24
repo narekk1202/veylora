@@ -35,11 +35,9 @@ const NewDecisionStepper = () => {
               ) : null}
 
               <li className="shrink-0 snap-center">
-                <button
+                <span
                   ref={isActive ? activeStepRef : undefined}
-                  type="button"
                   aria-current={isActive ? "step" : undefined}
-                  onClick={() => stepper.goTo(step.id)}
                   className="group flex flex-col items-start gap-1 px-1 text-left transition-colors md:px-0"
                 >
                   <span
@@ -47,7 +45,7 @@ const NewDecisionStepper = () => {
                       "text-[10px] font-medium tracking-wider uppercase md:text-[11px]",
                       isActive
                         ? "text-muted-foreground"
-                        : "text-muted-foreground/35 group-hover:text-muted-foreground/55",
+                        : "text-muted-foreground/35",
                     )}
                   >
                     STEP {String(index + 1).padStart(2, "0")}
@@ -55,14 +53,12 @@ const NewDecisionStepper = () => {
                   <span
                     className={cn(
                       "text-xs font-medium whitespace-nowrap md:text-sm",
-                      isActive
-                        ? "text-foreground"
-                        : "text-muted-foreground/35 group-hover:text-muted-foreground/55",
+                      isActive ? "text-foreground" : "text-muted-foreground/35",
                     )}
                   >
                     {step.title}
                   </span>
-                </button>
+                </span>
               </li>
             </Fragment>
           );
