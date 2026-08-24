@@ -9,6 +9,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
+import {
+  CATEGORY_COLOR,
+  CATEGORY_NAME,
+} from "@/shared/constants/catergories.consts";
 import { Separator } from "../ui/separator";
 import { NavItem, NavMain } from "./nav-main";
 
@@ -36,24 +40,24 @@ const navLinks: { navMain: NavItem[] } = {
 const navCategories: { navCategories: NavItem[] } = {
   navCategories: [
     {
-      title: "Career",
+      title: CATEGORY_NAME.CAREER,
       url: "/category/career",
-      dotColor: "#60A5FA",
+      dotColor: CATEGORY_COLOR.CAREER,
     },
     {
-      title: "Personal",
+      title: CATEGORY_NAME.PERSONAL,
       url: "/category/personal",
-      dotColor: "#34D399",
+      dotColor: CATEGORY_COLOR.PERSONAL,
     },
     {
-      title: "Finance",
+      title: CATEGORY_NAME.FINANCE,
       url: "/category/finance",
-      dotColor: "#FBBF24",
+      dotColor: CATEGORY_COLOR.FINANCE,
     },
     {
-      title: "Relationships",
+      title: CATEGORY_NAME.RELATIONSHIPS,
       url: "/category/relationships",
-      dotColor: "#FB7185",
+      dotColor: CATEGORY_COLOR.RELATIONSHIPS,
     },
   ],
 };
