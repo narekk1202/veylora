@@ -21,7 +21,7 @@ const EmptyDecisionsCard = () => {
             so you can learn from your past self later.
           </EmptyDescription>
         </EmptyHeader>
-        <EmptyContent className="mt-2 max-w-none flex-row justify-center gap-4">
+        <EmptyContent className="mt-2 max-w-none sm:flex-row justify-center gap-4">
           <Button type="button" className="h-12 px-5">
             Record your first decision
           </Button>

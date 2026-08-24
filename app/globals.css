@@ -190,4 +190,7 @@
   .active_sidebar_link {
     @apply bg-sidebar-accent text-sidebar-accent-foreground;
   }
+  .page_view {
+    @apply mx-auto flex w-full max-w-7xl flex-col gap-8 px-2 py-4;
+  }
 }

@@ -7,7 +7,7 @@ type OverviewViewProps = {
 
 const OverviewView = ({ firstName }: OverviewViewProps) => {
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-2 py-4">
+    <main className="page_view">
       <div className="flex flex-col gap-2">
         <h1 className="font-serif text-4xl font-medium max-sm:text-3xl">
           Welcome, {firstName}.
@@ -30,7 +30,7 @@ const OverviewView = ({ firstName }: OverviewViewProps) => {
           description="Unlock after your first review"
         />
       </div>
-    </div>
+    </main>
   );
 };
 
