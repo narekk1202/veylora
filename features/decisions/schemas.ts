@@ -16,7 +16,7 @@ export const newDecisionSchema = z.object({
   assumptions: z.string().min(1, "Assumptions are required"),
   predictions: z.string().min(1, "Predictions are required"),
   confidence: z.number().min(0).max(100),
-  reviewDate: z.date().refine((date) => date >= startOfTomorrow(), {
+  reviewDate: z.coerce.date().refine((date) => date >= startOfTomorrow(), {
     message: "Review date must be tomorrow or later",
   }),
 });

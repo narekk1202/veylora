@@ -1,21 +1,25 @@
 "use client";
 
 import { Button } from "@/shared/components/ui/button";
-import { Lock } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
 import { UseFormTrigger } from "react-hook-form";
 import { newDecision } from "../../libs/stepperize";
 import { NewDecisionSchema } from "../../schemas";
 
 type StepsFooterProps = {
+  isLoading?: boolean;
   isLockStep?: boolean;
-  callTrigger: UseFormTrigger<NewDecisionSchema>;
   fields: (keyof NewDecisionSchema)[];
+  onLock?: () => void;
+  callTrigger: UseFormTrigger<NewDecisionSchema>;
 };
 
 const StepsFooter = ({
+  isLoading = false,
   isLockStep = false,
   callTrigger,
   fields,
+  onLock,
 }: StepsFooterProps) => {
   const stepper = newDecision.useStepper();
 
@@ -42,8 +46,8 @@ const StepsFooter = ({
         </Button>
       )}
       {isLockStep && (
-        <Button className="h-11 px-8" onClick={() => stepper.next()}>
-          <Lock />
+        <Button className="h-11 px-8" onClick={onLock} disabled={isLoading}>
+          {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Lock />}
           Lock decision
         </Button>
       )}

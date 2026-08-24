@@ -1,4 +1,4 @@
-import { NewDecisionSchema } from "@/features/decisions/schemas";
+import { useCreateDecision } from "@/features/decisions/hooks/use-create-decision";
 import {
   Card,
   CardContent,
@@ -7,14 +7,13 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
-import { useFormContext } from "react-hook-form";
 import StepsFooter from "../steps-footer";
 import StepsHeading from "../steps-heading";
 const sectionLabelClassName =
   "text-muted-foreground text-[10px] font-medium tracking-wider uppercase";
 
 const SummaryStep = () => {
-  const form = useFormContext<NewDecisionSchema>();
+  const { form, onSubmit, isPending } = useCreateDecision();
 
   return (
     <section className="flex flex-col gap-8">
@@ -139,6 +138,8 @@ const SummaryStep = () => {
       <StepsFooter
         isLockStep
         callTrigger={form.trigger}
+        onLock={() => onSubmit(form.getValues())}
+        isLoading={isPending}
         fields={["primaryReasons", "assumptions", "potentialConcerns"]}
       />
     </section>
