@@ -1,5 +1,6 @@
 "use client";
 
+import { NewDecisionSchema } from "@/features/decisions/schemas";
 import { Button } from "@/shared/components/ui/button";
 import { Calendar } from "@/shared/components/ui/calendar";
 import {
@@ -13,6 +14,7 @@ import {
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldTitle,
@@ -25,9 +27,16 @@ import {
 import { Slider } from "@/shared/components/ui/slider";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { cn } from "@/shared/lib/utils";
-import { addDays, addMonths, format, isSameDay, startOfTomorrow } from "date-fns";
+import {
+  addDays,
+  addMonths,
+  format,
+  isSameDay,
+  startOfTomorrow,
+} from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import StepsFooter from "../steps-footer";
 import StepsHeading from "../steps-heading";
 
@@ -42,15 +51,14 @@ const REVISIT_PRESETS = [
 ] as const;
 
 const PredictionStep = () => {
-  const [confidence, setConfidence] = useState(75);
-  const [revisitDate, setRevisitDate] = useState(() => addMonths(new Date(), 3));
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [prediction, setPrediction] = useState("");
+  const form = useFormContext<NewDecisionSchema>();
+  const errors = form.formState.errors;
+  const predictions = useWatch({
+    control: form.control,
+    name: "predictions",
+  });
 
-  const formattedRevisitDate = useMemo(
-    () => format(revisitDate, "MMMM d, yyyy"),
-    [revisitDate],
-  );
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   return (
     <section className="flex flex-col gap-8">
@@ -60,115 +68,148 @@ const PredictionStep = () => {
       />
 
       <FieldGroup className="gap-6">
-        <Field>
+        <Field data-invalid={!!errors.predictions}>
           <div className="flex items-center justify-between gap-4">
             <FieldLabel htmlFor="prediction" className={fieldLabelClassName}>
               My prediction
             </FieldLabel>
             <span className={fieldLabelClassName}>
-              {prediction.trim() ? "Drafted" : "Empty"}
+              {predictions.trim() ? "Drafted" : "Empty"}
             </span>
           </div>
           <Textarea
+            {...form.register("predictions")}
             id="prediction"
             className="min-h-32"
-            value={prediction}
-            onChange={(event) => setPrediction(event.target.value)}
+            aria-invalid={!!errors.predictions}
             placeholder="If I take the Lead Product role, I expect a steep learning curve for the first 60 days. I predict I will feel stretched but energized by the new scope. By month three, I anticipate having stabilized the roadmap and reduced engineering churn by at least 15% through clearer prioritization."
           />
+          {errors.predictions && (
+            <FieldError>{errors.predictions.message}</FieldError>
+          )}
         </Field>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>How confident are you?</CardTitle>
-            <CardDescription>
-              Confidence represents your belief in this specific prediction.
-            </CardDescription>
-            <CardAction>
-              <p className="font-serif text-4xl text-primary tabular-nums">
-                {confidence}%
-              </p>
-            </CardAction>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-3">
-            <Slider
-              min={0}
-              max={100}
-              step={1}
-              value={confidence}
-              onValueChange={(value) => {
-                setConfidence(Array.isArray(value) ? (value[0] ?? 75) : value);
-              }}
-              aria-label="Prediction confidence"
-            />
-            <div className="text-muted-foreground flex justify-between gap-2 text-[10px] font-medium tracking-wider uppercase">
-              <span>Uncertain</span>
-              <span>50%</span>
-              <span>Complete certainty</span>
-            </div>
-          </CardContent>
-        </Card>
+        <Controller
+          name="confidence"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>How confident are you?</CardTitle>
+                  <CardDescription>
+                    Confidence represents your belief in this specific
+                    prediction.
+                  </CardDescription>
+                  <CardAction>
+                    <p className="text-primary font-serif text-4xl tabular-nums">
+                      {field.value}%
+                    </p>
+                  </CardAction>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-3">
+                  <Slider
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={field.value}
+                    onValueChange={(value) => {
+                      field.onChange(
+                        Array.isArray(value) ? (value[0] ?? 0) : value,
+                      );
+                    }}
+                    onBlur={field.onBlur}
+                    aria-invalid={fieldState.invalid}
+                    aria-label="Prediction confidence"
+                  />
+                  <div className="text-muted-foreground flex justify-between gap-2 text-[10px] font-medium tracking-wider uppercase">
+                    <span>Uncertain</span>
+                    <span>50%</span>
+                    <span>Complete certainty</span>
+                  </div>
+                </CardContent>
+              </Card>
+              {fieldState.error && (
+                <FieldError>{fieldState.error.message}</FieldError>
+              )}
+            </Field>
+          )}
+        />
 
-        <Field>
-          <FieldTitle>When should we revisit this?</FieldTitle>
-          <FieldDescription>
-            We will notify you to review this decision and record the actual
-            outcome.
-          </FieldDescription>
-          <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-            <PopoverTrigger
-              render={
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-11 w-full justify-start"
-                />
-              }
-            >
-              <CalendarIcon data-icon="inline-start" />
-              {formattedRevisitDate}
-            </PopoverTrigger>
-            <PopoverContent align="start" className="w-auto">
-              <Calendar
-                mode="single"
-                selected={revisitDate}
-                onSelect={(date) => {
-                  if (!date) {
-                    return;
-                  }
+        <Controller
+          name="reviewDate"
+          control={form.control}
+          render={({ field, fieldState }) => {
+            const formattedRevisitDate = format(field.value, "MMMM d, yyyy");
 
-                  setRevisitDate(date);
-                  setIsCalendarOpen(false);
-                }}
-                disabled={{ before: startOfTomorrow() }}
-              />
-            </PopoverContent>
-          </Popover>
-          <div className="flex flex-wrap gap-2">
-            {REVISIT_PRESETS.map((preset) => {
-              const presetDate = preset.getDate();
-              const isActive = isSameDay(presetDate, revisitDate);
+            return (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldTitle>When should we revisit this?</FieldTitle>
+                <FieldDescription>
+                  We will notify you to review this decision and record the
+                  actual outcome.
+                </FieldDescription>
+                <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                  <PopoverTrigger
+                    render={
+                      <Button
+                        ref={field.ref}
+                        type="button"
+                        variant="outline"
+                        className="h-11 w-full justify-start"
+                        aria-invalid={fieldState.invalid}
+                      />
+                    }
+                  >
+                    <CalendarIcon data-icon="inline-start" />
+                    {formattedRevisitDate}
+                  </PopoverTrigger>
+                  <PopoverContent align="start" className="w-auto">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={(date) => {
+                        if (!date) {
+                          return;
+                        }
 
-              return (
-                <Button
-                  key={preset.label}
-                  type="button"
-                  variant={isActive ? "outline" : "ghost"}
-                  aria-pressed={isActive}
-                  className={cn("text-muted-foreground", {
-                    "bg-foreground/10 text-foreground": isActive,
+                        field.onChange(date);
+                      }}
+                      disabled={{ before: startOfTomorrow() }}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <div className="flex flex-wrap gap-2">
+                  {REVISIT_PRESETS.map((preset) => {
+                    const presetDate = preset.getDate();
+                    const isActive = isSameDay(presetDate, field.value);
+
+                    return (
+                      <Button
+                        key={preset.label}
+                        type="button"
+                        variant={isActive ? "outline" : "ghost"}
+                        aria-pressed={isActive}
+                        className={cn("text-muted-foreground", {
+                          "bg-foreground/10 text-foreground": isActive,
+                        })}
+                        onClick={() => field.onChange(presetDate)}
+                      >
+                        {preset.label}
+                      </Button>
+                    );
                   })}
-                  onClick={() => setRevisitDate(presetDate)}
-                >
-                  {preset.label}
-                </Button>
-              );
-            })}
-          </div>
-          <FieldDescription>
-            We&apos;ll check back on {formattedRevisitDate}.
-          </FieldDescription>
-        </Field>
+                </div>
+                <FieldDescription>
+                  We&apos;ll check back on {formattedRevisitDate}.
+                </FieldDescription>
+                {fieldState.error && (
+                  <FieldError>{fieldState.error.message}</FieldError>
+                )}
+              </Field>
+            );
+          }}
+        />
       </FieldGroup>
 
       <p className="text-muted-foreground/60 text-xs italic">
@@ -176,7 +217,10 @@ const PredictionStep = () => {
         and record what actually happened.
       </p>
 
-      <StepsFooter />
+      <StepsFooter
+        callTrigger={form.trigger}
+        fields={["predictions", "confidence", "reviewDate"]}
+      />
     </section>
   );
 };
