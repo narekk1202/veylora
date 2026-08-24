@@ -22,8 +22,10 @@ const NewDecisionStepper = () => {
       className="-mx-2 w-[calc(100%+1rem)] snap-x snap-mandatory scrollbar-none overflow-x-auto px-2 md:mx-0 md:w-full md:snap-none md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
     >
       <ol className="flex min-w-max items-center md:w-full md:min-w-0">
-        {stepper.steps.map((step, index) => {
-          const isActive = stepper.id === step.id;
+        {stepper.steps
+          .filter((step) => step.id !== "locked")
+          .map((step, index) => {
+            const isActive = stepper.id === step.id;
 
           return (
             <Fragment key={step.id}>
@@ -61,8 +63,8 @@ const NewDecisionStepper = () => {
                 </span>
               </li>
             </Fragment>
-          );
-        })}
+            );
+          })}
       </ol>
     </nav>
   );

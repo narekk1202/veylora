@@ -1,7 +1,9 @@
 "use client";
 
+import { cn } from "@/shared/lib/utils";
 import { newDecision } from "../../libs/stepperize";
 import NewDecisionStepper from "./new-decision-stepper";
+import LockedStep from "./steps/locked";
 import OptionsStep from "./steps/options";
 import PredictionStep from "./steps/prediction";
 import ReasoningStep from "./steps/reasoning";
@@ -16,16 +18,18 @@ const NewDecisionView = () => (
 
 const NewDecisionContent = () => {
   const stepper = newDecision.useStepper();
+  const isLocked = stepper.id === "locked";
 
   return (
-    <main className="page_view gap-12">
-      <NewDecisionStepper />
+    <main className={cn("page_view", isLocked ? "gap-0" : "gap-12")}>
+      {isLocked ? null : <NewDecisionStepper />}
       {stepper.match({
         situation: () => <SituationStep />,
         options: () => <OptionsStep />,
         reasoning: () => <ReasoningStep />,
         prediction: () => <PredictionStep />,
         summary: () => <SummaryStep />,
+        locked: () => <LockedStep />,
       })}
     </main>
   );
