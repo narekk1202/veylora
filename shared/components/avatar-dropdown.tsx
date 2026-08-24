@@ -63,11 +63,12 @@ const AvatarDropdown = () => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/settings" className="flex w-full items-center gap-2">
-              <Settings />
-              Settings
-            </Link>
+          <DropdownMenuItem
+            render={<Link href="/settings" />}
+            className="flex w-full items-center gap-2"
+          >
+            <Settings />
+            Settings
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

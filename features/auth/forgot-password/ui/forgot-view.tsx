@@ -1,5 +1,6 @@
 import BrandingHeader from "@/shared/components/branding-header";
-import { Button } from "@/shared/components/ui/button";
+import { buttonVariants } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
 import ForgotForm from "./forgot-form";
 
@@ -15,9 +16,15 @@ const ForgotView = () => {
 
       <ForgotForm />
 
-      <Button variant={"link"} className={"text-muted-foreground/50 mt-5 px-1"}>
-        <Link href={"/login"}>Back to sign in</Link>
-      </Button>
+      <Link
+        href={"/login"}
+        className={cn(
+          buttonVariants({ variant: "link" }),
+          "text-muted-foreground/50 mt-5 px-1",
+        )}
+      >
+        Back to sign in
+      </Link>
     </main>
   );
 };

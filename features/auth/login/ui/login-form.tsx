@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/button";
+import { Button, buttonVariants } from "@/shared/components/ui/button";
 import {
   Field,
   FieldError,
@@ -9,6 +9,7 @@ import {
   FieldSet,
 } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
+import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
 import { useLogin } from "../use-login";
 
@@ -52,9 +53,15 @@ const LoginForm = () => {
           </Field>
 
           <div className="flex w-full justify-end">
-            <Button variant={"link"} className={"text-muted-foreground"}>
-              <Link href={"/forgot-password"}>Forgot Password?</Link>
-            </Button>
+            <Link
+              href={"/forgot-password"}
+              className={cn(
+                buttonVariants({ variant: "link" }),
+                "text-muted-foreground",
+              )}
+            >
+              Forgot Password?
+            </Link>
           </div>
 
           <Button className={"h-12 w-full"} type="submit" disabled={isPending}>

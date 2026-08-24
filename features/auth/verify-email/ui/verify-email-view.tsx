@@ -1,5 +1,6 @@
 import BrandingHeader from "@/shared/components/branding-header";
-import { Button } from "@/shared/components/ui/button";
+import { buttonVariants } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -29,9 +30,15 @@ const VerifyEmailView = ({ email }: { email?: string }) => {
       </div>
 
       <div className="flex flex-col items-center">
-        <Button variant={"link"} className={"text-muted-foreground/50"}>
-          <Link href={"/login"}>Back to sign in</Link>
-        </Button>
+        <Link
+          href={"/login"}
+          className={cn(
+            buttonVariants({ variant: "link" }),
+            "text-muted-foreground/50",
+          )}
+        >
+          Back to sign in
+        </Link>
       </div>
     </main>
   );

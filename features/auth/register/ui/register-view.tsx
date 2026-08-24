@@ -1,5 +1,6 @@
 import BrandingHeader from "@/shared/components/branding-header";
-import { Button } from "@/shared/components/ui/button";
+import { buttonVariants } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
 import RegisterForm from "./register-form";
 
@@ -19,9 +20,15 @@ const RegisterView = () => {
         <span className="text-muted-foreground text-sm">
           Already have an account?
         </span>
-        <Button variant={"link"} className={"text-foreground px-1"}>
-          <Link href={"/login"}>Sign in</Link>
-        </Button>
+        <Link
+          href={"/login"}
+          className={cn(
+            buttonVariants({ variant: "link" }),
+            "text-foreground px-1",
+          )}
+        >
+          Sign in
+        </Link>
       </div>
 
       <span className="text-muted-foreground/50 mt-5 w-full max-w-md text-center text-sm">
