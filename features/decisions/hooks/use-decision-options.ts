@@ -1,48 +1,64 @@
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { NewDecisionSchema } from "../schemas";
 
-type Option = {
-  id: string;
-  label: string;
-};
+type Option = NewDecisionSchema["options"][number];
+
+const VALUE_OPTS = {
+  shouldDirty: true,
+  shouldTouch: true,
+  shouldValidate: true,
+} as const;
 
 export const useDecisionOptions = () => {
-  const [options, setOptions] = useState<Option[]>([
-    { id: crypto.randomUUID(), label: "" },
-    { id: crypto.randomUUID(), label: "" },
-  ]);
-  const [selectedId, setSelectedId] = useState("");
+  const form = useFormContext<NewDecisionSchema>();
+  const options = form.watch("options") ?? [];
+  const selectedId = form.watch("selectedOptionId");
 
   const handleOnChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     option: Option,
   ) => {
     const nextLabel = event.target.value;
-    setOptions((current) =>
+    const current = form.getValues("options") ?? [];
+    form.setValue(
+      "options",
       current.map((item) =>
         item.id === option.id ? { ...item, label: nextLabel } : item,
       ),
+      VALUE_OPTS,
     );
   };
 
   const handleOnDelete = (option: Option) => {
-    const next = options.filter((item) => item.id !== option.id);
-    setOptions(next);
-    if (selectedId === option.id) {
-      setSelectedId(next[0]?.id ?? "");
+    const current = form.getValues("options") ?? [];
+    const next = current.filter((item) => item.id !== option.id);
+    form.setValue("options", next, VALUE_OPTS);
+    if (form.getValues("selectedOptionId") === option.id) {
+      form.setValue("selectedOptionId", next[0]?.id ?? "", VALUE_OPTS);
     }
   };
 
   const handleOnAdd = () => {
-    const id = crypto.randomUUID();
-    setOptions((current) => [...current, { id, label: "" }]);
+    const current = form.getValues("options") ?? [];
+    form.setValue(
+      "options",
+      [...current, { id: crypto.randomUUID(), label: "" }],
+      VALUE_OPTS,
+    );
+  };
+
+  const setSelectedId = (id: string) => {
+    form.setValue("selectedOptionId", id, VALUE_OPTS);
   };
 
   return {
+    form,
     options,
     selectedId,
     handleOnAdd,
     setSelectedId,
     handleOnChange,
     handleOnDelete,
+    errors: form.formState.errors,
   };
 };

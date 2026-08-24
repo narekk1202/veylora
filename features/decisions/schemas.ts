@@ -10,7 +10,7 @@ export const newDecisionSchema = z.object({
   options: z
     .array(z.object({ id: z.string().min(1), label: z.string().min(1) }))
     .min(2),
-  selectedOptionId: z.uuid(),
+  selectedOptionId: z.string().min(1, "One option must be selected"),
   primaryReasons: z.string().min(1, "Primary reasons are required"),
   potentialConcerns: z.string().min(1, "Potential concerns are required"),
   assumptions: z.string().min(1, "Assumptions are required"),

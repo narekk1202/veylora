@@ -4,6 +4,7 @@ import { useDecisionOptions } from "@/features/decisions/hooks/use-decision-opti
 import { Button } from "@/shared/components/ui/button";
 import {
   Field,
+  FieldError,
   FieldGroup,
   FieldLegend,
   FieldSet,
@@ -16,8 +17,10 @@ import StepsHeading from "../steps-heading";
 
 const OptionsStep = () => {
   const {
-    selectedId,
+    form,
+    errors,
     options,
+    selectedId,
     setSelectedId,
     handleOnChange,
     handleOnDelete,
@@ -69,6 +72,10 @@ const OptionsStep = () => {
               ))}
             </FieldGroup>
           </RadioGroup>
+          {errors.options && <FieldError>{errors.options.message}</FieldError>}
+          {errors.selectedOptionId && (
+            <FieldError>{errors.selectedOptionId.message}</FieldError>
+          )}
         </FieldSet>
 
         <Button
@@ -85,7 +92,7 @@ const OptionsStep = () => {
         </p>
       </div>
 
-      <StepsFooter />
+      <StepsFooter callTrigger={form.trigger} fields={["options", "selectedOptionId"]} />
     </section>
   );
 };

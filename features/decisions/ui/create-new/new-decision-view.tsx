@@ -26,7 +26,10 @@ const NewDecisionView = () => {
       question: "",
       context: "",
       urgency: "",
-      options: [],
+      options: [
+        { id: crypto.randomUUID(), label: "" },
+        { id: crypto.randomUUID(), label: "" },
+      ],
       selectedOptionId: "",
       primaryReasons: "",
       potentialConcerns: "",
