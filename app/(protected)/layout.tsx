@@ -12,6 +12,7 @@ export default async function ProtectedLayout({ children }: LayoutProps<"/">) {
 
   const onboardingDone = session?.user?.onboardingCompleted;
 
+  if (!session) redirect("/login");
   if (!onboardingDone) redirect("/onboarding");
 
   return (

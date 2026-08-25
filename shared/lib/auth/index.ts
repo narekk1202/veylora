@@ -3,6 +3,7 @@ import { createTemplatedAuthEmail } from "@/shared/lib/auth/emails";
 import { prisma } from "@/shared/lib/prisma";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
 import { createBetterAuthEmail } from "supersendtx-better-auth";
 
 const tx = createBetterAuthEmail({
@@ -19,11 +20,17 @@ export const auth = betterAuth({
     "http://localhost:3000",
     "https://veylora.space",
     "https://www.veylora.space",
-    "https://*.vercel.app",
   ],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60,
+    },
+  },
 
   emailAndPassword: {
     enabled: true,
@@ -45,4 +52,6 @@ export const auth = betterAuth({
       },
     },
   },
+
+  plugins: [nextCookies()],
 });
