@@ -158,5 +158,5 @@ export async function deleteDecision(id: string) {
   }
 
   revalidatePath("/decisions");
-  return { status: "success" };
+  redirect("/decisions");
 }

@@ -29,7 +29,7 @@ const DecisionHeader = ({ decision }: { decision: Decision }) => {
           </p>
         </div>
       </div>
-      <div className="text-muted-foreground mt-5 flex flex-wrap gap-x-10 gap-y-2 text-xs">
+      <div className="text-muted-foreground mt-5 flex flex-wrap items-center gap-x-10 gap-y-2 text-xs">
         <p>Created {format(decision.createdAt, "MMM d, yyyy")}</p>
         <p>Review scheduled for {format(decision.reviewDate, "MMM d, yyyy")}</p>
       </div>

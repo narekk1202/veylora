@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/shared/components/ui/card";
 import type { Decision } from "@/shared/generated/prisma/client";
 import { format } from "date-fns";
+import DeleteDialog from "./delete-dialog";
 import LifecycleItem from "./lifecycle-item";
 import SectionLabel from "./section-label";
 
@@ -57,6 +58,7 @@ export default function DecisionDetailSidebar({
           </p>
         </CardContent>
       </Card>
+      <DeleteDialog id={decision.id} />
     </aside>
   );
 }
