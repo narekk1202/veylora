@@ -113,6 +113,7 @@ model Decision {
   actualOutcome     String?
   accuracy          PredictionAccuracy?
   reviewedAt        DateTime?
+  postHocNotes      String?
 
   @@index([userId])
   @@index([userId, status])
