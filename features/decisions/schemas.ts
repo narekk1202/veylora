@@ -1,6 +1,45 @@
 import { CATEGORY_IDS } from "@/shared/constants/catergories.consts";
+import { DecisionStatus } from "@/shared/generated/prisma/enums";
 import { startOfTomorrow } from "date-fns";
 import z from "zod";
+
+const firstQueryValue = (value: string | string[] | undefined) =>
+  Array.isArray(value) ? value[0] : value;
+
+const searchFilterSchema = z.string().trim().min(1);
+const statusFilterSchema = z.enum([
+  DecisionStatus.LOCKED,
+  DecisionStatus.REVIEWED,
+]);
+const categoryFilterSchema = z.enum(CATEGORY_IDS);
+
+export type DecisionFilters = {
+  search?: string;
+  status?: z.infer<typeof statusFilterSchema>;
+  category?: z.infer<typeof categoryFilterSchema>;
+};
+
+export type DecisionSearchParams = {
+  q?: string | string[];
+  status?: string | string[];
+  category?: string | string[];
+};
+
+export function parseDecisionFilters(
+  raw: DecisionSearchParams,
+): DecisionFilters {
+  const search = searchFilterSchema.safeParse(firstQueryValue(raw.q));
+  const status = statusFilterSchema.safeParse(firstQueryValue(raw.status));
+  const category = categoryFilterSchema.safeParse(
+    firstQueryValue(raw.category),
+  );
+
+  return {
+    ...(search.success ? { search: search.data } : {}),
+    ...(status.success ? { status: status.data } : {}),
+    ...(category.success ? { category: category.data } : {}),
+  };
+}
 
 export const newDecisionSchema = z.object({
   category: z.enum(CATEGORY_IDS),

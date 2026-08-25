@@ -1,15 +1,9 @@
-import { Category, DecisionStatus } from "@/shared/generated/prisma/enums";
 import { getUserId } from "@/shared/lib/auth/utils";
 import { prisma } from "@/shared/lib/prisma";
 import { redirect } from "next/navigation";
+import type { DecisionFilters } from "./schemas";
 
-type GetDecisionsFilters = {
-  search?: string;
-  status?: DecisionStatus;
-  category?: Category;
-};
-
-export async function getDecisions(filters?: GetDecisionsFilters) {
+export async function getDecisions(filters?: DecisionFilters) {
   const userId = await getUserId();
 
   if (!userId) redirect("/login");

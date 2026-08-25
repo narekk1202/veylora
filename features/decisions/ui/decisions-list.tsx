@@ -1,8 +1,9 @@
+import type { DecisionFilters } from "../schemas";
 import { getDecisions } from "../queries";
 import DecisionsCard from "./decisions-card";
 
-const DecisionsList = async () => {
-  const decisions = await getDecisions();
+const DecisionsList = async ({ filters }: { filters: DecisionFilters }) => {
+  const decisions = await getDecisions(filters);
 
   return (
     <div className="flex flex-col gap-3">
