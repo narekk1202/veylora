@@ -5,7 +5,7 @@ import { cn } from "@/shared/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { startOfTomorrow } from "date-fns";
 import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, type Resolver } from "react-hook-form";
 import { newDecision } from "../../libs/stepperize";
 import { newDecisionSchema, NewDecisionSchema } from "../../schemas";
 import NewDecisionStepper from "./new-decision-stepper";
@@ -20,7 +20,7 @@ const NewDecisionView = () => {
   const [reviewDate] = useState(startOfTomorrow);
 
   const form = useForm<NewDecisionSchema>({
-    resolver: zodResolver(newDecisionSchema),
+    resolver: zodResolver(newDecisionSchema) as Resolver<NewDecisionSchema>,
     defaultValues: {
       category: CATEGORY_CONFIG.CAREER.id,
       question: "",
@@ -36,7 +36,7 @@ const NewDecisionView = () => {
       assumptions: "",
       predictions: "",
       confidence: 0,
-      reviewDate,
+      reviewDate
     },
     mode: "onChange",
   });

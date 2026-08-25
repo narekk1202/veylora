@@ -60,4 +60,4 @@ export const newDecisionSchema = z.object({
   }),
 });
 
-export type NewDecisionSchema = z.infer<typeof newDecisionSchema>;
+export type NewDecisionSchema = z.output<typeof newDecisionSchema>;
