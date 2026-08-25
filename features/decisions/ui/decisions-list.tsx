@@ -1,10 +1,7 @@
-import type { DecisionFilters } from "../schemas";
-import { getDecisions } from "../queries";
+import { Decision } from "@/shared/generated/prisma/client";
 import DecisionsCard from "./decisions-card";
 
-const DecisionsList = async ({ filters }: { filters: DecisionFilters }) => {
-  const decisions = await getDecisions(filters);
-
+const DecisionsList = ({ decisions }: { decisions: Decision[] }) => {
   return (
     <div className="flex flex-col gap-3">
       {decisions.map((decision) => (
