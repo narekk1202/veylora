@@ -18,6 +18,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "https://veylora.space",
+    "https://www.veylora.space",
     "https://*.vercel.app",
   ],
   database: prismaAdapter(prisma, {
