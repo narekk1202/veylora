@@ -153,7 +153,8 @@ export const DecisionScalarFieldEnum = {
   status: 'status',
   actualOutcome: 'actualOutcome',
   accuracy: 'accuracy',
-  reviewedAt: 'reviewedAt'
+  reviewedAt: 'reviewedAt',
+  postHocNotes: 'postHocNotes'
 } as const
 
 export type DecisionScalarFieldEnum = (typeof DecisionScalarFieldEnum)[keyof typeof DecisionScalarFieldEnum]

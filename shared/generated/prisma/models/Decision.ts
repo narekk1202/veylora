@@ -53,6 +53,7 @@ export type DecisionMinAggregateOutputType = {
   actualOutcome: string | null
   accuracy: $Enums.PredictionAccuracy | null
   reviewedAt: Date | null
+  postHocNotes: string | null
 }
 
 export type DecisionMaxAggregateOutputType = {
@@ -74,6 +75,7 @@ export type DecisionMaxAggregateOutputType = {
   actualOutcome: string | null
   accuracy: $Enums.PredictionAccuracy | null
   reviewedAt: Date | null
+  postHocNotes: string | null
 }
 
 export type DecisionCountAggregateOutputType = {
@@ -95,6 +97,7 @@ export type DecisionCountAggregateOutputType = {
   actualOutcome: number
   accuracy: number
   reviewedAt: number
+  postHocNotes: number
   _all: number
 }
 
@@ -126,6 +129,7 @@ export type DecisionMinAggregateInputType = {
   actualOutcome?: true
   accuracy?: true
   reviewedAt?: true
+  postHocNotes?: true
 }
 
 export type DecisionMaxAggregateInputType = {
@@ -147,6 +151,7 @@ export type DecisionMaxAggregateInputType = {
   actualOutcome?: true
   accuracy?: true
   reviewedAt?: true
+  postHocNotes?: true
 }
 
 export type DecisionCountAggregateInputType = {
@@ -168,6 +173,7 @@ export type DecisionCountAggregateInputType = {
   actualOutcome?: true
   accuracy?: true
   reviewedAt?: true
+  postHocNotes?: true
   _all?: true
 }
 
@@ -276,6 +282,7 @@ export type DecisionGroupByOutputType = {
   actualOutcome: string | null
   accuracy: $Enums.PredictionAccuracy | null
   reviewedAt: Date | null
+  postHocNotes: string | null
   _count: DecisionCountAggregateOutputType | null
   _avg: DecisionAvgAggregateOutputType | null
   _sum: DecisionSumAggregateOutputType | null
@@ -320,6 +327,7 @@ export type DecisionWhereInput = {
   actualOutcome?: Prisma.StringNullableFilter<"Decision"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"Decision"> | Date | string | null
+  postHocNotes?: Prisma.StringNullableFilter<"Decision"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   options?: Prisma.DecisionOptionListRelationFilter
 }
@@ -343,6 +351,7 @@ export type DecisionOrderByWithRelationInput = {
   actualOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
   accuracy?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  postHocNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   options?: Prisma.DecisionOptionOrderByRelationAggregateInput
 }
@@ -369,6 +378,7 @@ export type DecisionWhereUniqueInput = Prisma.AtLeast<{
   actualOutcome?: Prisma.StringNullableFilter<"Decision"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"Decision"> | Date | string | null
+  postHocNotes?: Prisma.StringNullableFilter<"Decision"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   options?: Prisma.DecisionOptionListRelationFilter
 }, "id">
@@ -392,6 +402,7 @@ export type DecisionOrderByWithAggregationInput = {
   actualOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
   accuracy?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  postHocNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DecisionCountOrderByAggregateInput
   _avg?: Prisma.DecisionAvgOrderByAggregateInput
   _max?: Prisma.DecisionMaxOrderByAggregateInput
@@ -421,6 +432,7 @@ export type DecisionScalarWhereWithAggregatesInput = {
   actualOutcome?: Prisma.StringNullableWithAggregatesFilter<"Decision"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableWithAggregatesFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Decision"> | Date | string | null
+  postHocNotes?: Prisma.StringNullableWithAggregatesFilter<"Decision"> | string | null
 }
 
 export type DecisionCreateInput = {
@@ -441,6 +453,7 @@ export type DecisionCreateInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
   user: Prisma.UserCreateNestedOneWithoutDecisionsInput
   options?: Prisma.DecisionOptionCreateNestedManyWithoutDecisionInput
 }
@@ -464,6 +477,7 @@ export type DecisionUncheckedCreateInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
   options?: Prisma.DecisionOptionUncheckedCreateNestedManyWithoutDecisionInput
 }
 
@@ -485,6 +499,7 @@ export type DecisionUpdateInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutDecisionsNestedInput
   options?: Prisma.DecisionOptionUpdateManyWithoutDecisionNestedInput
 }
@@ -508,6 +523,7 @@ export type DecisionUncheckedUpdateInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   options?: Prisma.DecisionOptionUncheckedUpdateManyWithoutDecisionNestedInput
 }
 
@@ -530,6 +546,7 @@ export type DecisionCreateManyInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
 }
 
 export type DecisionUpdateManyMutationInput = {
@@ -550,6 +567,7 @@ export type DecisionUpdateManyMutationInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DecisionUncheckedUpdateManyInput = {
@@ -571,6 +589,7 @@ export type DecisionUncheckedUpdateManyInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DecisionListRelationFilter = {
@@ -602,6 +621,7 @@ export type DecisionCountOrderByAggregateInput = {
   actualOutcome?: Prisma.SortOrder
   accuracy?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
+  postHocNotes?: Prisma.SortOrder
 }
 
 export type DecisionAvgOrderByAggregateInput = {
@@ -627,6 +647,7 @@ export type DecisionMaxOrderByAggregateInput = {
   actualOutcome?: Prisma.SortOrder
   accuracy?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
+  postHocNotes?: Prisma.SortOrder
 }
 
 export type DecisionMinOrderByAggregateInput = {
@@ -648,6 +669,7 @@ export type DecisionMinOrderByAggregateInput = {
   actualOutcome?: Prisma.SortOrder
   accuracy?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
+  postHocNotes?: Prisma.SortOrder
 }
 
 export type DecisionSumOrderByAggregateInput = {
@@ -753,6 +775,7 @@ export type DecisionCreateWithoutUserInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
   options?: Prisma.DecisionOptionCreateNestedManyWithoutDecisionInput
 }
 
@@ -774,6 +797,7 @@ export type DecisionUncheckedCreateWithoutUserInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
   options?: Prisma.DecisionOptionUncheckedCreateNestedManyWithoutDecisionInput
 }
 
@@ -825,6 +849,7 @@ export type DecisionScalarWhereInput = {
   actualOutcome?: Prisma.StringNullableFilter<"Decision"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"Decision"> | Date | string | null
+  postHocNotes?: Prisma.StringNullableFilter<"Decision"> | string | null
 }
 
 export type DecisionCreateWithoutOptionsInput = {
@@ -845,6 +870,7 @@ export type DecisionCreateWithoutOptionsInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
   user: Prisma.UserCreateNestedOneWithoutDecisionsInput
 }
 
@@ -867,6 +893,7 @@ export type DecisionUncheckedCreateWithoutOptionsInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
 }
 
 export type DecisionCreateOrConnectWithoutOptionsInput = {
@@ -903,6 +930,7 @@ export type DecisionUpdateWithoutOptionsInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutDecisionsNestedInput
 }
 
@@ -925,6 +953,7 @@ export type DecisionUncheckedUpdateWithoutOptionsInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DecisionCreateManyUserInput = {
@@ -945,6 +974,7 @@ export type DecisionCreateManyUserInput = {
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
+  postHocNotes?: string | null
 }
 
 export type DecisionUpdateWithoutUserInput = {
@@ -965,6 +995,7 @@ export type DecisionUpdateWithoutUserInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   options?: Prisma.DecisionOptionUpdateManyWithoutDecisionNestedInput
 }
 
@@ -986,6 +1017,7 @@ export type DecisionUncheckedUpdateWithoutUserInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   options?: Prisma.DecisionOptionUncheckedUpdateManyWithoutDecisionNestedInput
 }
 
@@ -1007,6 +1039,7 @@ export type DecisionUncheckedUpdateManyWithoutUserInput = {
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1059,6 +1092,7 @@ export type DecisionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   actualOutcome?: boolean
   accuracy?: boolean
   reviewedAt?: boolean
+  postHocNotes?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   options?: boolean | Prisma.Decision$optionsArgs<ExtArgs>
   _count?: boolean | Prisma.DecisionCountOutputTypeDefaultArgs<ExtArgs>
@@ -1083,6 +1117,7 @@ export type DecisionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   actualOutcome?: boolean
   accuracy?: boolean
   reviewedAt?: boolean
+  postHocNotes?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["decision"]>
 
@@ -1105,6 +1140,7 @@ export type DecisionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   actualOutcome?: boolean
   accuracy?: boolean
   reviewedAt?: boolean
+  postHocNotes?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["decision"]>
 
@@ -1127,9 +1163,10 @@ export type DecisionSelectScalar = {
   actualOutcome?: boolean
   accuracy?: boolean
   reviewedAt?: boolean
+  postHocNotes?: boolean
 }
 
-export type DecisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "createdAt" | "updatedAt" | "category" | "question" | "context" | "urgency" | "primaryReasons" | "potentialConcerns" | "assumptions" | "predictions" | "confidence" | "reviewDate" | "status" | "actualOutcome" | "accuracy" | "reviewedAt", ExtArgs["result"]["decision"]>
+export type DecisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "createdAt" | "updatedAt" | "category" | "question" | "context" | "urgency" | "primaryReasons" | "potentialConcerns" | "assumptions" | "predictions" | "confidence" | "reviewDate" | "status" | "actualOutcome" | "accuracy" | "reviewedAt" | "postHocNotes", ExtArgs["result"]["decision"]>
 export type DecisionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   options?: boolean | Prisma.Decision$optionsArgs<ExtArgs>
@@ -1167,6 +1204,7 @@ export type $DecisionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     actualOutcome: string | null
     accuracy: $Enums.PredictionAccuracy | null
     reviewedAt: Date | null
+    postHocNotes: string | null
   }, ExtArgs["result"]["decision"]>
   composites: {}
 }
@@ -1610,6 +1648,7 @@ export interface DecisionFieldRefs {
   readonly actualOutcome: Prisma.FieldRef<"Decision", 'String'>
   readonly accuracy: Prisma.FieldRef<"Decision", 'PredictionAccuracy'>
   readonly reviewedAt: Prisma.FieldRef<"Decision", 'DateTime'>
+  readonly postHocNotes: Prisma.FieldRef<"Decision", 'String'>
 }
     
 
