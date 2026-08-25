@@ -112,7 +112,7 @@ export async function savePostHocNotes(
   }
 
   try {
-    await prisma.decision.update({
+    const result = await prisma.decision.updateMany({
       where: {
         id: validated.data.decisionId,
         userId,
@@ -121,11 +121,42 @@ export async function savePostHocNotes(
         postHocNotes: validated.data.postHocNotes,
       },
     });
+    if (result.count === 0) {
+      return {
+        status: "error",
+        message: "Decision not found or unauthorized.",
+      };
+    }
   } catch (error) {
     console.error("Failed to save post-hoc notes:", error);
     return { status: "error", message: "Failed to save notes." };
   }
 
   revalidatePath(`/decisions/${validated.data.decisionId}`);
+  return { status: "success" };
+}
+
+export async function deleteDecision(id: string) {
+  const userId = await getUserId();
+
+  if (!userId) redirect("/login");
+
+  try {
+    const result = await prisma.decision.deleteMany({
+      where: { id, userId },
+    });
+
+    if (result.count === 0) {
+      return {
+        status: "error",
+        message: "Decision not found or unauthorized.",
+      };
+    }
+  } catch (error) {
+    console.error("Failed to delete decision:", error);
+    return { status: "error", message: "Failed to delete decision." };
+  }
+
+  revalidatePath("/decisions");
   return { status: "success" };
 }
