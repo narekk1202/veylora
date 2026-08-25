@@ -3,13 +3,15 @@
 import {
   newDecisionSchema,
   NewDecisionSchema,
+  postHocNotesSchema,
 } from "@/features/decisions/schemas";
 import { toDecisionOptionCreates } from "@/features/decisions/utils";
-import { getUserId } from '@/shared/lib/auth/utils'
+import { getUserId } from "@/shared/lib/auth/utils";
 import { prisma } from "@/shared/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import z from "zod";
+import { SavePostHocNotesState } from "./types";
 
 type CreateDecisionResult =
   | { success: true }
@@ -88,4 +90,42 @@ export async function createDecision(
 
   revalidatePath("/decisions");
   return { success: true };
+}
+
+export async function savePostHocNotes(
+  _: SavePostHocNotesState,
+  formData: FormData,
+): Promise<SavePostHocNotesState> {
+  const validated = postHocNotesSchema.safeParse({
+    decisionId: formData.get("decisionId"),
+    postHocNotes: formData.get("postHocNotes"),
+  });
+
+  if (!validated.success) {
+    return { status: "error", message: "Unable to save notes." };
+  }
+
+  const userId = await getUserId();
+
+  if (!userId) {
+    return { status: "error", message: "Unauthorized" };
+  }
+
+  try {
+    await prisma.decision.update({
+      where: {
+        id: validated.data.decisionId,
+        userId,
+      },
+      data: {
+        postHocNotes: validated.data.postHocNotes,
+      },
+    });
+  } catch (error) {
+    console.error("Failed to save post-hoc notes:", error);
+    return { status: "error", message: "Failed to save notes." };
+  }
+
+  revalidatePath(`/decisions/${validated.data.decisionId}`);
+  return { status: "success" };
 }

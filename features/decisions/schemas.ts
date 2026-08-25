@@ -60,4 +60,9 @@ export const newDecisionSchema = z.object({
   }),
 });
 
+export const postHocNotesSchema = z.object({
+  decisionId: z.string().min(1),
+  postHocNotes: z.string().trim().max(5_000),
+});
+
 export type NewDecisionSchema = z.output<typeof newDecisionSchema>;

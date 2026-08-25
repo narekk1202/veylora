@@ -8,3 +8,10 @@ export function toDecisionOptionCreates(
     isSelected: option.id === selectedOptionId,
   }));
 }
+
+export function toLines(value: string) {
+  return value
+    .split("\n")
+    .map((line) => line.replace(/^[•*-]\s*/, "").trim())
+    .filter(Boolean);
+}
