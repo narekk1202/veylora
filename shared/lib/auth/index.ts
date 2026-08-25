@@ -15,6 +15,11 @@ const email = createTemplatedAuthEmail(tx);
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://veylora.space",
+    "https://*.vercel.app",
+  ],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
