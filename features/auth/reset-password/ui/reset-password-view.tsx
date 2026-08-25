@@ -2,6 +2,7 @@ import BrandingHeader from "@/shared/components/branding-header";
 import { buttonVariants } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
+import { Suspense } from "react";
 import ResetPasswordForm from "./reset-password-form";
 
 const ResetPasswordView = () => {
@@ -14,7 +15,9 @@ const ResetPasswordView = () => {
         />
       </div>
 
-      <ResetPasswordForm />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ResetPasswordForm />
+      </Suspense>
 
       <Link
         href={"/login"}
