@@ -14,6 +14,7 @@ const tx = createBetterAuthEmail({
 const email = createTemplatedAuthEmail(tx);
 
 export const auth = betterAuth({
+  baseURL: env.BETTER_AUTH_URL,
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
