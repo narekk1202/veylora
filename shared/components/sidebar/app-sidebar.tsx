@@ -37,7 +37,7 @@ const navLinks: { navMain: NavItem[] } = {
 const navCategories: { navCategories: NavItem[] } = {
   navCategories: CATEGORIES.map((category) => ({
     title: category.name,
-    url: `/decisions?category=${category.id.toLowerCase()}`,
+    url: `/decisions?category=${category.id}`,
     dotColor: category.color,
   })),
 };
