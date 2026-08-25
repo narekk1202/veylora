@@ -1,3 +1,4 @@
+import PreviousPageButton from "@/shared/components/previous-page-button";
 import { notFound } from "next/navigation";
 import { getDecision } from "../../queries";
 import { toLines } from "../../utils";
@@ -17,6 +18,9 @@ export default async function DecisionDetailView({ id }: { id: string }) {
 
   return (
     <main className="page_view">
+      <div>
+        <PreviousPageButton />
+      </div>
       <DecisionHeader decision={decision} />
 
       <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
