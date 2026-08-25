@@ -64,7 +64,7 @@ const AvatarDropdown = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            render={<Link href="/settings" />}
+            render={<Link href="#" />}
             className="flex w-full items-center gap-2"
           >
             <Settings />

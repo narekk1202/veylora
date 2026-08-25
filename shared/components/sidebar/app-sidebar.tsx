@@ -25,11 +25,11 @@ const navLinks: { navMain: NavItem[] } = {
     },
     {
       title: "Reviews",
-      url: "/reviews",
+      url: "#",
     },
     {
       title: "Insights",
-      url: "/insights",
+      url: "#",
     },
   ],
 };
