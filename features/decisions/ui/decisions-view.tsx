@@ -1,25 +1,18 @@
-import { getDecisions } from "../queries";
-import DecisionsCard from "./decisions-card";
+import { Suspense } from "react";
+import DecisionCardSkeletons from "./decision-card-skeletons";
 import DecisionsFilters from "./decisions-filters";
 import DecisionsHeader from "./decisions-header";
+import DecisionsList from "./decisions-list";
 
-const DecisionsView = async () => {
-  const decisions = await getDecisions();
-
-  if (!decisions.success) {
-    return <div>Error: {decisions.error}</div>;
-  }
-
+const DecisionsView = () => {
   return (
     <main className="page_view">
       <DecisionsHeader />
       <DecisionsFilters />
 
-      <div className="flex flex-col gap-3">
-        {decisions.decisions.map((decision) => (
-          <DecisionsCard key={decision.id} {...decision} />
-        ))}
-      </div>
+      <Suspense fallback={<DecisionCardSkeletons />}>
+        <DecisionsList />
+      </Suspense>
     </main>
   );
 };
