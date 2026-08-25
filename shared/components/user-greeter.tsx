@@ -1,7 +1,7 @@
 "use client";
 
+import { User } from "better-auth";
 import { useSyncExternalStore } from "react";
-import { authClient } from "../lib/auth/auth-client";
 
 function getGreeting(hour: number) {
   if (hour < 12) return "Good morning";
@@ -22,22 +22,21 @@ function getServerGreeting() {
   return "Hello";
 }
 
-const UserGreeter = () => {
-  const { data: session, isPending } = authClient.useSession();
+type UserGreeterProps = {
+  user: User;
+};
+
+const UserGreeter = ({ user }: UserGreeterProps) => {
   const greeting = useSyncExternalStore(
     subscribe,
     getClientGreeting,
     getServerGreeting,
   );
 
-  const userName = session?.user?.name || "there";
-
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
+  const userName = user.name || "there";
 
   return (
-    <span className='text-sm font-medium text-muted-foreground'>
+    <span className="text-muted-foreground text-sm font-medium">
       {greeting}, {userName}!
     </span>
   );
