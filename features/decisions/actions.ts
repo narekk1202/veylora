@@ -5,14 +5,13 @@ import {
   NewDecisionSchema,
 } from "@/features/decisions/schemas";
 import { toDecisionOptionCreates } from "@/features/decisions/utils";
-import { auth } from "@/shared/lib/auth";
+import { getUserId } from '@/shared/lib/auth/utils'
 import { prisma } from "@/shared/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import z from "zod";
 
-export type CreateDecisionResult =
+type CreateDecisionResult =
   | { success: true }
   | {
       success: false;
@@ -23,13 +22,9 @@ export type CreateDecisionResult =
 export async function createDecision(
   decision: NewDecisionSchema,
 ): Promise<CreateDecisionResult> {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const userId = await getUserId();
 
-  if (!session?.user?.id) {
-    redirect("/login");
-  }
+  if (!userId) redirect("/login");
 
   const validated = newDecisionSchema.safeParse(decision);
 
@@ -63,7 +58,7 @@ export async function createDecision(
   try {
     await prisma.decision.create({
       data: {
-        userId: session.user.id,
+        userId,
         status: "LOCKED",
         category: validated.data.category,
         question: validated.data.question,

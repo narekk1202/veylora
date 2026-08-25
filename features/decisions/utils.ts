@@ -1,10 +1,3 @@
-export function formatDecisionDate(date: Date) {
-  return date
-    .toLocaleDateString("en-US", { month: "short", day: "numeric" })
-    .toUpperCase()
-    .replace(",", "");
-}
-
 export function toDecisionOptionCreates(
   options: { id: string; label: string }[],
   selectedOptionId: string,

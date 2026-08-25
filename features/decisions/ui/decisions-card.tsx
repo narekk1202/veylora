@@ -1,21 +1,21 @@
 import { Card } from "@/shared/components/ui/card";
 import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
+import { Decision } from "@/shared/generated/prisma/client";
 import { cn } from "@/shared/lib/utils";
-import { Decision } from "../types";
-import { formatDecisionDate } from "../utils";
+import { formatDate } from "date-fns";
 
 interface DecisionsCardProps extends Decision {
   className?: string;
 }
 
 const DecisionsCard = ({
-  title,
+  question,
   category,
   status,
-  date,
   confidence,
-  accuracyLabel,
-  reviewInDays,
+  accuracy,
+  reviewDate,
+  createdAt,
   className,
 }: DecisionsCardProps) => {
   const categoryMeta = CATEGORY_CONFIG[category];
@@ -49,14 +49,14 @@ const DecisionsCard = ({
           <span className="text-muted-foreground text-[11px] font-medium tracking-wide uppercase">
             {status}
             <span className="mx-1.5">·</span>
-            {formatDecisionDate(date)}
+            {formatDate(createdAt, "MMM d, yyyy")}
           </span>
         </div>
-        <p className="text-sm leading-snug font-medium">{title}</p>
+        <p className="text-sm leading-snug font-medium">{question}</p>
       </div>
 
       <div className="flex shrink-0 flex-col items-end gap-0.5 text-right">
-        {status === "locked" && confidence !== undefined ? (
+        {status === "LOCKED" && confidence !== undefined ? (
           <span
             className="text-sm font-semibold tabular-nums"
             style={{ color: CATEGORY_CONFIG.FINANCE.color }}
@@ -64,17 +64,17 @@ const DecisionsCard = ({
             {confidence}%
           </span>
         ) : null}
-        {status === "reviewed" && accuracyLabel ? (
+        {status === "REVIEWED" && accuracy ? (
           <span
             className="text-sm font-medium"
             style={{ color: CATEGORY_CONFIG.PERSONAL.color }}
           >
-            {accuracyLabel}
+            {accuracy}
           </span>
         ) : null}
-        {reviewInDays !== undefined ? (
+        {reviewDate !== undefined ? (
           <span className="text-muted-foreground text-xs">
-            Review in {reviewInDays} days
+            Review in {formatDate(reviewDate, "MMM d, yyyy")}
           </span>
         ) : null}
       </div>
