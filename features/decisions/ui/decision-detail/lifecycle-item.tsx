@@ -18,11 +18,11 @@ const LifecycleItem = ({
       <span
         className={
           active
-            ? "border-primary bg-primary/15 text-primary flex size-5 shrink-0 items-center justify-center rounded-full border"
-            : "border-border text-muted-foreground flex size-5 shrink-0 items-center justify-center rounded-full border"
+            ? "border-primary bg-primary/15 text-primary flex size-5 shrink-0 items-center justify-center rounded-full"
+            : "text-muted-foreground flex size-5 shrink-0 items-center justify-center rounded-full border"
         }
       >
-        <Icon className="size-3" />
+        <Icon className="size-10" />
       </span>
       <span>
         <span

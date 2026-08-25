@@ -15,8 +15,8 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <div className="flex flex-col items-start gap-3">
-      <p className="text-2xl font-serif font-medium">Something went wrong!</p>
+    <div className="flex min-h-[80vh] w-full flex-col items-center justify-center gap-3">
+      <p className="font-serif text-2xl font-medium">Something went wrong!</p>
       <p className="text-muted-foreground text-sm">Try again in a moment.</p>
       {error.digest ? (
         <p className="text-muted-foreground text-xs">

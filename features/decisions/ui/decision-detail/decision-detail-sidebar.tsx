@@ -1,5 +1,5 @@
-import type { Decision } from "@/shared/generated/prisma/client";
 import { Card, CardContent } from "@/shared/components/ui/card";
+import type { Decision } from "@/shared/generated/prisma/client";
 import { format } from "date-fns";
 import LifecycleItem from "./lifecycle-item";
 import SectionLabel from "./section-label";
@@ -51,8 +51,8 @@ export default function DecisionDetailSidebar({
         <CardContent className="space-y-3">
           <SectionLabel>Why is this locked?</SectionLabel>
           <p className="text-muted-foreground text-xs leading-5">
-            To combat hindsight bias, Veylora prevents editing once a decision is
-            finalized. This ensures your record reflects your actual state of
+            To combat hindsight bias, Veylora prevents editing once a decision
+            is finalized. This ensures your record reflects your actual state of
             mind at the time of the choice.
           </p>
         </CardContent>

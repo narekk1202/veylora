@@ -1,7 +1,5 @@
-import type {
-  Decision,
-  DecisionOption,
-} from "@/shared/generated/prisma/client";
+import { notFound } from "next/navigation";
+import { getDecision } from "../../queries";
 import { toLines } from "../../utils";
 import ConsideredOptionsSection from "./considered-options-section";
 import DecisionCardSection from "./decision-card-section";
@@ -10,13 +8,11 @@ import DecisionHeader from "./decision-header";
 import PostHocNotesSection from "./post-hoc-notes-section";
 import ReasoningSection from "./reasoning-section";
 
-type DecisionWithOptions = Decision & { options: DecisionOption[] };
+export default async function DecisionDetailView({ id }: { id: string }) {
+  const decision = await getDecision(id);
 
-export default function DecisionDetailView({
-  decision,
-}: {
-  decision: DecisionWithOptions;
-}) {
+  if (!decision) notFound();
+
   const assumptions = toLines(decision.assumptions);
 
   return (

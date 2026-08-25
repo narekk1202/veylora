@@ -27,3 +27,23 @@ export async function getDecisions(filters?: DecisionFilters) {
     },
   });
 }
+
+export async function getDecision(id: string) {
+  const userId = await getUserId();
+
+  if (!userId) redirect("/login");
+
+  return await prisma.decision.findFirst({
+    where: {
+      id,
+      userId,
+    },
+    include: {
+      options: {
+        orderBy: {
+          sortOrder: "asc",
+        },
+      },
+    },
+  });
+}
