@@ -25,6 +25,13 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
 
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60,
+    },
+  },
+
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,

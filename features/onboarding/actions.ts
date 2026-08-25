@@ -21,6 +21,11 @@ async function completeOnboarding(redirectTo: Route<string>) {
       where: { id: session.user.id },
       data: { onboardingCompleted: true },
     });
+
+    await auth.api.getSession({
+      headers: await headers(),
+      query: { disableCookieCache: true },
+    });
   } catch (error) {
     console.error("Failed to complete onboarding:", error);
     throw new Error("Failed to update onboarding status.");
