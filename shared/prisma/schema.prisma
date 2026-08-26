@@ -22,6 +22,8 @@ enum DecisionStatus {
 enum PredictionAccuracy {
   ACCURATE
   MOSTLY_ACCURATE
+  PARTIALLY_ACCURATE
+  MOSTLY_INACCURATE
   INACCURATE
 }
 

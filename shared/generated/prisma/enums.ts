@@ -30,6 +30,8 @@ export type DecisionStatus = (typeof DecisionStatus)[keyof typeof DecisionStatus
 export const PredictionAccuracy = {
   ACCURATE: 'ACCURATE',
   MOSTLY_ACCURATE: 'MOSTLY_ACCURATE',
+  PARTIALLY_ACCURATE: 'PARTIALLY_ACCURATE',
+  MOSTLY_INACCURATE: 'MOSTLY_INACCURATE',
   INACCURATE: 'INACCURATE'
 } as const
 
