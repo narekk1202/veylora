@@ -30,14 +30,16 @@ const AvatarDropdown = ({ user }: AvatarDropdownProps) => {
 
   const handleLogout = async () => {
     try {
-      await authClient.signOut();
-      router.replace("/login");
+      toast.promise(authClient.signOut(), {
+        loading: "Logging out...",
+        success: () => {
+          router.refresh();
+          return "Logged out successfully";
+        },
+        error: "Failed to log out",
+      });
     } catch (error) {
       console.error(error);
-      toast.add({
-        type: "error",
-        description: "Failed to log out",
-      });
     }
   };
 
