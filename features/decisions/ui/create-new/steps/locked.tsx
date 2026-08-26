@@ -74,7 +74,7 @@ const LockedStep = () => {
           href="/decisions"
           className={cn(buttonVariants({ variant: "default" }), "h-11 px-8")}
         >
-          View decision
+          View decisions
         </Link>
         <Link
           href="/overview"

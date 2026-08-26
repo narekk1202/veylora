@@ -78,6 +78,11 @@ export async function createDecision(
             validated.data.selectedOptionId,
           ),
         },
+        review: {
+          create: {
+            userId,
+          },
+        },
       },
     });
   } catch (error) {
