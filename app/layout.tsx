@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <NextTopLoader
             color="oklch(0.7334 0.0489 285.1325)"
-            height={2}
+            height={3}
             showSpinner={false}
           />
           <TooltipProvider>{children}</TooltipProvider>
