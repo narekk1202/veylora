@@ -1,9 +1,10 @@
 "use client";
 
+import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import type { ReviewAccuracyChoice } from "../../types";
 
-const ACCURACY_OPTIONS: {
+export const ACCURACY_OPTIONS: {
   value: ReviewAccuracyChoice;
   label: string;
 }[] = [
@@ -15,34 +16,39 @@ const ACCURACY_OPTIONS: {
 
 type AccuracyPickerProps = {
   value: ReviewAccuracyChoice | null;
-  onChange: (value: ReviewAccuracyChoice) => void;
+  onChange?: (value: ReviewAccuracyChoice) => void;
+  readOnly?: boolean;
 };
 
-const AccuracyPicker = ({ value, onChange }: AccuracyPickerProps) => {
+const AccuracyPicker = ({
+  value,
+  onChange,
+  readOnly = false,
+}: AccuracyPickerProps) => {
   return (
     <div
       className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
       role="radiogroup"
       aria-label="How accurate was your prediction?"
+      aria-readonly={readOnly || undefined}
     >
       {ACCURACY_OPTIONS.map((option) => {
         const selected = value === option.value;
 
         return (
-          <button
+          <Button
             key={option.value}
-            type="button"
             role="radio"
+            variant={selected ? "default" : "outline"}
+            className={cn("h-24")}
             aria-checked={selected}
-            onClick={() => onChange(option.value)}
-            className={cn(
-              "bg-card text-muted-foreground hover:text-foreground min-h-16 rounded-xl px-3 py-4 text-center text-sm leading-snug transition-colors ring-1 ring-foreground/10",
-              selected &&
-                "bg-foreground/10 text-foreground ring-foreground/30",
-            )}
+            disabled={readOnly}
+            onClick={() => {
+              if (!readOnly) onChange?.(option.value);
+            }}
           >
             {option.label}
-          </button>
+          </Button>
         );
       })}
     </div>

@@ -1,20 +1,20 @@
+import type { DecisionSummary } from "../../types";
 import { Card } from "@/shared/components/ui/card";
 import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
-import { format } from "date-fns";
-import type { PendingReview } from "../../types";
+import { formatLongDate } from "../../utils";
 
 type OriginalDecisionSummaryProps = {
-  review: PendingReview;
+  review: DecisionSummary;
 };
 
 const OriginalDecisionSummary = ({ review }: OriginalDecisionSummaryProps) => {
   const categoryMeta = CATEGORY_CONFIG[review.category];
-  const lockedLabel = format(review.lockedAt, "MMM d, yyyy");
+  const lockedLabel = formatLongDate(review.lockedAt);
 
   return (
     <Card className="gap-0 overflow-hidden p-0 ring-foreground/10">
       <div className="grid gap-6 p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_11rem] lg:gap-0">
-        <div className="flex min-w-0 flex-col gap-5 lg:border-r lg:border-foreground/10 lg:pr-6">
+        <div className="flex min-w-0 flex-col gap-5 lg:border-foreground/10 lg:border-r lg:pr-6">
           <div className="flex flex-wrap items-center gap-2.5">
             <span
               className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase"
@@ -44,7 +44,7 @@ const OriginalDecisionSummary = ({ review }: OriginalDecisionSummaryProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-2 border-t border-foreground/10 pt-5 lg:border-t-0 lg:pt-0 lg:pl-6">
+        <div className="border-foreground/10 flex flex-col items-center justify-center gap-2 border-t pt-5 lg:border-t-0 lg:pt-0 lg:pl-6">
           <p className="font-serif text-4xl tabular-nums sm:text-5xl">
             {review.confidence}%
           </p>

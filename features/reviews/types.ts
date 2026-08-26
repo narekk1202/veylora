@@ -9,23 +9,28 @@ export type ReviewAccuracyChoice =
   | "mostly_accurate"
   | "completely_accurate";
 
-export type PendingReview = {
-  id: string;
+export type DecisionSummary = {
   question: string;
   category: CategoryKey;
   lockedAt: Date;
-  reviewDate: Date;
   confidence: number;
-  urgency: "due" | "upcoming";
   predictions: string;
 };
 
-export type CompletedReview = {
+export type PendingReview = DecisionSummary & {
   id: string;
-  question: string;
-  category: CategoryKey;
+  reviewDate: Date;
+  urgency: "due" | "upcoming";
+};
+
+export type CompletedReview = DecisionSummary & {
+  id: string;
   reviewedAt: Date;
   accuracy: PredictionAccuracy;
+  actualOutcome: string;
+  surprise: string;
+  learned: string;
+  differently: string;
 };
 
 export type ReviewFormState = {
