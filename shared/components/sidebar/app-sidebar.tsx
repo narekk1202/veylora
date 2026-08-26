@@ -25,7 +25,7 @@ const navLinks: { navMain: NavItem[] } = {
     },
     {
       title: "Reviews",
-      url: "#",
+      url: "/reviews",
     },
     {
       title: "Insights",
