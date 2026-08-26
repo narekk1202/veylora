@@ -33,7 +33,8 @@ const ReviewCard = ({ review, className }: ReviewCardProps) => {
           isDue
             ? "border-chart-4/20 hover:border-chart-4/40 bg-chart-4/7"
             : "border-foreground/10 hover:border-foreground/20",
-          isOverdue && "border-destructive hover:border-destructive/40 bg-destructive/7",
+          isOverdue &&
+            "border-destructive hover:border-destructive/40 bg-destructive/7",
           className,
         )}
       >

@@ -10,6 +10,7 @@ const OriginalDecisionSummary = ({
 }) => {
   const categoryMeta = CATEGORY_CONFIG[review.decision.category];
   const lockedLabel = formatLongDate(review.decision.createdAt);
+  const reviewDateLabel = formatLongDate(review.decision.reviewDate);
 
   return (
     <Card className="ring-foreground/10 gap-0 overflow-hidden p-0">
@@ -26,7 +27,7 @@ const OriginalDecisionSummary = ({
               {categoryMeta.name}
             </span>
             <span className="text-muted-foreground text-xs">
-              Locked {lockedLabel}
+              Locked {lockedLabel} · Review date {reviewDateLabel}
             </span>
           </div>
 
