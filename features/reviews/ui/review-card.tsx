@@ -20,7 +20,7 @@ const ReviewCard = ({ review, className }: ReviewCardProps) => {
   const actionLabel = isDue ? "Start review" : "Preview";
 
   return (
-    <Link href={`/decisions/${review.id}`}>
+    <Link href={`/reviews/${review.id}`}>
       <Card
         className={cn(
           "cursor-pointer flex-row items-center gap-4 px-4 py-4 border-2 transition-colors sm:gap-5",

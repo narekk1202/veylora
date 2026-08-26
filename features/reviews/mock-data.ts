@@ -10,8 +10,10 @@ export const MOCK_PENDING_REVIEWS: PendingReview[] = [
     category: "CAREER",
     lockedAt: subDays(today, 21),
     reviewDate: today,
-    confidence: 70,
+    confidence: 75,
     urgency: "due",
+    predictions:
+      "I expect that taking this role will increase my long-term career satisfaction by at least 20% despite the initial stress. I predict I will have adjusted to the new team within three months.",
   },
   {
     id: "rev-upcoming-1",
@@ -21,6 +23,8 @@ export const MOCK_PENDING_REVIEWS: PendingReview[] = [
     reviewDate: addDays(today, 3),
     confidence: 60,
     urgency: "upcoming",
+    predictions:
+      "I expect the move will reduce my commute stress and give me more evening energy, though rent will be meaningfully higher.",
   },
 ];
 
@@ -33,3 +37,7 @@ export const MOCK_COMPLETED_REVIEWS: CompletedReview[] = [
     accuracy: "MOSTLY_ACCURATE",
   },
 ];
+
+export function getMockPendingReview(id: string) {
+  return MOCK_PENDING_REVIEWS.find((review) => review.id === id);
+}
