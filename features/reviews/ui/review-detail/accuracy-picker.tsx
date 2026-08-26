@@ -32,7 +32,7 @@ const AccuracyPicker = ({ value, readOnly = false }: AccuracyPickerProps) => {
       aria-readonly={readOnly || undefined}
     >
       {ACCURACY_OPTIONS.map((option) => {
-        const isSelected = selected === option.value;
+        const isSelected = readOnly ? undefined : selected === option.value;
         return (
           <Button
             key={option.value}
