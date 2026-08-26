@@ -21,16 +21,13 @@ const DecisionsView = async ({
   return (
     <main className="page_view">
       <DecisionsHeader />
+      <Suspense fallback={<DecisionsFiltersFallback />}>
+        <DecisionsFilters />
+      </Suspense>
       {decisions.length > 0 ? (
-        <>
-          <Suspense fallback={<DecisionsFiltersFallback />}>
-            <DecisionsFilters />
-          </Suspense>
-
-          <Suspense fallback={<DecisionCardSkeletons />}>
-            <DecisionsList decisions={decisions} />
-          </Suspense>
-        </>
+        <Suspense fallback={<DecisionCardSkeletons />}>
+          <DecisionsList decisions={decisions} />
+        </Suspense>
       ) : (
         <EmptyDecisions />
       )}
