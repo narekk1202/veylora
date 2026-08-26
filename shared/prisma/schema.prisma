@@ -27,6 +27,13 @@ enum PredictionAccuracy {
   INACCURATE
 }
 
+enum ReviewStatus {
+  DUE
+  OVERDUE
+  COMPLETED
+  UPCOMING
+}
+
 model User {
   id                  String     @id
   name                String
@@ -146,6 +153,7 @@ model Review {
   updatedAt          DateTime            @updatedAt
   actualOutcome      String?
   accuracy           PredictionAccuracy?
+  status             ReviewStatus        @default(UPCOMING)
   outcomeSummary     String?
   surprises          String?
   lessonsLearned     String?

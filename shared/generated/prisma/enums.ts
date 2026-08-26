@@ -36,3 +36,13 @@ export const PredictionAccuracy = {
 } as const
 
 export type PredictionAccuracy = (typeof PredictionAccuracy)[keyof typeof PredictionAccuracy]
+
+
+export const ReviewStatus = {
+  DUE: 'DUE',
+  OVERDUE: 'OVERDUE',
+  COMPLETED: 'COMPLETED',
+  UPCOMING: 'UPCOMING'
+} as const
+
+export type ReviewStatus = (typeof ReviewStatus)[keyof typeof ReviewStatus]

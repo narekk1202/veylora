@@ -32,6 +32,7 @@ export type ReviewMinAggregateOutputType = {
   updatedAt: Date | null
   actualOutcome: string | null
   accuracy: $Enums.PredictionAccuracy | null
+  status: $Enums.ReviewStatus | null
   outcomeSummary: string | null
   surprises: string | null
   lessonsLearned: string | null
@@ -46,6 +47,7 @@ export type ReviewMaxAggregateOutputType = {
   updatedAt: Date | null
   actualOutcome: string | null
   accuracy: $Enums.PredictionAccuracy | null
+  status: $Enums.ReviewStatus | null
   outcomeSummary: string | null
   surprises: string | null
   lessonsLearned: string | null
@@ -60,6 +62,7 @@ export type ReviewCountAggregateOutputType = {
   updatedAt: number
   actualOutcome: number
   accuracy: number
+  status: number
   outcomeSummary: number
   surprises: number
   lessonsLearned: number
@@ -76,6 +79,7 @@ export type ReviewMinAggregateInputType = {
   updatedAt?: true
   actualOutcome?: true
   accuracy?: true
+  status?: true
   outcomeSummary?: true
   surprises?: true
   lessonsLearned?: true
@@ -90,6 +94,7 @@ export type ReviewMaxAggregateInputType = {
   updatedAt?: true
   actualOutcome?: true
   accuracy?: true
+  status?: true
   outcomeSummary?: true
   surprises?: true
   lessonsLearned?: true
@@ -104,6 +109,7 @@ export type ReviewCountAggregateInputType = {
   updatedAt?: true
   actualOutcome?: true
   accuracy?: true
+  status?: true
   outcomeSummary?: true
   surprises?: true
   lessonsLearned?: true
@@ -191,6 +197,7 @@ export type ReviewGroupByOutputType = {
   updatedAt: Date
   actualOutcome: string | null
   accuracy: $Enums.PredictionAccuracy | null
+  status: $Enums.ReviewStatus
   outcomeSummary: string | null
   surprises: string | null
   lessonsLearned: string | null
@@ -226,6 +233,7 @@ export type ReviewWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   actualOutcome?: Prisma.StringNullableFilter<"Review"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Review"> | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
   outcomeSummary?: Prisma.StringNullableFilter<"Review"> | string | null
   surprises?: Prisma.StringNullableFilter<"Review"> | string | null
   lessonsLearned?: Prisma.StringNullableFilter<"Review"> | string | null
@@ -242,6 +250,7 @@ export type ReviewOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   actualOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
   accuracy?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   outcomeSummary?: Prisma.SortOrderInput | Prisma.SortOrder
   surprises?: Prisma.SortOrderInput | Prisma.SortOrder
   lessonsLearned?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -261,6 +270,7 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   actualOutcome?: Prisma.StringNullableFilter<"Review"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Review"> | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
   outcomeSummary?: Prisma.StringNullableFilter<"Review"> | string | null
   surprises?: Prisma.StringNullableFilter<"Review"> | string | null
   lessonsLearned?: Prisma.StringNullableFilter<"Review"> | string | null
@@ -277,6 +287,7 @@ export type ReviewOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   actualOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
   accuracy?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   outcomeSummary?: Prisma.SortOrderInput | Prisma.SortOrder
   surprises?: Prisma.SortOrderInput | Prisma.SortOrder
   lessonsLearned?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -297,6 +308,7 @@ export type ReviewScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
   actualOutcome?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableWithAggregatesFilter<"Review"> | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusWithAggregatesFilter<"Review"> | $Enums.ReviewStatus
   outcomeSummary?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
   surprises?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
   lessonsLearned?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
@@ -309,6 +321,7 @@ export type ReviewCreateInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -325,6 +338,7 @@ export type ReviewUncheckedCreateInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -337,6 +351,7 @@ export type ReviewUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -353,6 +368,7 @@ export type ReviewUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -367,6 +383,7 @@ export type ReviewCreateManyInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -379,6 +396,7 @@ export type ReviewUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -393,6 +411,7 @@ export type ReviewUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -422,6 +441,7 @@ export type ReviewCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   actualOutcome?: Prisma.SortOrder
   accuracy?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   outcomeSummary?: Prisma.SortOrder
   surprises?: Prisma.SortOrder
   lessonsLearned?: Prisma.SortOrder
@@ -436,6 +456,7 @@ export type ReviewMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   actualOutcome?: Prisma.SortOrder
   accuracy?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   outcomeSummary?: Prisma.SortOrder
   surprises?: Prisma.SortOrder
   lessonsLearned?: Prisma.SortOrder
@@ -450,6 +471,7 @@ export type ReviewMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   actualOutcome?: Prisma.SortOrder
   accuracy?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   outcomeSummary?: Prisma.SortOrder
   surprises?: Prisma.SortOrder
   lessonsLearned?: Prisma.SortOrder
@@ -534,12 +556,17 @@ export type NullableEnumPredictionAccuracyFieldUpdateOperationsInput = {
   set?: $Enums.PredictionAccuracy | null
 }
 
+export type EnumReviewStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ReviewStatus
+}
+
 export type ReviewCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -554,6 +581,7 @@ export type ReviewUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -597,6 +625,7 @@ export type ReviewScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   actualOutcome?: Prisma.StringNullableFilter<"Review"> | string | null
   accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Review"> | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
   outcomeSummary?: Prisma.StringNullableFilter<"Review"> | string | null
   surprises?: Prisma.StringNullableFilter<"Review"> | string | null
   lessonsLearned?: Prisma.StringNullableFilter<"Review"> | string | null
@@ -609,6 +638,7 @@ export type ReviewCreateWithoutDecisionInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -623,6 +653,7 @@ export type ReviewUncheckedCreateWithoutDecisionInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -651,6 +682,7 @@ export type ReviewUpdateWithoutDecisionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -665,6 +697,7 @@ export type ReviewUncheckedUpdateWithoutDecisionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -678,6 +711,7 @@ export type ReviewCreateManyUserInput = {
   updatedAt?: Date | string
   actualOutcome?: string | null
   accuracy?: $Enums.PredictionAccuracy | null
+  status?: $Enums.ReviewStatus
   outcomeSummary?: string | null
   surprises?: string | null
   lessonsLearned?: string | null
@@ -690,6 +724,7 @@ export type ReviewUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -704,6 +739,7 @@ export type ReviewUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -717,6 +753,7 @@ export type ReviewUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   outcomeSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surprises?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lessonsLearned?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -733,6 +770,7 @@ export type ReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   actualOutcome?: boolean
   accuracy?: boolean
+  status?: boolean
   outcomeSummary?: boolean
   surprises?: boolean
   lessonsLearned?: boolean
@@ -749,6 +787,7 @@ export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updatedAt?: boolean
   actualOutcome?: boolean
   accuracy?: boolean
+  status?: boolean
   outcomeSummary?: boolean
   surprises?: boolean
   lessonsLearned?: boolean
@@ -765,6 +804,7 @@ export type ReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updatedAt?: boolean
   actualOutcome?: boolean
   accuracy?: boolean
+  status?: boolean
   outcomeSummary?: boolean
   surprises?: boolean
   lessonsLearned?: boolean
@@ -781,13 +821,14 @@ export type ReviewSelectScalar = {
   updatedAt?: boolean
   actualOutcome?: boolean
   accuracy?: boolean
+  status?: boolean
   outcomeSummary?: boolean
   surprises?: boolean
   lessonsLearned?: boolean
   wouldDoDifferently?: boolean
 }
 
-export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "decisionId" | "userId" | "createdAt" | "updatedAt" | "actualOutcome" | "accuracy" | "outcomeSummary" | "surprises" | "lessonsLearned" | "wouldDoDifferently", ExtArgs["result"]["review"]>
+export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "decisionId" | "userId" | "createdAt" | "updatedAt" | "actualOutcome" | "accuracy" | "status" | "outcomeSummary" | "surprises" | "lessonsLearned" | "wouldDoDifferently", ExtArgs["result"]["review"]>
 export type ReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   decision?: boolean | Prisma.DecisionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -815,6 +856,7 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     updatedAt: Date
     actualOutcome: string | null
     accuracy: $Enums.PredictionAccuracy | null
+    status: $Enums.ReviewStatus
     outcomeSummary: string | null
     surprises: string | null
     lessonsLearned: string | null
@@ -1251,6 +1293,7 @@ export interface ReviewFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Review", 'DateTime'>
   readonly actualOutcome: Prisma.FieldRef<"Review", 'String'>
   readonly accuracy: Prisma.FieldRef<"Review", 'PredictionAccuracy'>
+  readonly status: Prisma.FieldRef<"Review", 'ReviewStatus'>
   readonly outcomeSummary: Prisma.FieldRef<"Review", 'String'>
   readonly surprises: Prisma.FieldRef<"Review", 'String'>
   readonly lessonsLearned: Prisma.FieldRef<"Review", 'String'>

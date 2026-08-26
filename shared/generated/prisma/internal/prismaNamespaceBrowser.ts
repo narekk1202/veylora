@@ -178,6 +178,7 @@ export const ReviewScalarFieldEnum = {
   updatedAt: 'updatedAt',
   actualOutcome: 'actualOutcome',
   accuracy: 'accuracy',
+  status: 'status',
   outcomeSummary: 'outcomeSummary',
   surprises: 'surprises',
   lessonsLearned: 'lessonsLearned',
