@@ -1,5 +1,5 @@
 type ReviewAnswerProps = {
-  children: string;
+  children: React.ReactNode;
   label: string;
 };
 

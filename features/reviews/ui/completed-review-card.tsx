@@ -1,11 +1,11 @@
 import { Card } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
-import type { CompletedReview } from "../types";
+import { ReviewWithDecision } from "../types";
 import { formatAccuracyLabel, formatShortDate } from "../utils";
 
 type CompletedReviewCardProps = {
-  review: CompletedReview;
+  review: ReviewWithDecision;
   className?: string;
 };
 
@@ -22,11 +22,11 @@ const CompletedReviewCard = ({
         )}
       >
         <p className="text-sm leading-snug font-medium text-pretty">
-          {review.question}
+          {review.decision.question}
         </p>
         <p className="text-muted-foreground text-xs">
-          Reviewed {formatShortDate(review.reviewedAt)} · Rated{" "}
-          {formatAccuracyLabel(review.accuracy)}
+          Reviewed {formatShortDate(review.decision.reviewedAt!)} · Rated{" "}
+          {formatAccuracyLabel(review.accuracy || "INACCURATE")}
         </p>
       </Card>
     </Link>

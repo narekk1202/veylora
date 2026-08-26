@@ -2,28 +2,28 @@ import { Card } from "@/shared/components/ui/card";
 import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
-import type { PendingReview } from "../types";
+import { ReviewWithDecision } from "../types";
 import { formatReviewUrgencyLabel, formatShortDate } from "../utils";
 
 type ReviewCardProps = {
-  review: PendingReview;
+  review: ReviewWithDecision;
   className?: string;
 };
 
 const ReviewCard = ({ review, className }: ReviewCardProps) => {
-  const isDue = review.urgency === "due";
-  const categoryMeta = CATEGORY_CONFIG[review.category];
-  const urgencyLabel = formatReviewUrgencyLabel(review.reviewDate);
+  const isDue = review.status === "DUE" || review.status === "OVERDUE";
+  const categoryMeta = CATEGORY_CONFIG[review.decision.category];
+  const urgencyLabel = formatReviewUrgencyLabel(review.decision.reviewDate);
   const meta = isDue
-    ? `Locked ${formatShortDate(review.lockedAt)} · Review date was ${formatShortDate(review.reviewDate)}`
-    : `Locked ${formatShortDate(review.lockedAt)} · ${review.confidence}% confidence at lock`;
+    ? `Locked ${formatShortDate(review.decision.createdAt)} · Review date was ${formatShortDate(review.decision.reviewDate)}`
+    : `Locked ${formatShortDate(review.decision.createdAt)} · ${review.decision.confidence}% confidence at lock`;
   const actionLabel = isDue ? "Start review" : "Preview";
 
   return (
     <Link href={`/reviews/${review.id}`}>
       <Card
         className={cn(
-          "cursor-pointer flex-row items-center gap-4 px-4 py-4 border-2 transition-colors sm:gap-5",
+          "cursor-pointer flex-row items-center gap-4 border-2 px-4 py-4 transition-colors sm:gap-5",
           isDue
             ? "border-chart-4/20 hover:border-chart-4/40 bg-chart-4/7"
             : "border-foreground/10 hover:border-foreground/20",
@@ -60,7 +60,7 @@ const ReviewCard = ({ review, className }: ReviewCardProps) => {
           </div>
 
           <p className="text-sm leading-snug font-medium text-pretty sm:text-[15px]">
-            {review.question}
+            {review.decision.question}
           </p>
 
           <p className="text-muted-foreground text-xs">{meta}</p>

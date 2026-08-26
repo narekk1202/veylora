@@ -1,21 +1,22 @@
 "use client";
 
 import { Button } from "@/shared/components/ui/button";
+import { ReviewStatus } from "@/shared/generated/prisma/enums";
 import Link from "next/link";
 import { formatLongDate } from "../../utils";
 
 type ReviewFooterProps = {
-  status?: "pending" | "completed";
+  status: ReviewStatus;
   reviewedAt?: Date;
   onComplete?: () => void;
 };
 
 const ReviewFooter = ({
-  status = "pending",
+  status = ReviewStatus.UPCOMING,
   reviewedAt,
   onComplete,
 }: ReviewFooterProps) => {
-  if (status === "completed") {
+  if (status === ReviewStatus.COMPLETED) {
     return (
       <footer className="border-border/40 flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-muted-foreground text-xs italic">

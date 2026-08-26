@@ -1,19 +1,29 @@
 "use client";
 
+import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
-import type { ReviewTab } from "../types";
+import { useReviewFilterParams } from "../hooks/use-review-filter-params";
+import { REVIEW_STATUS_FILTERS } from "../schemas";
 
-type ReviewsTabsProps = {
-  value: ReviewTab;
-  dueCount: number;
-  onValueChange: (value: ReviewTab) => void;
-};
+const STATUS_VALUES = new Set<string>(REVIEW_STATUS_FILTERS);
 
-const ReviewsTabs = ({ value, dueCount, onValueChange }: ReviewsTabsProps) => {
+export function ReviewsTabsFallback() {
+  return <Skeleton className="h-10 w-72" />;
+}
+
+const ReviewsTabs = ({ dueCount }: { dueCount: number }) => {
+  const { searchParams, setFilterParam } = useReviewFilterParams();
+
+  const rawStatus = searchParams.get("status");
+  const statusValue =
+    rawStatus && STATUS_VALUES.has(rawStatus) ? rawStatus : "all";
+
   return (
     <Tabs
-      value={value}
-      onValueChange={(next) => onValueChange(next as ReviewTab)}
+      value={statusValue}
+      onValueChange={(next) =>
+        setFilterParam("status", next === "all" ? undefined : next)
+      }
       className="w-fit"
     >
       <TabsList className="h-auto gap-1 rounded-lg p-1">

@@ -1,30 +1,29 @@
 "use client";
 
 import { Button } from "@/shared/components/ui/button";
+import { PredictionAccuracy } from "@/shared/generated/prisma/enums";
 import { cn } from "@/shared/lib/utils";
-import type { ReviewAccuracyChoice } from "../../types";
+import { useState } from "react";
 
 export const ACCURACY_OPTIONS: {
-  value: ReviewAccuracyChoice;
+  value: PredictionAccuracy;
   label: string;
 }[] = [
-  { value: "completely_wrong", label: "Completely wrong" },
-  { value: "partially_accurate", label: "Partially accurate" },
-  { value: "mostly_accurate", label: "Mostly accurate" },
-  { value: "completely_accurate", label: "Completely accurate" },
+  { value: "INACCURATE", label: "Completely wrong" },
+  { value: "MOSTLY_INACCURATE", label: "Mostly inaccurate" },
+  { value: "PARTIALLY_ACCURATE", label: "Partially accurate" },
+  { value: "MOSTLY_ACCURATE", label: "Mostly accurate" },
+  { value: "ACCURATE", label: "Completely accurate" },
 ];
 
 type AccuracyPickerProps = {
-  value: ReviewAccuracyChoice | null;
-  onChange?: (value: ReviewAccuracyChoice) => void;
+  value: PredictionAccuracy;
   readOnly?: boolean;
 };
 
-const AccuracyPicker = ({
-  value,
-  onChange,
-  readOnly = false,
-}: AccuracyPickerProps) => {
+const AccuracyPicker = ({ value, readOnly = false }: AccuracyPickerProps) => {
+  const [selected, setSelected] = useState<PredictionAccuracy>(value);
+
   return (
     <div
       className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
@@ -33,19 +32,16 @@ const AccuracyPicker = ({
       aria-readonly={readOnly || undefined}
     >
       {ACCURACY_OPTIONS.map((option) => {
-        const selected = value === option.value;
-
+        const isSelected = selected === option.value;
         return (
           <Button
             key={option.value}
             role="radio"
-            variant={selected ? "default" : "outline"}
+            variant={isSelected ? "default" : "outline"}
             className={cn("h-24")}
-            aria-checked={selected}
+            aria-checked={isSelected}
             disabled={readOnly}
-            onClick={() => {
-              if (!readOnly) onChange?.(option.value);
-            }}
+            onClick={() => !readOnly && setSelected(option.value)}
           >
             {option.label}
           </Button>
