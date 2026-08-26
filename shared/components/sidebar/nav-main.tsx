@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   sidebarMenuButtonVariants,
+  useSidebar,
 } from "@/shared/components/ui/sidebar";
 import { cn } from "../../lib/utils";
 
@@ -19,6 +20,11 @@ export type NavItem = {
 
 export function NavMain({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
+  const { isMobile, toggleSidebar } = useSidebar();
+
+  const handleCloseSidebarMobile = () => {
+    if (isMobile) toggleSidebar();
+  };
 
   return (
     <SidebarMenu className="gap-2">
@@ -27,7 +33,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
           pathname === item.url || pathname.startsWith(`${item.url}/`);
 
         return (
-          <SidebarMenuItem key={item.title}>
+          <SidebarMenuItem key={item.title} onClick={handleCloseSidebarMobile}>
             <Link
               href={item.url}
               className={cn(
