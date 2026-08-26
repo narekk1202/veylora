@@ -36,7 +36,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          <NextTopLoader color="oklch(0.7334 0.0489 285.1325)" height={4} />
+          <NextTopLoader
+            color="oklch(0.7334 0.0489 285.1325)"
+            height={2}
+            showSpinner={false}
+          />
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
         </ThemeProvider>
