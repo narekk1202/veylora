@@ -64,13 +64,13 @@ const DecisionsFilters = () => {
       />
 
       <Tabs
-        className="bg-card rounded-md px-1 py-1.5 max-lg:w-full"
+        className="max-lg:w-full"
         value={statusValue}
         onValueChange={(next) =>
           setFilterParam("status", next === "all" ? undefined : next)
         }
       >
-        <TabsList variant="line" className="max-lg:w-full">
+        <TabsList className="max-lg:w-full">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value={DecisionStatus.LOCKED}>Locked</TabsTrigger>
           <TabsTrigger value={DecisionStatus.REVIEWED}>Reviewed</TabsTrigger>
