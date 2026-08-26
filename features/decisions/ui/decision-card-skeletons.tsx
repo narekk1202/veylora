@@ -4,7 +4,7 @@ const DecisionCardSkeletons = () => {
   return (
     <div className="flex h-auto w-full flex-col gap-3">
       {Array.from({ length: 5 }).map((_, index) => (
-        <Skeleton key={index} className="h-18 w-full rounded-xl" />
+        <Skeleton key={index} className="h-28 w-full rounded-xl sm:h-18" />
       ))}
     </div>
   );
