@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/shared/components/ui/tooltip";
 import { ThemeProvider } from "@/shared/providers/theme-provider";
 import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const fontSans = Inter({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
+          <NextTopLoader color="oklch(0.7334 0.0489 285.1325)" height={4} />
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
         </ThemeProvider>
