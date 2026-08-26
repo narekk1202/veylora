@@ -173,13 +173,6 @@ export type EnumDecisionStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumDecisionStatusFilter<$PrismaModel> | $Enums.DecisionStatus
 }
 
-export type EnumPredictionAccuracyNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPredictionAccuracyNullableFilter<$PrismaModel> | $Enums.PredictionAccuracy | null
-}
-
 export type EnumCategoryWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.Category | Prisma.EnumCategoryFieldRefInput<$PrismaModel>
   in?: $Enums.Category[] | Prisma.ListEnumCategoryFieldRefInput<$PrismaModel>
@@ -216,14 +209,21 @@ export type EnumDecisionStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumDecisionStatusFilter<$PrismaModel>
 }
 
-export type EnumPredictionAccuracyNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPredictionAccuracyNullableWithAggregatesFilter<$PrismaModel> | $Enums.PredictionAccuracy | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPredictionAccuracyNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPredictionAccuracyNullableFilter<$PrismaModel>
+export type EnumPredictionAccuracyFilter<$PrismaModel = never> = {
+  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPredictionAccuracyFilter<$PrismaModel> | $Enums.PredictionAccuracy
+}
+
+export type EnumPredictionAccuracyWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPredictionAccuracyWithAggregatesFilter<$PrismaModel> | $Enums.PredictionAccuracy
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPredictionAccuracyFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPredictionAccuracyFilter<$PrismaModel>
 }
 
 export type NestedStringFilter<$PrismaModel = never> = {
@@ -387,13 +387,6 @@ export type NestedEnumDecisionStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumDecisionStatusFilter<$PrismaModel> | $Enums.DecisionStatus
 }
 
-export type NestedEnumPredictionAccuracyNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPredictionAccuracyNullableFilter<$PrismaModel> | $Enums.PredictionAccuracy | null
-}
-
 export type NestedEnumCategoryWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.Category | Prisma.EnumCategoryFieldRefInput<$PrismaModel>
   in?: $Enums.Category[] | Prisma.ListEnumCategoryFieldRefInput<$PrismaModel>
@@ -441,14 +434,21 @@ export type NestedEnumDecisionStatusWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumDecisionStatusFilter<$PrismaModel>
 }
 
-export type NestedEnumPredictionAccuracyNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPredictionAccuracyNullableWithAggregatesFilter<$PrismaModel> | $Enums.PredictionAccuracy | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPredictionAccuracyNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPredictionAccuracyNullableFilter<$PrismaModel>
+export type NestedEnumPredictionAccuracyFilter<$PrismaModel = never> = {
+  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPredictionAccuracyFilter<$PrismaModel> | $Enums.PredictionAccuracy
+}
+
+export type NestedEnumPredictionAccuracyWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PredictionAccuracy | Prisma.EnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  in?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PredictionAccuracy[] | Prisma.ListEnumPredictionAccuracyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPredictionAccuracyWithAggregatesFilter<$PrismaModel> | $Enums.PredictionAccuracy
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPredictionAccuracyFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPredictionAccuracyFilter<$PrismaModel>
 }
 
 

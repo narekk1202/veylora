@@ -50,8 +50,6 @@ export type DecisionMinAggregateOutputType = {
   confidence: number | null
   reviewDate: Date | null
   status: $Enums.DecisionStatus | null
-  actualOutcome: string | null
-  accuracy: $Enums.PredictionAccuracy | null
   reviewedAt: Date | null
   postHocNotes: string | null
 }
@@ -72,8 +70,6 @@ export type DecisionMaxAggregateOutputType = {
   confidence: number | null
   reviewDate: Date | null
   status: $Enums.DecisionStatus | null
-  actualOutcome: string | null
-  accuracy: $Enums.PredictionAccuracy | null
   reviewedAt: Date | null
   postHocNotes: string | null
 }
@@ -94,8 +90,6 @@ export type DecisionCountAggregateOutputType = {
   confidence: number
   reviewDate: number
   status: number
-  actualOutcome: number
-  accuracy: number
   reviewedAt: number
   postHocNotes: number
   _all: number
@@ -126,8 +120,6 @@ export type DecisionMinAggregateInputType = {
   confidence?: true
   reviewDate?: true
   status?: true
-  actualOutcome?: true
-  accuracy?: true
   reviewedAt?: true
   postHocNotes?: true
 }
@@ -148,8 +140,6 @@ export type DecisionMaxAggregateInputType = {
   confidence?: true
   reviewDate?: true
   status?: true
-  actualOutcome?: true
-  accuracy?: true
   reviewedAt?: true
   postHocNotes?: true
 }
@@ -170,8 +160,6 @@ export type DecisionCountAggregateInputType = {
   confidence?: true
   reviewDate?: true
   status?: true
-  actualOutcome?: true
-  accuracy?: true
   reviewedAt?: true
   postHocNotes?: true
   _all?: true
@@ -279,8 +267,6 @@ export type DecisionGroupByOutputType = {
   confidence: number
   reviewDate: Date
   status: $Enums.DecisionStatus
-  actualOutcome: string | null
-  accuracy: $Enums.PredictionAccuracy | null
   reviewedAt: Date | null
   postHocNotes: string | null
   _count: DecisionCountAggregateOutputType | null
@@ -324,12 +310,11 @@ export type DecisionWhereInput = {
   confidence?: Prisma.IntFilter<"Decision"> | number
   reviewDate?: Prisma.DateTimeFilter<"Decision"> | Date | string
   status?: Prisma.EnumDecisionStatusFilter<"Decision"> | $Enums.DecisionStatus
-  actualOutcome?: Prisma.StringNullableFilter<"Decision"> | string | null
-  accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"Decision"> | Date | string | null
   postHocNotes?: Prisma.StringNullableFilter<"Decision"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   options?: Prisma.DecisionOptionListRelationFilter
+  review?: Prisma.XOR<Prisma.ReviewNullableScalarRelationFilter, Prisma.ReviewWhereInput> | null
 }
 
 export type DecisionOrderByWithRelationInput = {
@@ -348,12 +333,11 @@ export type DecisionOrderByWithRelationInput = {
   confidence?: Prisma.SortOrder
   reviewDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  actualOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
-  accuracy?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   postHocNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   options?: Prisma.DecisionOptionOrderByRelationAggregateInput
+  review?: Prisma.ReviewOrderByWithRelationInput
 }
 
 export type DecisionWhereUniqueInput = Prisma.AtLeast<{
@@ -375,12 +359,11 @@ export type DecisionWhereUniqueInput = Prisma.AtLeast<{
   confidence?: Prisma.IntFilter<"Decision"> | number
   reviewDate?: Prisma.DateTimeFilter<"Decision"> | Date | string
   status?: Prisma.EnumDecisionStatusFilter<"Decision"> | $Enums.DecisionStatus
-  actualOutcome?: Prisma.StringNullableFilter<"Decision"> | string | null
-  accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"Decision"> | Date | string | null
   postHocNotes?: Prisma.StringNullableFilter<"Decision"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   options?: Prisma.DecisionOptionListRelationFilter
+  review?: Prisma.XOR<Prisma.ReviewNullableScalarRelationFilter, Prisma.ReviewWhereInput> | null
 }, "id">
 
 export type DecisionOrderByWithAggregationInput = {
@@ -399,8 +382,6 @@ export type DecisionOrderByWithAggregationInput = {
   confidence?: Prisma.SortOrder
   reviewDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  actualOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
-  accuracy?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   postHocNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DecisionCountOrderByAggregateInput
@@ -429,8 +410,6 @@ export type DecisionScalarWhereWithAggregatesInput = {
   confidence?: Prisma.IntWithAggregatesFilter<"Decision"> | number
   reviewDate?: Prisma.DateTimeWithAggregatesFilter<"Decision"> | Date | string
   status?: Prisma.EnumDecisionStatusWithAggregatesFilter<"Decision"> | $Enums.DecisionStatus
-  actualOutcome?: Prisma.StringNullableWithAggregatesFilter<"Decision"> | string | null
-  accuracy?: Prisma.EnumPredictionAccuracyNullableWithAggregatesFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Decision"> | Date | string | null
   postHocNotes?: Prisma.StringNullableWithAggregatesFilter<"Decision"> | string | null
 }
@@ -450,12 +429,11 @@ export type DecisionCreateInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
   user: Prisma.UserCreateNestedOneWithoutDecisionsInput
   options?: Prisma.DecisionOptionCreateNestedManyWithoutDecisionInput
+  review?: Prisma.ReviewCreateNestedOneWithoutDecisionInput
 }
 
 export type DecisionUncheckedCreateInput = {
@@ -474,11 +452,10 @@ export type DecisionUncheckedCreateInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
   options?: Prisma.DecisionOptionUncheckedCreateNestedManyWithoutDecisionInput
+  review?: Prisma.ReviewUncheckedCreateNestedOneWithoutDecisionInput
 }
 
 export type DecisionUpdateInput = {
@@ -496,12 +473,11 @@ export type DecisionUpdateInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutDecisionsNestedInput
   options?: Prisma.DecisionOptionUpdateManyWithoutDecisionNestedInput
+  review?: Prisma.ReviewUpdateOneWithoutDecisionNestedInput
 }
 
 export type DecisionUncheckedUpdateInput = {
@@ -520,11 +496,10 @@ export type DecisionUncheckedUpdateInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   options?: Prisma.DecisionOptionUncheckedUpdateManyWithoutDecisionNestedInput
+  review?: Prisma.ReviewUncheckedUpdateOneWithoutDecisionNestedInput
 }
 
 export type DecisionCreateManyInput = {
@@ -543,8 +518,6 @@ export type DecisionCreateManyInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
 }
@@ -564,8 +537,6 @@ export type DecisionUpdateManyMutationInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -586,8 +557,6 @@ export type DecisionUncheckedUpdateManyInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -618,8 +587,6 @@ export type DecisionCountOrderByAggregateInput = {
   confidence?: Prisma.SortOrder
   reviewDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  actualOutcome?: Prisma.SortOrder
-  accuracy?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   postHocNotes?: Prisma.SortOrder
 }
@@ -644,8 +611,6 @@ export type DecisionMaxOrderByAggregateInput = {
   confidence?: Prisma.SortOrder
   reviewDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  actualOutcome?: Prisma.SortOrder
-  accuracy?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   postHocNotes?: Prisma.SortOrder
 }
@@ -666,8 +631,6 @@ export type DecisionMinOrderByAggregateInput = {
   confidence?: Prisma.SortOrder
   reviewDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  actualOutcome?: Prisma.SortOrder
-  accuracy?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   postHocNotes?: Prisma.SortOrder
 }
@@ -739,10 +702,6 @@ export type EnumDecisionStatusFieldUpdateOperationsInput = {
   set?: $Enums.DecisionStatus
 }
 
-export type NullableEnumPredictionAccuracyFieldUpdateOperationsInput = {
-  set?: $Enums.PredictionAccuracy | null
-}
-
 export type DecisionCreateNestedOneWithoutOptionsInput = {
   create?: Prisma.XOR<Prisma.DecisionCreateWithoutOptionsInput, Prisma.DecisionUncheckedCreateWithoutOptionsInput>
   connectOrCreate?: Prisma.DecisionCreateOrConnectWithoutOptionsInput
@@ -755,6 +714,20 @@ export type DecisionUpdateOneRequiredWithoutOptionsNestedInput = {
   upsert?: Prisma.DecisionUpsertWithoutOptionsInput
   connect?: Prisma.DecisionWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.DecisionUpdateToOneWithWhereWithoutOptionsInput, Prisma.DecisionUpdateWithoutOptionsInput>, Prisma.DecisionUncheckedUpdateWithoutOptionsInput>
+}
+
+export type DecisionCreateNestedOneWithoutReviewInput = {
+  create?: Prisma.XOR<Prisma.DecisionCreateWithoutReviewInput, Prisma.DecisionUncheckedCreateWithoutReviewInput>
+  connectOrCreate?: Prisma.DecisionCreateOrConnectWithoutReviewInput
+  connect?: Prisma.DecisionWhereUniqueInput
+}
+
+export type DecisionUpdateOneRequiredWithoutReviewNestedInput = {
+  create?: Prisma.XOR<Prisma.DecisionCreateWithoutReviewInput, Prisma.DecisionUncheckedCreateWithoutReviewInput>
+  connectOrCreate?: Prisma.DecisionCreateOrConnectWithoutReviewInput
+  upsert?: Prisma.DecisionUpsertWithoutReviewInput
+  connect?: Prisma.DecisionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DecisionUpdateToOneWithWhereWithoutReviewInput, Prisma.DecisionUpdateWithoutReviewInput>, Prisma.DecisionUncheckedUpdateWithoutReviewInput>
 }
 
 export type DecisionCreateWithoutUserInput = {
@@ -772,11 +745,10 @@ export type DecisionCreateWithoutUserInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
   options?: Prisma.DecisionOptionCreateNestedManyWithoutDecisionInput
+  review?: Prisma.ReviewCreateNestedOneWithoutDecisionInput
 }
 
 export type DecisionUncheckedCreateWithoutUserInput = {
@@ -794,11 +766,10 @@ export type DecisionUncheckedCreateWithoutUserInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
   options?: Prisma.DecisionOptionUncheckedCreateNestedManyWithoutDecisionInput
+  review?: Prisma.ReviewUncheckedCreateNestedOneWithoutDecisionInput
 }
 
 export type DecisionCreateOrConnectWithoutUserInput = {
@@ -846,8 +817,6 @@ export type DecisionScalarWhereInput = {
   confidence?: Prisma.IntFilter<"Decision"> | number
   reviewDate?: Prisma.DateTimeFilter<"Decision"> | Date | string
   status?: Prisma.EnumDecisionStatusFilter<"Decision"> | $Enums.DecisionStatus
-  actualOutcome?: Prisma.StringNullableFilter<"Decision"> | string | null
-  accuracy?: Prisma.EnumPredictionAccuracyNullableFilter<"Decision"> | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"Decision"> | Date | string | null
   postHocNotes?: Prisma.StringNullableFilter<"Decision"> | string | null
 }
@@ -867,11 +836,10 @@ export type DecisionCreateWithoutOptionsInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
   user: Prisma.UserCreateNestedOneWithoutDecisionsInput
+  review?: Prisma.ReviewCreateNestedOneWithoutDecisionInput
 }
 
 export type DecisionUncheckedCreateWithoutOptionsInput = {
@@ -890,10 +858,9 @@ export type DecisionUncheckedCreateWithoutOptionsInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
+  review?: Prisma.ReviewUncheckedCreateNestedOneWithoutDecisionInput
 }
 
 export type DecisionCreateOrConnectWithoutOptionsInput = {
@@ -927,11 +894,10 @@ export type DecisionUpdateWithoutOptionsInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutDecisionsNestedInput
+  review?: Prisma.ReviewUpdateOneWithoutDecisionNestedInput
 }
 
 export type DecisionUncheckedUpdateWithoutOptionsInput = {
@@ -950,10 +916,109 @@ export type DecisionUncheckedUpdateWithoutOptionsInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  review?: Prisma.ReviewUncheckedUpdateOneWithoutDecisionNestedInput
+}
+
+export type DecisionCreateWithoutReviewInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  category?: $Enums.Category
+  question: string
+  context: string
+  urgency: string
+  primaryReasons: string
+  potentialConcerns: string
+  assumptions: string
+  predictions: string
+  confidence: number
+  reviewDate: Date | string
+  status?: $Enums.DecisionStatus
+  reviewedAt?: Date | string | null
+  postHocNotes?: string | null
+  user: Prisma.UserCreateNestedOneWithoutDecisionsInput
+  options?: Prisma.DecisionOptionCreateNestedManyWithoutDecisionInput
+}
+
+export type DecisionUncheckedCreateWithoutReviewInput = {
+  id?: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  category?: $Enums.Category
+  question: string
+  context: string
+  urgency: string
+  primaryReasons: string
+  potentialConcerns: string
+  assumptions: string
+  predictions: string
+  confidence: number
+  reviewDate: Date | string
+  status?: $Enums.DecisionStatus
+  reviewedAt?: Date | string | null
+  postHocNotes?: string | null
+  options?: Prisma.DecisionOptionUncheckedCreateNestedManyWithoutDecisionInput
+}
+
+export type DecisionCreateOrConnectWithoutReviewInput = {
+  where: Prisma.DecisionWhereUniqueInput
+  create: Prisma.XOR<Prisma.DecisionCreateWithoutReviewInput, Prisma.DecisionUncheckedCreateWithoutReviewInput>
+}
+
+export type DecisionUpsertWithoutReviewInput = {
+  update: Prisma.XOR<Prisma.DecisionUpdateWithoutReviewInput, Prisma.DecisionUncheckedUpdateWithoutReviewInput>
+  create: Prisma.XOR<Prisma.DecisionCreateWithoutReviewInput, Prisma.DecisionUncheckedCreateWithoutReviewInput>
+  where?: Prisma.DecisionWhereInput
+}
+
+export type DecisionUpdateToOneWithWhereWithoutReviewInput = {
+  where?: Prisma.DecisionWhereInput
+  data: Prisma.XOR<Prisma.DecisionUpdateWithoutReviewInput, Prisma.DecisionUncheckedUpdateWithoutReviewInput>
+}
+
+export type DecisionUpdateWithoutReviewInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+  question?: Prisma.StringFieldUpdateOperationsInput | string
+  context?: Prisma.StringFieldUpdateOperationsInput | string
+  urgency?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryReasons?: Prisma.StringFieldUpdateOperationsInput | string
+  potentialConcerns?: Prisma.StringFieldUpdateOperationsInput | string
+  assumptions?: Prisma.StringFieldUpdateOperationsInput | string
+  predictions?: Prisma.StringFieldUpdateOperationsInput | string
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutDecisionsNestedInput
+  options?: Prisma.DecisionOptionUpdateManyWithoutDecisionNestedInput
+}
+
+export type DecisionUncheckedUpdateWithoutReviewInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+  question?: Prisma.StringFieldUpdateOperationsInput | string
+  context?: Prisma.StringFieldUpdateOperationsInput | string
+  urgency?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryReasons?: Prisma.StringFieldUpdateOperationsInput | string
+  potentialConcerns?: Prisma.StringFieldUpdateOperationsInput | string
+  assumptions?: Prisma.StringFieldUpdateOperationsInput | string
+  predictions?: Prisma.StringFieldUpdateOperationsInput | string
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  options?: Prisma.DecisionOptionUncheckedUpdateManyWithoutDecisionNestedInput
 }
 
 export type DecisionCreateManyUserInput = {
@@ -971,8 +1036,6 @@ export type DecisionCreateManyUserInput = {
   confidence: number
   reviewDate: Date | string
   status?: $Enums.DecisionStatus
-  actualOutcome?: string | null
-  accuracy?: $Enums.PredictionAccuracy | null
   reviewedAt?: Date | string | null
   postHocNotes?: string | null
 }
@@ -992,11 +1055,10 @@ export type DecisionUpdateWithoutUserInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   options?: Prisma.DecisionOptionUpdateManyWithoutDecisionNestedInput
+  review?: Prisma.ReviewUpdateOneWithoutDecisionNestedInput
 }
 
 export type DecisionUncheckedUpdateWithoutUserInput = {
@@ -1014,11 +1076,10 @@ export type DecisionUncheckedUpdateWithoutUserInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   options?: Prisma.DecisionOptionUncheckedUpdateManyWithoutDecisionNestedInput
+  review?: Prisma.ReviewUncheckedUpdateOneWithoutDecisionNestedInput
 }
 
 export type DecisionUncheckedUpdateManyWithoutUserInput = {
@@ -1036,8 +1097,6 @@ export type DecisionUncheckedUpdateManyWithoutUserInput = {
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   reviewDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
-  actualOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accuracy?: Prisma.NullableEnumPredictionAccuracyFieldUpdateOperationsInput | $Enums.PredictionAccuracy | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postHocNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -1089,12 +1148,11 @@ export type DecisionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   confidence?: boolean
   reviewDate?: boolean
   status?: boolean
-  actualOutcome?: boolean
-  accuracy?: boolean
   reviewedAt?: boolean
   postHocNotes?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   options?: boolean | Prisma.Decision$optionsArgs<ExtArgs>
+  review?: boolean | Prisma.Decision$reviewArgs<ExtArgs>
   _count?: boolean | Prisma.DecisionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["decision"]>
 
@@ -1114,8 +1172,6 @@ export type DecisionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   confidence?: boolean
   reviewDate?: boolean
   status?: boolean
-  actualOutcome?: boolean
-  accuracy?: boolean
   reviewedAt?: boolean
   postHocNotes?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1137,8 +1193,6 @@ export type DecisionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   confidence?: boolean
   reviewDate?: boolean
   status?: boolean
-  actualOutcome?: boolean
-  accuracy?: boolean
   reviewedAt?: boolean
   postHocNotes?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1160,16 +1214,15 @@ export type DecisionSelectScalar = {
   confidence?: boolean
   reviewDate?: boolean
   status?: boolean
-  actualOutcome?: boolean
-  accuracy?: boolean
   reviewedAt?: boolean
   postHocNotes?: boolean
 }
 
-export type DecisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "createdAt" | "updatedAt" | "category" | "question" | "context" | "urgency" | "primaryReasons" | "potentialConcerns" | "assumptions" | "predictions" | "confidence" | "reviewDate" | "status" | "actualOutcome" | "accuracy" | "reviewedAt" | "postHocNotes", ExtArgs["result"]["decision"]>
+export type DecisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "createdAt" | "updatedAt" | "category" | "question" | "context" | "urgency" | "primaryReasons" | "potentialConcerns" | "assumptions" | "predictions" | "confidence" | "reviewDate" | "status" | "reviewedAt" | "postHocNotes", ExtArgs["result"]["decision"]>
 export type DecisionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   options?: boolean | Prisma.Decision$optionsArgs<ExtArgs>
+  review?: boolean | Prisma.Decision$reviewArgs<ExtArgs>
   _count?: boolean | Prisma.DecisionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DecisionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1184,6 +1237,7 @@ export type $DecisionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     options: Prisma.$DecisionOptionPayload<ExtArgs>[]
+    review: Prisma.$ReviewPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1201,8 +1255,6 @@ export type $DecisionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     confidence: number
     reviewDate: Date
     status: $Enums.DecisionStatus
-    actualOutcome: string | null
-    accuracy: $Enums.PredictionAccuracy | null
     reviewedAt: Date | null
     postHocNotes: string | null
   }, ExtArgs["result"]["decision"]>
@@ -1601,6 +1653,7 @@ export interface Prisma__DecisionClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   options<T extends Prisma.Decision$optionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Decision$optionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  review<T extends Prisma.Decision$reviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Decision$reviewArgs<ExtArgs>>): Prisma.Prisma__ReviewClient<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1645,8 +1698,6 @@ export interface DecisionFieldRefs {
   readonly confidence: Prisma.FieldRef<"Decision", 'Int'>
   readonly reviewDate: Prisma.FieldRef<"Decision", 'DateTime'>
   readonly status: Prisma.FieldRef<"Decision", 'DecisionStatus'>
-  readonly actualOutcome: Prisma.FieldRef<"Decision", 'String'>
-  readonly accuracy: Prisma.FieldRef<"Decision", 'PredictionAccuracy'>
   readonly reviewedAt: Prisma.FieldRef<"Decision", 'DateTime'>
   readonly postHocNotes: Prisma.FieldRef<"Decision", 'String'>
 }
@@ -2071,6 +2122,25 @@ export type Decision$optionsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.DecisionOptionScalarFieldEnum | Prisma.DecisionOptionScalarFieldEnum[]
+}
+
+/**
+ * Decision.review
+ */
+export type Decision$reviewArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
 }
 
 /**

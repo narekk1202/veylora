@@ -56,7 +56,8 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Decision: 'Decision',
-  DecisionOption: 'DecisionOption'
+  DecisionOption: 'DecisionOption',
+  Review: 'Review'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -151,8 +152,6 @@ export const DecisionScalarFieldEnum = {
   confidence: 'confidence',
   reviewDate: 'reviewDate',
   status: 'status',
-  actualOutcome: 'actualOutcome',
-  accuracy: 'accuracy',
   reviewedAt: 'reviewedAt',
   postHocNotes: 'postHocNotes'
 } as const
@@ -169,6 +168,19 @@ export const DecisionOptionScalarFieldEnum = {
 } as const
 
 export type DecisionOptionScalarFieldEnum = (typeof DecisionOptionScalarFieldEnum)[keyof typeof DecisionOptionScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  decisionId: 'decisionId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  actualOutcome: 'actualOutcome',
+  accuracy: 'accuracy'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
 
 
 export const SortOrder = {

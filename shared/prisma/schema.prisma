@@ -39,6 +39,7 @@ model User {
   accounts            Account[]
   onboardingCompleted Boolean    @default(false)
   decisions           Decision[]
+  reviews             Review[]
 
   @@unique([email])
   @@map("user")
@@ -95,12 +96,12 @@ model Verification {
 }
 
 model Decision {
-  id                String              @id @default(cuid())
+  id                String           @id @default(cuid())
   userId            String
-  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  category          Category            @default(CAREER)
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  category          Category         @default(CAREER)
   question          String
   context           String
   urgency           String
@@ -110,12 +111,11 @@ model Decision {
   assumptions       String
   predictions       String
   confidence        Int
-  reviewDate        DateTime            @db.Date
-  status            DecisionStatus      @default(LOCKED)
-  actualOutcome     String?
-  accuracy          PredictionAccuracy?
+  reviewDate        DateTime         @db.Date
+  status            DecisionStatus   @default(LOCKED)
   reviewedAt        DateTime?
   postHocNotes      String?
+  review            Review?
 
   @@index([userId])
   @@index([userId, status])
@@ -134,4 +134,19 @@ model DecisionOption {
 
   @@index([decisionId])
   @@map("decision_option")
+}
+
+model Review {
+  id            String             @id @default(cuid())
+  decisionId    String             @unique
+  decision      Decision           @relation(fields: [decisionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  actualOutcome String
+  accuracy      PredictionAccuracy
+
+  @@index([userId])
+  @@map("review")
 }
