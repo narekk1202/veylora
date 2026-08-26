@@ -1,17 +1,26 @@
 import { ReviewStatus } from "@/shared/generated/prisma/enums";
 import { getUserId } from "@/shared/lib/auth/utils";
 import { prisma } from "@/shared/lib/prisma";
+import { startOfDay } from "date-fns";
 import { redirect } from "next/navigation";
 import type { ReviewFilters } from "./schemas";
+import type { ReviewWithDecision } from "./types";
+import { deriveReviewStatus } from "./utils";
 
-const DUE_NOW_STATUSES = [ReviewStatus.DUE, ReviewStatus.OVERDUE] as const;
+function reviewStatusWhere(status: ReviewFilters["status"], now = new Date()) {
+  const today = startOfDay(now);
 
-function reviewStatusWhere(status: ReviewFilters["status"]) {
   switch (status) {
     case "due":
-      return { status: { in: [...DUE_NOW_STATUSES] } };
+      return {
+        status: { not: ReviewStatus.COMPLETED },
+        decision: { reviewDate: { lte: today } },
+      };
     case "upcoming":
-      return { status: ReviewStatus.UPCOMING };
+      return {
+        status: { not: ReviewStatus.COMPLETED },
+        decision: { reviewDate: { gt: today } },
+      };
     case "completed":
       return { status: ReviewStatus.COMPLETED };
     default:
@@ -19,12 +28,16 @@ function reviewStatusWhere(status: ReviewFilters["status"]) {
   }
 }
 
+function withDerivedStatus(review: ReviewWithDecision): ReviewWithDecision {
+  return { ...review, status: deriveReviewStatus(review) };
+}
+
 export async function getReviews(filters?: ReviewFilters) {
   const userId = await getUserId();
 
   if (!userId) redirect("/login");
 
-  return prisma.review.findMany({
+  const reviews = await prisma.review.findMany({
     where: {
       userId,
       ...reviewStatusWhere(filters?.status),
@@ -36,6 +49,8 @@ export async function getReviews(filters?: ReviewFilters) {
       decision: true,
     },
   });
+
+  return reviews.map(withDerivedStatus);
 }
 
 export async function getDueReviewCount() {
@@ -46,7 +61,7 @@ export async function getDueReviewCount() {
   return prisma.review.count({
     where: {
       userId,
-      status: { in: [...DUE_NOW_STATUSES] },
+      ...reviewStatusWhere("due"),
     },
   });
 }
@@ -56,10 +71,12 @@ export async function getReview(id: string) {
 
   if (!userId) redirect("/login");
 
-  return prisma.review.findUnique({
+  const review = await prisma.review.findUnique({
     where: { id, userId },
     include: {
       decision: true,
     },
   });
+
+  return review ? withDerivedStatus(review) : null;
 }

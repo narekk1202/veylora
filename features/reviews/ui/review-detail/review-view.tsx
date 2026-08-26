@@ -1,7 +1,7 @@
 import PreviousPageButton from "@/shared/components/previous-page-button";
-import { ReviewStatus } from "@/shared/generated/prisma/enums";
 import { notFound } from "next/navigation";
 import { getReview } from "../../queries";
+import { isReviewOpenForCompletion } from "../../utils";
 import CompletedReviewDetails from "./completed-review-details";
 import DueReviewForm from "./due-review-form";
 
@@ -20,7 +20,7 @@ const ReviewView = async ({ id }: ReviewViewProps) => {
         <PreviousPageButton />
       </div>
 
-      {review.status === ReviewStatus.DUE ? (
+      {isReviewOpenForCompletion(review.status) ? (
         <DueReviewForm review={review} />
       ) : (
         <CompletedReviewDetails review={review} />

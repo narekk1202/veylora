@@ -1,4 +1,4 @@
-import type {
+import {
   PredictionAccuracy,
   ReviewStatus,
 } from "@/shared/generated/prisma/enums";
@@ -25,6 +25,26 @@ export function formatReviewUrgencyLabel(reviewDate: Date, now = new Date()) {
   const daysUntil = differenceInCalendarDays(day, today);
   if (daysUntil === 1) return "IN 1 DAY";
   return `IN ${daysUntil} DAYS`;
+}
+
+export function deriveReviewStatus(
+  review: { status: ReviewStatus; decision: { reviewDate: Date } },
+  now = new Date(),
+): ReviewStatus {
+  if (review.status === ReviewStatus.COMPLETED) {
+    return ReviewStatus.COMPLETED;
+  }
+
+  const day = startOfDay(review.decision.reviewDate);
+  const today = startOfDay(now);
+
+  if (day.getTime() < today.getTime()) return ReviewStatus.OVERDUE;
+  if (day.getTime() === today.getTime()) return ReviewStatus.DUE;
+  return ReviewStatus.UPCOMING;
+}
+
+export function isReviewOpenForCompletion(status: ReviewStatus) {
+  return status === ReviewStatus.DUE || status === ReviewStatus.OVERDUE;
 }
 
 export function formatShortDate(date: Date) {

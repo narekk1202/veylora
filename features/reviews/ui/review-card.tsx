@@ -3,7 +3,11 @@ import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
 import { ReviewWithDecision } from "../types";
-import { formatReviewUrgencyLabel, formatShortDate } from "../utils";
+import {
+  formatReviewUrgencyLabel,
+  formatShortDate,
+  isReviewOpenForCompletion,
+} from "../utils";
 
 type ReviewCardProps = {
   review: ReviewWithDecision;
@@ -13,12 +17,13 @@ type ReviewCardProps = {
 const ReviewCard = ({ review, className }: ReviewCardProps) => {
   const isDue = review.status === "DUE";
   const isOverdue = review.status === "OVERDUE";
+  const canStart = isReviewOpenForCompletion(review.status);
   const categoryMeta = CATEGORY_CONFIG[review.decision.category];
   const urgencyLabel = formatReviewUrgencyLabel(review.decision.reviewDate);
-  const meta = isDue
+  const meta = canStart
     ? `Locked ${formatShortDate(review.decision.createdAt)} · Review date was ${formatShortDate(review.decision.reviewDate)}`
     : `Locked ${formatShortDate(review.decision.createdAt)} · ${review.decision.confidence}% confidence at lock`;
-  const actionLabel = isDue ? "Start review" : "Preview";
+  const actionLabel = canStart ? "Start review" : "Preview";
 
   return (
     <Link href={`/reviews/${review.id}`}>
