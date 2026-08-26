@@ -177,7 +177,11 @@ export const ReviewScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   actualOutcome: 'actualOutcome',
-  accuracy: 'accuracy'
+  accuracy: 'accuracy',
+  outcomeSummary: 'outcomeSummary',
+  surprises: 'surprises',
+  lessonsLearned: 'lessonsLearned',
+  wouldDoDifferently: 'wouldDoDifferently'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]

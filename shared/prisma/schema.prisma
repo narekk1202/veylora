@@ -137,15 +137,19 @@ model DecisionOption {
 }
 
 model Review {
-  id            String             @id @default(cuid())
-  decisionId    String             @unique
-  decision      Decision           @relation(fields: [decisionId], references: [id], onDelete: Cascade)
-  userId        String
-  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  actualOutcome String
-  accuracy      PredictionAccuracy
+  id                 String              @id @default(cuid())
+  decisionId         String              @unique
+  decision           Decision            @relation(fields: [decisionId], references: [id], onDelete: Cascade)
+  userId             String
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  actualOutcome      String?
+  accuracy           PredictionAccuracy?
+  outcomeSummary     String?
+  surprises          String?
+  lessonsLearned     String?
+  wouldDoDifferently String?
 
   @@index([userId])
   @@map("review")
