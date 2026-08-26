@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/button";
-import { ReviewStatus } from "@/shared/generated/prisma/enums";
-import Link from "next/link";
-import { formatLongDate } from "../../utils";
+import { Button } from "@/shared/components/ui/button"
+import { ReviewStatus } from "@/shared/generated/prisma/enums"
+import Link from "next/link"
+import { formatLongDate } from "../../utils"
 
 type ReviewFooterProps = {
   status: ReviewStatus;
@@ -41,7 +41,7 @@ const ReviewFooter = ({
       <p className="text-muted-foreground text-xs italic">
         This review will be permanently added to your insights.
       </p>
-      <Button type="button" className="h-11 shrink-0 px-8" onClick={onComplete}>
+      <Button type="button" className="h-11 shrink-0 px-8" onClick={onComplete} disabled={status === 'UPCOMING'}>
         Complete review
       </Button>
     </footer>

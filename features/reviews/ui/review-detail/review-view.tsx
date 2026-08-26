@@ -3,7 +3,7 @@ import { ReviewStatus } from "@/shared/generated/prisma/enums";
 import { notFound } from "next/navigation";
 import { getReview } from "../../queries";
 import CompletedReviewDetails from "./completed-review-details";
-import DueReviewForm from "./pending-review-form";
+import DueReviewForm from "./due-review-form";
 
 type ReviewViewProps = {
   id: string;
