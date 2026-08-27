@@ -29,7 +29,7 @@ const navLinks: { navMain: NavItem[] } = {
     },
     {
       title: "Insights",
-      url: "#",
+      url: "/insights",
     },
   ],
 };
