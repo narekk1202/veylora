@@ -3,7 +3,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { PredictionAccuracy } from "@/shared/generated/prisma/enums";
 import { cn } from "@/shared/lib/utils";
-import { useState } from "react";
 
 export const ACCURACY_OPTIONS: {
   value: PredictionAccuracy;
@@ -17,13 +16,16 @@ export const ACCURACY_OPTIONS: {
 ];
 
 type AccuracyPickerProps = {
-  value: PredictionAccuracy;
   readOnly?: boolean;
+  value: PredictionAccuracy | undefined;
+  onChange: (value: PredictionAccuracy) => void;
 };
 
-const AccuracyPicker = ({ value, readOnly = false }: AccuracyPickerProps) => {
-  const [selected, setSelected] = useState<PredictionAccuracy>(value);
-
+const AccuracyPicker = ({
+  value,
+  onChange,
+  readOnly = false,
+}: AccuracyPickerProps) => {
   return (
     <div
       className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
@@ -32,7 +34,7 @@ const AccuracyPicker = ({ value, readOnly = false }: AccuracyPickerProps) => {
       aria-readonly={readOnly || undefined}
     >
       {ACCURACY_OPTIONS.map((option) => {
-        const isSelected = readOnly ? undefined : selected === option.value;
+        const isSelected = readOnly ? undefined : value === option.value;
         return (
           <Button
             key={option.value}
@@ -41,7 +43,7 @@ const AccuracyPicker = ({ value, readOnly = false }: AccuracyPickerProps) => {
             className={cn("h-24")}
             aria-checked={isSelected}
             disabled={readOnly}
-            onClick={() => !readOnly && setSelected(option.value)}
+            onClick={() => !readOnly && onChange(option.value)}
           >
             {option.label}
           </Button>

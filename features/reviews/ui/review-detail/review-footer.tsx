@@ -8,13 +8,11 @@ import { formatLongDate } from "../../utils"
 type ReviewFooterProps = {
   status: ReviewStatus;
   reviewedAt?: Date;
-  onComplete?: () => void;
 };
 
 const ReviewFooter = ({
   status = ReviewStatus.UPCOMING,
   reviewedAt,
-  onComplete,
 }: ReviewFooterProps) => {
   if (status === ReviewStatus.COMPLETED) {
     return (
@@ -41,7 +39,11 @@ const ReviewFooter = ({
       <p className="text-muted-foreground text-xs italic">
         This review will be permanently added to your insights.
       </p>
-      <Button type="button" className="h-11 shrink-0 px-8" onClick={onComplete} disabled={status === 'UPCOMING'}>
+      <Button
+        type="submit"
+        className="h-11 shrink-0 px-8"
+        disabled={status === ReviewStatus.UPCOMING}
+      >
         Complete review
       </Button>
     </footer>

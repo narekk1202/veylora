@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getReview } from "../../queries";
 import { isReviewOpenForCompletion } from "../../utils";
 import CompletedReviewDetails from "./completed-review-details";
-import DueReviewForm from "./due-review-form";
+import DueReviewDetails from "./due-review-details";
 
 type ReviewViewProps = {
   id: string;
@@ -21,7 +21,7 @@ const ReviewView = async ({ id }: ReviewViewProps) => {
       </div>
 
       {isReviewOpenForCompletion(review.status) ? (
-        <DueReviewForm review={review} />
+        <DueReviewDetails review={review} />
       ) : (
         <CompletedReviewDetails review={review} />
       )}
