@@ -27,7 +27,12 @@ export const useCompleteReview = (reviewId: string) => {
       if (!result?.success) {
         toast.add({
           type: "error",
-          description: "Failed to complete review",
+          description:
+            result?.errors &&
+            "root" in result.errors &&
+            typeof result.errors.root === "string"
+              ? result.errors.root
+              : "Failed to complete review",
         });
         return;
       }

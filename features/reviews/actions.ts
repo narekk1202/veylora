@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import z from "zod";
 import { completeReviewSchema, CompleteReviewSchema } from "./schemas";
+import { deriveReviewStatus, isReviewOpenForCompletion } from "./utils";
 
 export async function completeReview(
   reviewId: string,
@@ -27,6 +28,32 @@ export async function completeReview(
   }
 
   try {
+    const review = await prisma.review.findUnique({
+      where: { id: reviewId, userId },
+      include: { decision: true },
+    });
+
+    if (!review) {
+      return {
+        success: false,
+        errors: { root: "Review not found" },
+      };
+    }
+
+    const status = deriveReviewStatus(review);
+
+    if (!isReviewOpenForCompletion(status)) {
+      return {
+        success: false,
+        errors: {
+          root:
+            status === ReviewStatus.COMPLETED
+              ? "Review already completed"
+              : "Review is not yet due",
+        },
+      };
+    }
+
     await prisma.review.update({
       where: {
         id: reviewId,
