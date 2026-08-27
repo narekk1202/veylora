@@ -44,6 +44,11 @@ export async function getDecision(id: string) {
           sortOrder: "asc",
         },
       },
+      review: {
+        select: {
+          id: true,
+        },
+      },
     },
   });
 }

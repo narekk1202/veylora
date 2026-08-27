@@ -1,4 +1,8 @@
 import PreviousPageButton from "@/shared/components/previous-page-button";
+import { buttonVariants } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
+import { ArrowRightIcon } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDecision } from "../../queries";
 import { toLines } from "../../utils";
@@ -18,8 +22,17 @@ export default async function DecisionDetailView({ id }: { id: string }) {
 
   return (
     <main className="page_view">
-      <div>
+      <div className="flex items-center justify-between gap-3">
         <PreviousPageButton />
+        {decision.review ? (
+          <Link
+            href={`/reviews/${decision.review.id}`}
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+          >
+            View review
+            <ArrowRightIcon className="size-4" />
+          </Link>
+        ) : null}
       </div>
       <DecisionHeader decision={decision} />
 
