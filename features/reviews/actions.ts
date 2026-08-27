@@ -57,6 +57,8 @@ export async function completeReview(
     };
   }
 
-  revalidatePath(`/reviews/${reviewId}`);
-  return { success: true };
+  revalidatePath(`/decisions`);
+  revalidatePath("/reviews");
+
+  redirect(`/reviews`);
 }
