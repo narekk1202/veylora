@@ -15,7 +15,6 @@ const DecisionsCard = ({
   category,
   status,
   confidence,
-  accuracy,
   reviewDate,
   createdAt,
   className,
@@ -69,14 +68,6 @@ const DecisionsCard = ({
               style={{ color: CATEGORY_CONFIG.FINANCE.color }}
             >
               {confidence}%
-            </span>
-          ) : null}
-          {status === "REVIEWED" && accuracy ? (
-            <span
-              className="text-sm font-medium"
-              style={{ color: CATEGORY_CONFIG.PERSONAL.color }}
-            >
-              {accuracy}
             </span>
           ) : null}
           {reviewDate !== undefined ? (
