@@ -1,11 +1,12 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/button"
-import { ReviewStatus } from "@/shared/generated/prisma/enums"
-import Link from "next/link"
-import { formatLongDate } from "../../utils"
+import { Button } from "@/shared/components/ui/button";
+import { ReviewStatus } from "@/shared/generated/prisma/enums";
+import Link from "next/link";
+import { formatLongDate } from "../../utils";
 
 type ReviewFooterProps = {
+  isPending?: boolean;
   status: ReviewStatus;
   reviewedAt?: Date;
 };
@@ -13,6 +14,7 @@ type ReviewFooterProps = {
 const ReviewFooter = ({
   status = ReviewStatus.UPCOMING,
   reviewedAt,
+  isPending = false,
 }: ReviewFooterProps) => {
   if (status === ReviewStatus.COMPLETED) {
     return (
@@ -23,9 +25,9 @@ const ReviewFooter = ({
             : "This review is permanently added to your insights."}
         </p>
         <Button
-          type="button"
           variant="outline"
           className="h-11 shrink-0 px-8"
+          nativeButton={false}
           render={<Link href="/reviews" />}
         >
           Back to reviews
@@ -42,7 +44,7 @@ const ReviewFooter = ({
       <Button
         type="submit"
         className="h-11 shrink-0 px-8"
-        disabled={status === ReviewStatus.UPCOMING}
+        disabled={status === ReviewStatus.UPCOMING || isPending}
       >
         Complete review
       </Button>

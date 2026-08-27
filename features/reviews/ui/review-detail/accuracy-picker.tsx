@@ -18,7 +18,7 @@ export const ACCURACY_OPTIONS: {
 type AccuracyPickerProps = {
   readOnly?: boolean;
   value: PredictionAccuracy | undefined;
-  onChange: (value: PredictionAccuracy) => void;
+  onChange?: (value: PredictionAccuracy) => void;
 };
 
 const AccuracyPicker = ({
@@ -43,7 +43,7 @@ const AccuracyPicker = ({
             className={cn("h-24")}
             aria-checked={isSelected}
             disabled={readOnly}
-            onClick={() => !readOnly && onChange(option.value)}
+            onClick={() => !readOnly && onChange?.(option.value)}
           >
             {option.label}
           </Button>

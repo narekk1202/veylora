@@ -15,7 +15,7 @@ const CompletedReviewDetails = ({ review }: { review: ReviewWithDecision }) => {
       <div className="flex flex-col gap-10">
         <ReviewFormSection step={1} title="What actually happened?">
           <ReviewAnswer label="What actually happened?">
-            {review.actualOutcome}
+            {review.outcomeSummary}
           </ReviewAnswer>
         </ReviewFormSection>
 

@@ -9,8 +9,14 @@ import { useCompleteReview } from "../../hooks/use-complete-review";
 import AccuracyPicker from "./accuracy-picker";
 import ReviewFormSection from "./review-form-section";
 
-const DueReviewForm = ({ children }: { children?: ReactNode }) => {
-  const { form, onSubmit } = useCompleteReview();
+const DueReviewForm = ({
+  children,
+  reviewId,
+}: {
+  children?: (isPending: boolean) => ReactNode;
+  reviewId: string;
+}) => {
+  const { form, isPending, onSubmit } = useCompleteReview(reviewId);
   const errors = form.formState.errors;
 
   return (
@@ -92,7 +98,7 @@ const DueReviewForm = ({ children }: { children?: ReactNode }) => {
         </Field>
       </ReviewFormSection>
 
-      {children}
+      {children?.(isPending)}
     </form>
   );
 };

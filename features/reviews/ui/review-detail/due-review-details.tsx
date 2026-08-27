@@ -1,7 +1,6 @@
 import { ReviewWithDecision } from "../../types";
-import DueReviewForm from "./due-review-form";
+import DueReviewSection from "./due-review-section";
 import OriginalDecisionSummary from "./original-decision-summary";
-import ReviewFooter from "./review-footer";
 import ReviewHeader from "./review-header";
 
 const DueReviewDetails = ({ review }: { review: ReviewWithDecision }) => {
@@ -9,9 +8,7 @@ const DueReviewDetails = ({ review }: { review: ReviewWithDecision }) => {
     <>
       <ReviewHeader status={review.status} />
       <OriginalDecisionSummary review={review} />
-      <DueReviewForm>
-        <ReviewFooter status={review.status} />
-      </DueReviewForm>
+      <DueReviewSection review={review} />
     </>
   );
 };
