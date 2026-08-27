@@ -34,7 +34,8 @@ export default function DecisionDetailSidebar({
               label="Decision made"
             />
             <LifecycleItem
-              active={!isReviewed}
+              active={!!decision.reviewDate}
+              complete={isReviewed}
               date={format(decision.reviewDate, "MMM d, yyyy")}
               label="Review scheduled"
             />
