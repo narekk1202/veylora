@@ -7,7 +7,7 @@ import { nextCookies } from "better-auth/next-js";
 import { createBetterAuthEmail } from "supersendtx-better-auth";
 
 const tx = createBetterAuthEmail({
-  from: "noreply@veylora.space",
+  from: env.FROM_EMAIL,
   apiKey: env.SUPERSENDTX_API_KEY,
   appUrl: env.BETTER_AUTH_URL,
 });

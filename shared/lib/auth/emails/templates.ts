@@ -1,18 +1,18 @@
 import {
   escapeHtml,
-  renderAuthEmailLayout,
-  type AuthEmailContent,
-} from "./layout";
+  renderEmailLayout,
+  type EmailContent,
+} from "@/shared/lib/email/layout";
 
 export function verificationEmail(input: {
   name?: string | null;
   url: string;
-}): AuthEmailContent {
+}): EmailContent {
   const greeting = input.name?.trim() ? `Hi ${input.name.trim()},` : "Hi,";
 
   return {
     subject: "Verify your email",
-    ...renderAuthEmailLayout({
+    ...renderEmailLayout({
       preview: "Confirm this address to finish creating your Veylora account.",
       heading: "Confirm this address.",
       bodyHtml: `<p style="margin:0 0 12px;">${escapeHtml(greeting)}</p>
@@ -28,12 +28,12 @@ export function verificationEmail(input: {
 export function resetPasswordEmail(input: {
   name?: string | null;
   url: string;
-}): AuthEmailContent {
+}): EmailContent {
   const greeting = input.name?.trim() ? `Hi ${input.name.trim()},` : "Hi,";
 
   return {
     subject: "Reset your password",
-    ...renderAuthEmailLayout({
+    ...renderEmailLayout({
       preview:
         "Use this link to choose a new password for your Veylora account.",
       heading: "Recover access.",

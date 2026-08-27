@@ -1,10 +1,10 @@
-export type AuthEmailContent = {
+export type EmailContent = {
   subject: string;
   html: string;
   text: string;
 };
 
-export type AuthEmailLayoutInput = {
+export type EmailLayoutInput = {
   preview: string;
   heading: string;
   bodyHtml: string;
@@ -21,14 +21,14 @@ export function escapeHtml(value: string) {
     .replaceAll('"', "&quot;");
 }
 
-export function renderAuthEmailLayout({
+export function renderEmailLayout({
   preview,
   heading,
   bodyHtml,
   bodyText,
   cta,
   footer,
-}: AuthEmailLayoutInput): Pick<AuthEmailContent, "html" | "text"> {
+}: EmailLayoutInput): Pick<EmailContent, "html" | "text"> {
   const ctaHtml = cta
     ? `<tr>
         <td style="padding:28px 0 8px;">
