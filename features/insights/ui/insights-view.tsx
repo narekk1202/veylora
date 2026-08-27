@@ -1,6 +1,6 @@
+import PageHeader from "@/shared/components/page-header";
 import CalibrationCard from "./calibration-card";
 import CategoryInsightsCard from "./category-insights-card";
-import InsightsHeader from "./insights-header";
 import MetricStatCard from "./metric-stat-card";
 import TimelineCalibrationCard from "./timeline-calibration-card";
 import TrendObservationCard from "./trend-observation-card";
@@ -8,8 +8,11 @@ import TrendObservationCard from "./trend-observation-card";
 const InsightsView = () => {
   return (
     <main className="page_view gap-12">
-      <InsightsHeader />
-
+      <PageHeader
+        title="Insights"
+        description="Patterns in how you make decisions. Discover where your intuition
+        thrives and where your reasoning needs space to grow."
+      />
       <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-3">
           <MetricStatCard

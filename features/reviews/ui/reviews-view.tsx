@@ -1,8 +1,8 @@
+import PageHeader from "@/shared/components/page-header";
 import { Suspense } from "react";
 import { getDueReviewCount, getReviews } from "../queries";
 import type { ReviewSearchParams } from "../schemas";
 import { parseReviewFilters } from "../schemas";
-import ReviewsHeader from "./reviews-header";
 import ReviewsList from "./reviews-list";
 import ReviewsTabs, { ReviewsTabsFallback } from "./reviews-tabs";
 
@@ -19,7 +19,11 @@ const ReviewsView = async ({
 
   return (
     <main className="page_view">
-      <ReviewsHeader />
+      <PageHeader
+        title="Reviews"
+        description="Decisions ready for honest reflection. Compare what you predicted with
+        what actually happened."
+      />
       <Suspense fallback={<ReviewsTabsFallback />}>
         <ReviewsTabs dueCount={dueCount} />
       </Suspense>
