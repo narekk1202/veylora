@@ -1080,7 +1080,6 @@ export const ReviewScalarFieldEnum = {
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  actualOutcome: 'actualOutcome',
   accuracy: 'accuracy',
   status: 'status',
   outcomeSummary: 'outcomeSummary',
