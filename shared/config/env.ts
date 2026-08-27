@@ -8,7 +8,7 @@ export const env = createEnv({
     DATABASE_URL: z.url(),
     SUPERSENDTX_API_KEY: z.string(),
     CRON_SECRET: z.string().min(16),
-    FROM_EMAIL: z.string().email(),
+    FROM_EMAIL: z.email(),
   },
   client: {},
   runtimeEnv: {
