@@ -2,7 +2,7 @@ import PreviousPageButton from "@/shared/components/previous-page-button";
 import { notFound } from "next/navigation";
 import { getReview } from "../../queries";
 import { isReviewOpenForCompletion } from "../../utils";
-import CompletedReviewDetails from "./completed-review-details";
+import GeneralReviewDetails from "./general-review-details";
 import DueReviewDetails from "./due-review-details";
 
 type ReviewViewProps = {
@@ -23,7 +23,7 @@ const ReviewView = async ({ id }: ReviewViewProps) => {
       {isReviewOpenForCompletion(review.status) ? (
         <DueReviewDetails review={review} />
       ) : (
-        <CompletedReviewDetails review={review} />
+        <GeneralReviewDetails review={review} />
       )}
     </main>
   );

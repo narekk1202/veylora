@@ -6,7 +6,7 @@ import ReviewFooter from "./review-footer";
 import ReviewFormSection from "./review-form-section";
 import ReviewHeader from "./review-header";
 
-const CompletedReviewDetails = ({ review }: { review: ReviewWithDecision }) => {
+const GeneralReviewDetails = ({ review }: { review: ReviewWithDecision }) => {
   return (
     <>
       <ReviewHeader status={review.status} />
@@ -50,4 +50,4 @@ const CompletedReviewDetails = ({ review }: { review: ReviewWithDecision }) => {
   );
 };
 
-export default CompletedReviewDetails;
+export default GeneralReviewDetails;
