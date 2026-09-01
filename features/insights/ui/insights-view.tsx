@@ -1,11 +1,20 @@
 import PageHeader from "@/shared/components/page-header";
+import { getInsights } from "../queries";
+import { DecisionsWithReviews } from "../types";
+import { calculatePredictionAccuracy } from "../utils";
 import CalibrationCard from "./calibration-card";
 import CategoryInsightsCard from "./category-insights-card";
 import MetricStatCard from "./metric-stat-card";
 import TimelineCalibrationCard from "./timeline-calibration-card";
 import TrendObservationCard from "./trend-observation-card";
 
-const InsightsView = () => {
+const InsightsView = async () => {
+  const data = await getInsights();
+
+  const predictionAccuracy = calculatePredictionAccuracy(
+    data.filter((item) => item.review !== null) as DecisionsWithReviews[],
+  );
+
   return (
     <main className="page_view gap-12">
       <PageHeader
@@ -17,8 +26,8 @@ const InsightsView = () => {
         <div className="lg:col-span-3">
           <MetricStatCard
             label="Prediction Accuracy"
-            value="68%"
-            progress={68}
+            value={`${predictionAccuracy}%`}
+            progress={predictionAccuracy}
             indicatorClassName="[&_[data-slot=progress-indicator]]:bg-chart-3/60"
           />
         </div>
