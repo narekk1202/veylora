@@ -1,7 +1,10 @@
 import PageHeader from "@/shared/components/page-header";
 import { getInsights } from "../queries";
 import { DecisionsWithReviews } from "../types";
-import { calculatePredictionAccuracy } from "../utils";
+import {
+  calculateConfidenceScore,
+  calculatePredictionAccuracy,
+} from "../utils";
 import CalibrationCard from "./calibration-card";
 import CategoryInsightsCard from "./category-insights-card";
 import MetricStatCard from "./metric-stat-card";
@@ -11,9 +14,12 @@ import TrendObservationCard from "./trend-observation-card";
 const InsightsView = async () => {
   const data = await getInsights();
 
-  const predictionAccuracy = calculatePredictionAccuracy(
-    data.filter((item) => item.review !== null) as DecisionsWithReviews[],
-  );
+  const decisionsWithReviews = data.filter(
+    (item) => item.review !== null,
+  ) as DecisionsWithReviews[];
+
+  const predictionAccuracy = calculatePredictionAccuracy(decisionsWithReviews);
+  const confidenceScore = calculateConfidenceScore(decisionsWithReviews);
 
   return (
     <main className="page_view gap-12">
@@ -34,8 +40,8 @@ const InsightsView = async () => {
         <div className="lg:col-span-3">
           <MetricStatCard
             label="Avg. Confidence"
-            value="71%"
-            progress={71}
+            value={`${confidenceScore}%`}
+            progress={confidenceScore}
             indicatorClassName="[&_[data-slot=progress-indicator]]:bg-primary/60"
           />
         </div>
