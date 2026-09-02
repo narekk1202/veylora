@@ -1,4 +1,4 @@
-import { Button } from "@/shared/components/ui/button";
+import { buttonVariants } from "@/shared/components/ui/button";
 import {
   Card,
   CardAction,
@@ -6,6 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
+import { cn } from "@/shared/lib/utils";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
 const DecisionsAddCard = () => {
   return (
@@ -21,7 +24,16 @@ const DecisionsAddCard = () => {
           </CardDescription>
         </div>
         <CardAction className="col-start-auto row-span-1 row-start-auto w-full sm:w-auto">
-          <Button className="h-12 w-full sm:w-44.5">New decision</Button>
+          <Link
+            href="/decisions/new"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "h-12 w-full sm:w-44.5",
+            )}
+          >
+            <Plus />
+            New decision
+          </Link>
         </CardAction>
       </CardHeader>
     </Card>
