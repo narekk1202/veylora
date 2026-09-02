@@ -86,6 +86,7 @@ export async function completeReview(
 
   revalidatePath(`/decisions`);
   revalidatePath("/reviews");
+  revalidatePath("/insights");
 
   redirect(`/reviews`);
 }
