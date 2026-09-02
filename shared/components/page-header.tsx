@@ -1,6 +1,6 @@
 type PageHeaderProps = {
   title: string;
-  description: string;
+  description?: string;
   render?: React.ReactNode;
 };
 
@@ -11,9 +11,11 @@ const PageHeader = ({ title, description, render }: PageHeaderProps) => {
         <h1 className="font-serif text-4xl tracking-tight max-sm:text-3xl">
           {title}
         </h1>
-        <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
-          {description}
-        </p>
+        {description ? (
+          <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
+            {description}
+          </p>
+        ) : null}
       </div>
       {render}
     </header>

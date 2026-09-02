@@ -16,6 +16,7 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 import { User } from "better-auth";
 import { LogOut, Settings } from "lucide-react";
+import { Route } from "next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "../lib/auth/auth-client";
@@ -67,7 +68,7 @@ const AvatarDropdown = ({ user }: AvatarDropdownProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            render={<Link href="#" />}
+            render={<Link href={"/settings" as Route} />}
             className="flex w-full items-center gap-2"
           >
             <Settings />
