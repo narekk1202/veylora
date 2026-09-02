@@ -22,7 +22,6 @@ export const useLogin = () => {
     startTransition(async () => {
       const { error } = await authClient.signIn.email({
         ...data,
-        callbackURL: "/overview",
       });
 
       if (error) {
@@ -38,7 +37,7 @@ export const useLogin = () => {
         description: "Signed in successfully",
       });
 
-      router.push("/");
+      router.replace("/overview");
     });
   };
 
