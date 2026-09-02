@@ -16,12 +16,20 @@ export default function AppleIcon() {
         alignItems: "center",
         justifyContent: "center",
         background: "#171717",
-        color: "#b8a9c9",
-        fontSize: 96,
-        fontWeight: 700,
       }}
     >
-      V
+      <div
+        style={{
+          display: "flex",
+          color: "#b8a9c9",
+          fontSize: 108,
+          fontWeight: 700,
+          letterSpacing: -4,
+          lineHeight: 1,
+        }}
+      >
+        V
+      </div>
     </div>,
     { ...size },
   );
