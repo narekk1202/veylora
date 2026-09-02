@@ -20,6 +20,7 @@ import { Route } from "next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "../lib/auth/auth-client";
+import { initialsFromName } from "../lib/utils";
 import { toast } from "./ui/toast";
 
 type AvatarDropdownProps = {
@@ -48,8 +49,11 @@ const AvatarDropdown = ({ user }: AvatarDropdownProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger className="relative size-10 cursor-pointer rounded-full">
         <Avatar>
-          <AvatarImage alt={user.name || ""} src={user.image || ""} />
-          <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+          <AvatarImage
+            alt={initialsFromName(user.name)}
+            src={user.image || ""}
+          />
+          <AvatarFallback>{initialsFromName(user.name)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
