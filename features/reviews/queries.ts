@@ -3,6 +3,7 @@ import { getUserId } from "@/shared/lib/auth/utils";
 import { prisma } from "@/shared/lib/prisma";
 import { startOfDay } from "date-fns";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 import type { ReviewFilters } from "./schemas";
 import type { ReviewWithDecision } from "./types";
 import { deriveReviewStatus } from "./utils";
@@ -66,7 +67,7 @@ export async function getDueReviewCount() {
   });
 }
 
-export async function getReview(id: string) {
+export const getReview = cache(async (id: string) => {
   const userId = await getUserId();
 
   if (!userId) redirect("/login");
@@ -79,4 +80,4 @@ export async function getReview(id: string) {
   });
 
   return review ? withDerivedStatus(review) : null;
-}
+});

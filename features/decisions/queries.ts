@@ -1,6 +1,7 @@
 import { getUserId } from "@/shared/lib/auth/utils";
 import { prisma } from "@/shared/lib/prisma";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 import type { DecisionFilters } from "./schemas";
 
 export async function getDecisions(filters?: DecisionFilters) {
@@ -28,7 +29,7 @@ export async function getDecisions(filters?: DecisionFilters) {
   });
 }
 
-export async function getDecision(id: string) {
+export const getDecision = cache(async (id: string) => {
   const userId = await getUserId();
 
   if (!userId) redirect("/login");
@@ -51,4 +52,4 @@ export async function getDecision(id: string) {
       },
     },
   });
-}
+});
