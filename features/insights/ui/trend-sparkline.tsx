@@ -2,14 +2,7 @@
 
 import { ChartContainer, type ChartConfig } from "@/shared/components/ui/chart";
 import { Line, LineChart } from "recharts";
-
-const chartData = [
-  { month: "Jan", confidence: 59 },
-  { month: "Feb", confidence: 62 },
-  { month: "Mar", confidence: 65 },
-  { month: "Apr", confidence: 68 },
-  { month: "May", confidence: 71 },
-];
+import type { TrendPoint } from "../types";
 
 const chartConfig = {
   confidence: {
@@ -18,7 +11,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const TrendSparkline = () => {
+type TrendSparklineProps = {
+  data: TrendPoint[];
+};
+
+const TrendSparkline = ({ data }: TrendSparklineProps) => {
   return (
     <ChartContainer
       config={chartConfig}
@@ -27,7 +24,7 @@ const TrendSparkline = () => {
     >
       <LineChart
         accessibilityLayer
-        data={chartData}
+        data={data}
         margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
       >
         <Line

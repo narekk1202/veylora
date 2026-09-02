@@ -11,9 +11,14 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { InfoIcon } from "lucide-react";
+import type { CalibrationInsight } from "../types";
 import CalibrationChart from "./calibration-chart";
 
-const CalibrationCard = () => {
+type CalibrationCardProps = {
+  calibration: CalibrationInsight;
+};
+
+const CalibrationCard = ({ calibration }: CalibrationCardProps) => {
   return (
     <Card className="h-full [--card-spacing:--spacing(8)]">
       <CardHeader>
@@ -23,14 +28,11 @@ const CalibrationCard = () => {
         <CardDescription>Accuracy vs. Stated Confidence</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-12">
-        <CalibrationChart />
+        <CalibrationChart data={calibration.points} />
         <Alert>
           <InfoIcon />
-          <AlertTitle>Under-confidence pattern:</AlertTitle>
-          <AlertDescription>
-            In high-stakes decisions, your actual accuracy is 15% higher than
-            your stated confidence suggests.
-          </AlertDescription>
+          <AlertTitle>{calibration.patternTitle}</AlertTitle>
+          <AlertDescription>{calibration.patternDescription}</AlertDescription>
         </Alert>
       </CardContent>
     </Card>

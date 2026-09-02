@@ -9,15 +9,7 @@ import {
   type ChartConfig,
 } from "@/shared/components/ui/chart";
 import { CartesianGrid, Label, Line, LineChart, XAxis, YAxis } from "recharts";
-
-const chartData = [
-  { confidence: 0, actual: 0, ideal: 0 },
-  { confidence: 20, actual: 5, ideal: 20 },
-  { confidence: 40, actual: 20, ideal: 40 },
-  { confidence: 60, actual: 35, ideal: 60 },
-  { confidence: 80, actual: 50, ideal: 80 },
-  { confidence: 100, actual: 60, ideal: 100 },
-];
+import type { CalibrationPoint } from "../types";
 
 const chartConfig = {
   actual: {
@@ -30,7 +22,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const CalibrationChart = () => {
+type CalibrationChartProps = {
+  data: CalibrationPoint[];
+};
+
+const CalibrationChart = ({ data }: CalibrationChartProps) => {
   return (
     <ChartContainer
       config={chartConfig}
@@ -39,7 +35,7 @@ const CalibrationChart = () => {
     >
       <LineChart
         accessibilityLayer
-        data={chartData}
+        data={data}
         margin={{ top: 8, right: 12, bottom: 16, left: 8 }}
       >
         <CartesianGrid vertical={false} />
@@ -94,6 +90,7 @@ const CalibrationChart = () => {
           type="natural"
           stroke="var(--color-actual)"
           strokeWidth={2}
+          connectNulls
           dot={{
             r: 3,
             fill: "var(--background)",

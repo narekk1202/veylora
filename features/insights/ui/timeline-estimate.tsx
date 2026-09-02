@@ -23,9 +23,12 @@ const TimelineEstimate = ({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-end justify-between gap-3">
-        <span className="text-xs font-medium">{title}</span>
+        <span className="min-w-0 truncate text-xs font-medium">{title}</span>
         <span
-          className={cn("text-[10px] font-bold uppercase", statusClassName)}
+          className={cn(
+            "shrink-0 text-[10px] font-bold uppercase",
+            statusClassName,
+          )}
         >
           {statusLabel}
         </span>
