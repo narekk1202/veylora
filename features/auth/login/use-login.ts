@@ -20,7 +20,10 @@ export const useLogin = () => {
 
   const onSubmit = (data: LoginSchema) => {
     startTransition(async () => {
-      const { error } = await authClient.signIn.email(data);
+      const { error } = await authClient.signIn.email({
+        ...data,
+        callbackURL: "/overview",
+      });
 
       if (error) {
         toast.add({
