@@ -1,7 +1,13 @@
 import { Toaster } from "@/shared/components/ui/toast";
 import { TooltipProvider } from "@/shared/components/ui/tooltip";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  getSiteUrl,
+} from "@/shared/constants/seo.consts";
 import { ThemeProvider } from "@/shared/providers/theme-provider";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Lora } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
@@ -17,9 +23,39 @@ const fontSerif = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Veylora",
-  description:
-    "Veylora is a personal decision journal that helps you capture your reasoning, track predictions, review outcomes, and discover patterns in how you make decisions.",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#171717",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

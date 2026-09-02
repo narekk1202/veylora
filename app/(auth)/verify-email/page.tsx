@@ -1,9 +1,11 @@
 import { VerifyEmailView } from "@/features/auth";
+import { NOINDEX_ROBOTS } from "@/shared/constants/seo.consts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Verify Email | Veylora",
+  title: "Verify Email",
   description: "A link was sent if that address exists.",
+  robots: NOINDEX_ROBOTS,
 };
 
 export default async function VerifyEmailPage({

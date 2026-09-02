@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { headers } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "Overview | Veylora",
+  title: "Overview",
   description: "Capture, lock, and review decisions with an honest past self.",
 };
 
