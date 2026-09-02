@@ -38,6 +38,9 @@ export default function Loading() {
                 <Skeleton className="h-3 w-12" />
                 <Skeleton className="h-11 w-full" />
               </div>
+              <div className="flex justify-end">
+                <Skeleton className="h-9 w-16" />
+              </div>
             </CardContent>
           </Card>
         </SectionSkeleton>
