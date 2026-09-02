@@ -1,8 +1,8 @@
 import { CATEGORY_CONFIG } from "@/shared/constants/catergories.consts";
 import { Category, PredictionAccuracy } from "@/shared/generated/prisma/enums";
+import { accuracyPercent, mean, roundedMean } from "@/shared/lib/stats";
 import { differenceInCalendarDays, format } from "date-fns";
 import {
-  ACCURACY_PERCENTAGES,
   CALIBRATION_GAP_THRESHOLD,
   CONFIDENCE_BINS,
   POSITIVE_ACCURACIES,
@@ -19,15 +19,6 @@ import type {
   TrendObservation,
 } from "./types";
 
-function mean(values: number[]) {
-  if (values.length === 0) return 0;
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
-}
-
-function roundedMean(values: number[]) {
-  return Math.round(mean(values));
-}
-
 function maxBy<T>(items: T[], score: (item: T) => number) {
   return items.reduce((best, item) =>
     score(item) > score(best) ? item : best,
@@ -38,11 +29,6 @@ function minBy<T>(items: T[], score: (item: T) => number) {
   return items.reduce((best, item) =>
     score(item) < score(best) ? item : best,
   );
-}
-
-function accuracyPercent(accuracy: PredictionAccuracy | null) {
-  if (!accuracy) return 0;
-  return ACCURACY_PERCENTAGES[accuracy];
 }
 
 function isPositiveAccuracy(accuracy: PredictionAccuracy | null) {

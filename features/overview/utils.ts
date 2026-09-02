@@ -1,5 +1,5 @@
-import { ACCURACY_PERCENTAGES } from "@/features/insights/consts";
 import { PredictionAccuracy } from "@/shared/generated/prisma/enums";
+import { accuracyPercent, roundedMean } from "@/shared/lib/stats";
 import {
   differenceInCalendarDays,
   differenceInHours,
@@ -8,20 +8,6 @@ import {
 } from "date-fns";
 import { ACCURACY_TREND_MONTHS } from "./consts";
 import type { AccuracyTrendPoint } from "./types";
-
-function mean(values: number[]) {
-  if (values.length === 0) return 0;
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
-}
-
-function roundedMean(values: number[]) {
-  return Math.round(mean(values));
-}
-
-export function accuracyPercent(accuracy: PredictionAccuracy | null) {
-  if (!accuracy) return 0;
-  return ACCURACY_PERCENTAGES[accuracy];
-}
 
 export function calculateAccuracyScore(
   accuracies: Array<PredictionAccuracy | null>,
