@@ -94,6 +94,7 @@ export async function createDecision(
   }
 
   revalidatePath("/decisions");
+  revalidatePath("/overview");
   return { success: true };
 }
 
@@ -163,5 +164,6 @@ export async function deleteDecision(id: string) {
   }
 
   revalidatePath("/decisions");
+  revalidatePath("/overview");
   redirect("/decisions");
 }
