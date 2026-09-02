@@ -1,5 +1,3 @@
-export const REVIEW_PERIOD_DEFAULT = "90 days";
-
 export const REMINDER_TOGGLES = [
   {
     id: "email-due",

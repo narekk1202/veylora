@@ -4,12 +4,10 @@ import {
   FieldContent,
   FieldDescription,
   FieldGroup,
-  FieldLabel,
   FieldTitle,
 } from "@/shared/components/ui/field";
-import { Input } from "@/shared/components/ui/input";
 import { Switch } from "@/shared/components/ui/switch";
-import { REMINDER_TOGGLES, REVIEW_PERIOD_DEFAULT } from "../consts";
+import { REMINDER_TOGGLES } from "../consts";
 import SettingsSection from "./settings-section";
 
 const RemindersSection = () => {
@@ -36,19 +34,6 @@ const RemindersSection = () => {
               />
             </Field>
           ))}
-          <Field className="border-t px-5 py-5">
-            <FieldLabel
-              htmlFor="review-period"
-              className="text-muted-foreground text-[10px] font-semibold tracking-wider uppercase"
-            >
-              Default review period
-            </FieldLabel>
-            <Input
-              id="review-period"
-              name="reviewPeriod"
-              defaultValue={REVIEW_PERIOD_DEFAULT}
-            />
-          </Field>
         </FieldGroup>
       </Card>
     </SettingsSection>
