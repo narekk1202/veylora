@@ -18,8 +18,8 @@ export const REMINDER_TOGGLES = [
 
 export const EXPORT_ACTIONS = [
   {
-    id: "decisions-json",
-    label: "Export all decisions (JSON)",
+    id: "decisions-excel",
+    label: "Export all decisions (Excel)",
   },
   {
     id: "journal-markdown",
