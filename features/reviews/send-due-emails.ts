@@ -13,6 +13,7 @@ export async function sendDueReviewEmails(now = new Date()) {
       status: { not: ReviewStatus.COMPLETED },
       dueNotifiedAt: null,
       decision: { reviewDate: { lte: today } },
+      user: { emailDueReminders: true },
     },
     include: {
       user: { select: { email: true, name: true } },

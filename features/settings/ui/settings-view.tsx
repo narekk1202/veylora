@@ -14,7 +14,10 @@ const SettingsView = ({ user }: SettingsViewProps) => {
     <main className="page_view">
       <PageHeader title="Settings" />
       <ProfileSection user={user} />
-      <RemindersSection />
+      <RemindersSection
+        emailDueReminders={user.emailDueReminders}
+        weeklyDigest={user.weeklyDigest}
+      />
       <DataPrivacySection />
       <DangerZoneSection />
     </main>

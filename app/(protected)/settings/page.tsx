@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default async function SettingsPage() {
   const session = await auth.api.getSession({
     headers: await headers(),
+    query: { disableCookieCache: true },
   });
 
   const user = session?.user;
@@ -25,6 +26,8 @@ export default async function SettingsPage() {
         name: user.name,
         email: user.email,
         image: user.image,
+        emailDueReminders: user.emailDueReminders ?? true,
+        weeklyDigest: user.weeklyDigest ?? false,
       }}
     />
   );

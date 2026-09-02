@@ -51,6 +51,18 @@ export const auth = betterAuth({
         defaultValue: false,
         input: false,
       },
+      emailDueReminders: {
+        type: "boolean",
+        required: true,
+        defaultValue: true,
+        input: false,
+      },
+      weeklyDigest: {
+        type: "boolean",
+        required: true,
+        defaultValue: false,
+        input: false,
+      },
     },
   },
 

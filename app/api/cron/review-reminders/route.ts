@@ -1,4 +1,5 @@
 import { sendDueReviewEmails } from "@/features/reviews/send-due-emails";
+import { sendWeeklyDigestEmails } from "@/features/reviews/send-weekly-digest";
 import { env } from "@/shared/config/env";
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
@@ -22,8 +23,12 @@ async function handler(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const result = await sendDueReviewEmails();
-  return NextResponse.json(result);
+  const [due, digest] = await Promise.all([
+    sendDueReviewEmails(),
+    sendWeeklyDigestEmails(),
+  ]);
+
+  return NextResponse.json({ due, digest });
 }
 
 export const GET = handler;
