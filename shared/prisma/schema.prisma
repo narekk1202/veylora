@@ -45,10 +45,15 @@ model User {
   sessions            Session[]
   accounts            Account[]
   onboardingCompleted Boolean    @default(false)
+  emailDueReminders   Boolean    @default(true)
+  weeklyDigest        Boolean    @default(false)
+  weeklyDigestSentAt  DateTime?
   decisions           Decision[]
   reviews             Review[]
 
   @@unique([email])
+  @@index([emailDueReminders])
+  @@index([weeklyDigest, weeklyDigestSentAt])
   @@map("user")
 }
 
